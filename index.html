@@ -7,11 +7,42 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" onerror="console.warn('SB CDN failed')"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
 /* === RESET === */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0c0e12;--s1:#121620;--s2:#181d28;--s3:#212836;--s4:#2b3342;--bd:#242c3a;--bl:#364154;--ac:#3ee08c;--ag:#3ee08c22;--dg:#e85454;--dgg:#e8545422;--sf:#3ee08c;--sfg:#3ee08c22;--wa:#e8a634;--in:#5b9df0;--ig:#5b9df022;--t1:#e9edf3;--t2:#96a0b0;--t3:#5c6676;--r:8px;--rl:12px;--rxl:16px;--sh:0 1px 2px rgba(0,0,0,.35);--shl:0 12px 32px rgba(0,0,0,.45);--tr:.18s cubic-bezier(.4,0,.2,1)}
+:root{
+  --bg:#0a0c10;
+  --s1:#11141a;
+  --s2:#161b22;
+  --s3:#1c2330;
+  --s4:#253044;
+  --bd:rgba(255,255,255,.07);
+  --bl:rgba(255,255,255,.14);
+  --ac:#7c8cff;
+  --ag:rgba(124,140,255,.16);
+  --dg:#f07178;
+  --dgg:rgba(240,113,120,.14);
+  --sf:#3dd68c;
+  --sfg:rgba(61,214,140,.14);
+  --wa:#e8b86d;
+  --in:#6eb6ff;
+  --ig:rgba(110,182,255,.14);
+  --t1:#eef1f6;
+  --t2:#9aa4b2;
+  --t3:#6b7585;
+  --r:10px;
+  --rl:14px;
+  --rxl:18px;
+  --sh:0 1px 2px rgba(0,0,0,.28);
+  --sh-md:0 8px 24px rgba(0,0,0,.22);
+  --shl:0 16px 48px rgba(0,0,0,.38);
+  --tr:.2s cubic-bezier(.22,1,.36,1);
+  --tr-s:.12s cubic-bezier(.22,1,.36,1);
+  --grad-card:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,0));
+  --grad-accent:linear-gradient(135deg,rgba(124,140,255,.22),rgba(110,182,255,.08));
+}
+.mode-sale{--ac:#6eb6ff;--ag:rgba(110,182,255,.16)}
 .mode-sale{--ac:#5b9df0;--ag:#5b9df022}
 html{font-size:15px;scroll-behavior:smooth}
 body{font-family:'Inter','Noto Sans SC',system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -68,6 +99,17 @@ input,button,select,textarea{font-family:inherit;font-size:inherit;border:none;o
 .tt{font-weight:600;font-size:.95rem}.tm{font-size:.6rem;font-family:'DM Mono',monospace;padding:.15rem .45rem;border-radius:4px}.tsp{flex:1}
 .sbox{position:relative;width:220px}.sbox input{width:100%;padding:.45rem .8rem .45rem 2rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);color:var(--t1);font-size:.78rem;transition:all var(--tr)}.sbox input:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--ag)}
 .sbox svg{position:absolute;left:.6rem;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--t3)}
+/* inv toolbar: equal heights */
+.sbox input, #iY, .tb select, .tb input[type="text"], .tb input[type="number"] {
+  box-sizing: border-box;
+  height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 1.4;
+}
+.sbox input { padding-left: 2rem; padding-right: .75rem; }
+#iY { width: 92px; padding-left: .75rem; padding-right: .75rem; }
+
 .cnt{flex:1;padding:1.3rem 1.5rem 2rem;min-width:0;width:100%;box-sizing:border-box}
 .sov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99}.sov.show{display:block}
 
@@ -112,7 +154,7 @@ tbody tr{border-bottom:1px solid var(--bd);transition:background var(--tr)}tbody
 /* === BADGES & TAGS === */
 .badge{display:inline-block;padding:.1rem .4rem;border-radius:5px;font-size:.62rem;font-weight:500}
 .b-ad{background:#3ee08c18;color:#3ee08c;border:1px solid #3ee08c30}.b-st{background:#5b9df018;color:#5b9df0;border:1px solid #5b9df030}.b-sl{background:#3ee08c18;color:#3ee08c;border:1px solid #3ee08c30}.b-on{background:#3ee08c18;color:#3ee08c;border:1px solid #3ee08c30}.b-off{background:#e8545418;color:#e85454;border:1px solid #e8545430}.b-dr{background:#8c919d18;color:#8c919d;border:1px solid #8c919d30}.b-pd{background:#e8a63418;color:#e8a634;border:1px solid #e8a63430}.b-pk{background:#5b9df018;color:#5b9df0;border:1px solid #5b9df030}.b-dn{background:#3ee08c18;color:#3ee08c;border:1px solid #3ee08c30}.b-cn{background:#e8545418;color:#e85454;border:1px solid #e8545430}
-.b-novo{background:#3ee08c18;color:#3ee08c;border:1px solid #3ee08c30}.b-oferta{background:#e8a63418;color:#e8a634;border:1px solid #e8a63430}.b-promo{background:#c77dff18;color:#c77dff;border:1px solid #c77dff30}
+.b-novo{background:#3ee08c18;color:#3ee08c;border:1px solid #3ee08c30}.b-oferta{background:#e8a63418;color:#e8a634;border:1px solid #e8a63430}.b-promo,.b-promocao{background:#c77dff18;color:#c77dff;border:1px solid #c77dff30}.b-normal{background:#8c919d18;color:#8c919d;border:1px solid #8c919d30}.b-maiscaro{background:#f43f5e18;color:#f43f5e;border:1px solid #f43f5e30}
 .ctags{display:flex;gap:.2rem;flex-wrap:wrap}.ctag{display:inline-flex;align-items:center;gap:.15rem;padding:.1rem .4rem;border-radius:5px;font-size:.62rem;font-weight:500;white-space:nowrap}
 .ptags{display:flex;gap:.15rem;flex-wrap:wrap}.ptag{font-size:.55rem;padding:.08rem .3rem;border-radius:4px;background:var(--s3);color:var(--t3)}.ptag.on{background:var(--sfg);color:var(--sf);border:1px solid #3ee08c22}
 .cpills{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.3rem}
@@ -337,7 +379,661 @@ tbody td:nth-child(5){font-variant-numeric:tabular-nums}
 }
 /* === SALES FEES === */
 .otrow{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--t2);padding:.32rem 0}
-.otrow.ott{border-top:1px solid var(--bd);margin-top:.35rem;padding-top:.65rem;font-size:1rem;font-weight:700;color:var(--t1)}</style>
+.otrow.ott{border-top:1px solid var(--bd);margin-top:.35rem;padding-top:.65rem;font-size:1rem;font-weight:700;color:var(--t1)}/* === UI POLISH: modern WMS (Linear/Stripe-inspired) === */
+body{background:
+  radial-gradient(1200px 600px at 12% -10%, rgba(124,140,255,.09), transparent 55%),
+  radial-gradient(900px 480px at 88% 0%, rgba(110,182,255,.05), transparent 50%),
+  var(--bg)}
+h1,h2,h3,.mt,.pnT{letter-spacing:-.02em}
+.sc{
+  background:var(--grad-card),var(--s1);
+  border:1px solid var(--bd);
+  border-radius:var(--rl);
+  box-shadow:var(--sh);
+}
+.sc:hover{
+  border-color:var(--bl);
+  transform:translateY(-2px);
+  box-shadow:var(--sh-md);
+  background:var(--grad-card),var(--s2);
+}
+.sc .sl{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t3)}
+.sc .sv{font-size:1.85rem;font-weight:700;letter-spacing:-.03em;line-height:1.05;margin:.35rem 0}
+.sch{
+  display:inline-flex;align-items:center;gap:.3rem;
+  padding:.22rem .55rem;border-radius:999px;font-size:.68rem;font-weight:600;
+  background:var(--s3);color:var(--t2);border:1px solid var(--bd)
+}
+.sch.up{background:var(--sfg);color:var(--sf);border-color:rgba(61,214,140,.22)}
+.sch.down{background:var(--dgg);color:var(--dg);border-color:rgba(240,113,120,.22)}
+.pnl{
+  background:var(--grad-card),var(--s1);
+  border:1px solid var(--bd);
+  border-radius:var(--rl);
+  box-shadow:var(--sh);
+  overflow:hidden
+}
+.pnH{padding:.95rem 1.15rem;border-bottom:1px solid var(--bd)}
+.pnT{font-weight:650;font-size:.92rem;letter-spacing:-.01em}
+.pcard{
+  background:var(--grad-card),var(--s2);
+  border:1px solid var(--bd);
+  border-radius:var(--rl);
+  padding:.85rem 1rem;
+  box-shadow:var(--sh)
+}
+.pcard:hover{
+  border-color:rgba(124,140,255,.35);
+  background:var(--grad-card),var(--s3);
+  box-shadow:var(--sh-md);
+  transform:translateY(-1px)
+}
+.btn{
+  border-radius:10px;
+  font-weight:600;
+  letter-spacing:-.01em;
+  transition:transform var(--tr-s),background var(--tr),border-color var(--tr),box-shadow var(--tr)
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn.bp{
+  background:linear-gradient(180deg,#8b98ff,#6d7cf0);
+  color:#fff;
+  box-shadow:0 6px 18px rgba(124,140,255,.28)
+}
+.btn.bp:hover{box-shadow:0 10px 28px rgba(124,140,255,.36)}
+.btn.bg{background:var(--s3);color:var(--t1);border:1px solid var(--bd)}
+.btn.bg:hover{border-color:var(--bl);background:var(--s4)}
+.sbox input,#iY,.tb select,.tb input[type="text"]{
+  border-radius:10px;
+  border:1px solid var(--bd);
+  background:rgba(255,255,255,.03);
+  transition:border-color var(--tr),box-shadow var(--tr),background var(--tr)
+}
+.sbox input:focus,#iY:focus,.tb select:focus,.tb input:focus{
+  border-color:rgba(124,140,255,.55);
+  box-shadow:0 0 0 3px rgba(124,140,255,.18);
+  background:rgba(255,255,255,.05)
+}
+.badge{
+  display:inline-flex;align-items:center;gap:.25rem;
+  padding:.18rem .55rem;border-radius:999px;font-size:.68rem;font-weight:600;letter-spacing:.01em
+}
+.b-novo{background:rgba(61,214,140,.14);color:#3dd68c;border:1px solid rgba(61,214,140,.22)}
+.b-oferta{background:rgba(232,184,109,.14);color:#e8b86d;border:1px solid rgba(232,184,109,.22)}
+.b-promo,.b-promocao{background:rgba(124,140,255,.14);color:#9aa8ff;border:1px solid rgba(124,140,255,.22)}
+.b-normal{background:rgba(255,255,255,.06);color:var(--t2);border:1px solid var(--bd)}
+.mono,.sk{font-family:'DM Mono',ui-monospace,SFMono-Regular,monospace;letter-spacing:-.02em}
+.pdk{color:var(--t3);font-size:.72rem;font-weight:500}
+.pdv{font-size:.82rem;font-weight:600;letter-spacing:-.01em}
+.pdl{display:flex;gap:.35rem;align-items:baseline;line-height:1.65}
+.pimg{
+  border-radius:12px;
+  border:1px solid var(--bd);
+  background:linear-gradient(145deg,var(--s3),var(--s2))
+}
+.mo .mdl{
+  background:var(--grad-card),var(--s1);
+  border:1px solid var(--bd);
+  border-radius:var(--rxl);
+  box-shadow:var(--shl)
+}
+.tc{
+  background:var(--s1);
+  border:1px solid var(--bd);
+  border-radius:12px;
+  box-shadow:var(--shl)
+}
+.stats{gap:.9rem}
+.sc:nth-child(1)::after{background:linear-gradient(90deg,var(--ac),transparent)}
+.sc:nth-child(2)::after{background:linear-gradient(90deg,var(--sf),transparent)}
+.sc:nth-child(3)::after{background:linear-gradient(90deg,var(--in),transparent)}
+.sc:nth-child(4)::after{background:linear-gradient(90deg,var(--dg),transparent)}
+.sc::after{height:2px;opacity:.85}
+button,select{transition:all var(--tr-s)}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+}
+/* === end polish === */
+/* === UI POLISH 2 === */
+.tb{
+  gap:.55rem;
+  padding:.35rem;
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--bd);
+  border-radius:14px;
+}
+.fc{
+  padding:.32rem .72rem;
+  border-radius:999px;
+  border:1px solid var(--bd);
+  background:transparent;
+  color:var(--t2);
+  font-size:.72rem;
+  font-weight:600;
+  transition:all var(--tr-s)
+}
+.fc:hover{color:var(--t1);border-color:var(--bl);background:rgba(255,255,255,.04)}
+.fc.on{
+  background:var(--ag);
+  color:var(--ac);
+  border-color:rgba(124,140,255,.35)
+}
+.csi{
+  background:var(--grad-card),var(--s2);
+  border:1px solid var(--bd);
+  border-radius:12px;
+  padding:.65rem .85rem;
+  margin-bottom:.45rem
+}
+.csi:hover{
+  border-color:rgba(124,140,255,.28);
+  background:var(--grad-card),var(--s3);
+  box-shadow:var(--sh)
+}
+.cat-toggle-arrow{width:28px;height:28px;font-size:1.15rem;border-radius:8px}
+.cat-children.collapsed{display:none}
+.cascade-item{
+  border-radius:10px;
+  padding:.55rem .75rem;
+  margin:.2rem 0;
+  border:1px solid transparent;
+  transition:all var(--tr-s)
+}
+.cascade-item:hover{background:rgba(255,255,255,.045);border-color:var(--bd)}
+.cascade-item.on{
+  background:var(--ag);
+  border-color:rgba(124,140,255,.35);
+  color:var(--ac)
+}
+.cascade-tag,.ctag{
+  border-radius:999px;
+  padding:.22rem .65rem;
+  font-size:.72rem;
+  font-weight:600;
+  border:1px solid var(--bd);
+  background:rgba(255,255,255,.04)
+}
+.lsi{
+  padding:.7rem .15rem;
+  border-bottom:1px dashed var(--bd)
+}
+.lsi:last-child{border-bottom:none}
+.lsi:hover{background:rgba(255,255,255,.025);border-radius:10px}
+.ai{
+  padding:.75rem .25rem;
+  border-bottom:1px dashed var(--bd)
+}
+.ai:last-child{border-bottom:none}
+.stb,.b-pd{
+  border-radius:999px;
+  font-size:.65rem;
+  font-weight:600
+}
+.sbr2{
+  height:4px;
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  overflow:hidden
+}
+.sbf2{height:100%;border-radius:999px}
+.pnl .pnB{padding:1rem 1.15rem}
+.mh{padding:1.05rem 1.25rem}
+.mb{padding:1.15rem 1.25rem}
+.mf{padding:1rem 1.25rem;border-top:1px solid var(--bd);gap:.55rem}
+.fg label,.fgm label{
+  font-size:.72rem;
+  font-weight:600;
+  color:var(--t3);
+  letter-spacing:.03em
+}
+.fg input,.fgm input,.fgm textarea,.fgm select{
+  border-radius:10px;
+  border:1px solid var(--bd);
+  background:rgba(255,255,255,.03);
+  padding:.65rem .85rem
+}
+table{
+  width:100%;
+  border-collapse:collapse
+}
+th{
+  font-size:.7rem;
+  font-weight:650;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--t3);
+  padding:.75rem .55rem;
+  border-bottom:1px solid var(--bd)
+}
+td{
+  padding:.85rem .55rem;
+  border-bottom:1px solid var(--bd);
+  vertical-align:middle
+}
+tr:hover td{background:rgba(255,255,255,.02)}
+.sk{
+  font-size:.78rem;
+  padding:.18rem .5rem;
+  border-radius:6px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--bd)
+}
+.empty{
+  padding:1.5rem;
+  text-align:center;
+  color:var(--t3);
+  border:1px dashed var(--bd);
+  border-radius:var(--rl);
+  background:rgba(255,255,255,.015)
+}
+/* === end polish 2 === */
+
+/* === UI POLISH 3: shell === */
+.ni{
+  border-radius:10px;
+  padding:.62rem .85rem;
+  transition:all var(--tr-s)
+}
+.ni:hover{background:rgba(255,255,255,.05)}
+.ni.on{
+  background:var(--ag);
+  color:var(--ac);
+  box-shadow:inset 0 0 0 1px rgba(124,140,255,.22)
+}
+.nl{
+  margin:1.15rem 0 .45rem;
+  padding-left:.85rem;
+  font-size:.65rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--t3)
+}
+.sb,header,.hdr{
+  background:rgba(10,12,16,.72);
+  backdrop-filter:blur(12px)
+}
+/* === end polish 3 === */
+
+/* === HEADER CONTROLS === */
+header .bi#langBtn,
+header .sbox input,
+header input#gS{
+  height:38px;
+  box-sizing:border-box;
+  border-radius:10px;
+}
+header .sbox{width:220px;display:flex;align-items:center}
+header .sbox input{padding:0 .85rem 0 2.1rem}
+header .sbox svg{top:50%;transform:translateY(-50%)}
+/* === end header controls === */
+
+/* === SELECT POPUP === */
+select{
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa4b2' stroke-width='2.2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right .65rem center;
+  padding-right:1.85rem !important;
+  cursor:pointer
+}
+select:hover{border-color:var(--bl)}
+select:focus{
+  border-color:rgba(124,140,255,.55);
+  box-shadow:0 0 0 3px rgba(124,140,255,.18)
+}
+select option{
+  background:#161b22;
+  color:#eef1f6;
+  padding:.55rem .75rem;
+  border-radius:8px
+}
+select option:checked,
+select option:hover,
+select option:focus{
+  background:rgba(124,140,255,.22);
+  color:#eef1f6
+}
+select option:disabled{
+  color:#6b7585
+}
+/* darker popup for WebKit/Blink */
+select,
+select option{
+  color-scheme:dark
+}
+body{color-scheme:dark}
+/* === end select popup === */
+
+/* === UI POLISH 3: motion & system === */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes riseIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.mo.show{animation:fadeIn .18s ease}
+.mo .mdl{animation:riseIn .22s cubic-bezier(.22,1,.36,1)}
+.stats .sc{animation:riseIn .28s cubic-bezier(.22,1,.36,1) both}
+.stats .sc:nth-child(2){animation-delay:.04s}
+.stats .sc:nth-child(3){animation-delay:.08s}
+.stats .sc:nth-child(4){animation-delay:.12s}
+.pcards .pcard{animation:riseIn .22s cubic-bezier(.22,1,.36,1) both}
+.tc{animation:scaleIn .2s cubic-bezier(.22,1,.36,1)}
+.spinner{
+  width:28px;height:28px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.1);
+  border-top-color:var(--ac);
+  animation:spin .7s linear infinite;
+  margin:.75rem auto
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{
+  background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);
+  animation:fadeIn .2s ease
+}
+.lsi .lf{
+  height:3px;
+  border-radius:999px;
+  background:var(--ac);
+  box-shadow:0 0 8px rgba(124,140,255,.35)
+}
+.lsi .lf.c{background:var(--dg);box-shadow:0 0 8px rgba(240,113,120,.35)}
+.lsi .lf.w{background:var(--wa);box-shadow:0 0 8px rgba(232,184,109,.3)}
+.ai .ad{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ai .ad.in{background:var(--sf);box-shadow:0 0 8px rgba(61,214,140,.45)}
+.ai .ad.out{background:var(--in);box-shadow:0 0 8px rgba(110,182,255,.45)}
+.btn:focus-visible,.fc:focus-visible,select:focus-visible,input:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px rgba(124,140,255,.28)
+}
+.pcard:active,.sc:active{transform:scale(.985)}
+.pnl{animation:riseIn .22s cubic-bezier(.22,1,.36,1) both}
+.sbr2 .sbf2{transition:width .35s cubic-bezier(.22,1,.36,1)}
+.badge{transition:all var(--tr-s)}
+.badge:hover{filter:brightness(1.08)}
+/* order / activity rows */
+.oi-row,.od-section{
+  border-radius:12px;
+  border:1px solid var(--bd);
+  background:rgba(255,255,255,.02);
+  padding:.85rem 1rem
+}
+/* end polish 3 motion */
+
+/* === TOAST POLISH 3 === */
+.tc{
+  min-width:220px;
+  padding:.85rem 1.1rem;
+  font-size:.82rem;
+  font-weight:500;
+  animation:riseIn .22s cubic-bezier(.22,1,.36,1)
+}
+.tc.ok{border-color:rgba(61,214,140,.35);box-shadow:0 12px 32px rgba(61,214,140,.12)}
+.tc.er{border-color:rgba(240,113,120,.35);box-shadow:0 12px 32px rgba(240,113,120,.12)}
+/* end toast polish 3 */
+
+/* === CATEGORY EXPAND UI (unified) === */
+.cat-toggle-arrow{
+  width:28px;
+  height:28px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  border:1px solid transparent;
+  background:rgba(255,255,255,.03);
+  color:var(--t2);
+  font-size:.85rem;
+  line-height:1;
+  transition:all var(--tr-s);
+  user-select:none;
+  flex-shrink:0
+}
+.cat-toggle-arrow:hover{
+  color:var(--ac);
+  background:var(--ag);
+  border-color:rgba(124,140,255,.25)
+}
+.cat-toggle-arrow.expanded{
+  transform:rotate(90deg);
+  color:var(--ac);
+  background:var(--ag);
+  border-color:rgba(124,140,255,.22)
+}
+.cat-children{
+  margin-left:.15rem;
+  padding-left:.55rem;
+  border-left:1px solid var(--bd);
+  overflow:hidden
+}
+.cat-children.collapsed{display:none}
+.cascade-item .ci-arrow,
+.cascade-item.has-children::after{
+  color:var(--t3)
+}
+.ci-arrow{
+  margin-left:auto;
+  width:22px;
+  height:22px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+  background:rgba(255,255,255,.03);
+  font-size:.72rem;
+  color:var(--t2)
+}
+.cascade-item:hover .ci-arrow{
+  color:var(--ac);
+  background:var(--ag)
+}
+.cascade-selector{
+  border:1px solid var(--bd);
+  border-radius:14px;
+  background:rgba(255,255,255,.02);
+  padding:.35rem
+}
+.cascade-selected{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem;
+  margin-bottom:.45rem
+}
+select{
+  appearance:none;
+  -webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa4b2' stroke-width='2.2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right .7rem center;
+  padding-right:2rem !important;
+  height:38px;
+  box-sizing:border-box;
+  border-radius:10px;
+  border:1px solid var(--bd);
+  background-color:rgba(255,255,255,.03);
+  color:var(--t1);
+  font-size:.8rem;
+  cursor:pointer;
+  transition:all var(--tr-s)
+}
+select:hover{border-color:var(--bl);background-color:rgba(255,255,255,.05)}
+select:focus{
+  border-color:rgba(124,140,255,.55);
+  box-shadow:0 0 0 3px rgba(124,140,255,.16)
+}
+select option{
+  background:#161b22;
+  color:#eef1f6;
+  padding:.5rem .75rem
+}
+select option:checked,select option:hover{background:rgba(124,140,255,.22);color:#eef1f6}
+/* end category expand ui */
+
+/* === FORM CONTROLS UNIFIED === */
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+textarea{
+  height:38px;
+  box-sizing:border-box;
+  border-radius:10px;
+  border:1px solid var(--bd);
+  background:rgba(255,255,255,.035);
+  color:var(--t1);
+  padding:0 .75rem;
+  font-size:.82rem;
+  transition:border-color var(--tr-s),box-shadow var(--tr-s),background var(--tr-s)
+}
+input[type="number"]{
+  -moz-appearance:textfield;
+  appearance:textfield;
+  padding-right:1.75rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='22' viewBox='0 0 10 22'%3E%3Cpath d='M5 2l3 3H2z' fill='%239aa4b2'/%3E%3Cpath d='M5 20l3-3H2z' fill='%239aa4b2'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right .45rem center
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button{
+  -webkit-appearance:none;
+  margin:0
+}
+input[type="text"]:hover,
+input[type="number"]:hover,
+textarea:hover{border-color:var(--bl);background:rgba(255,255,255,.05)}
+input:focus,textarea:focus,select:focus{
+  outline:none;
+  border-color:rgba(124,140,255,.55);
+  box-shadow:0 0 0 3px rgba(124,140,255,.16);
+  background:rgba(255,255,255,.05)
+}
+input::placeholder,textarea::placeholder{color:var(--t3)}
+input[type="checkbox"]{
+  appearance:none;
+  -webkit-appearance:none;
+  width:18px;
+  height:18px;
+  border-radius:5px;
+  border:1.5px solid var(--bl);
+  background:rgba(255,255,255,.03);
+  cursor:pointer;
+  flex-shrink:0;
+  position:relative;
+  transition:all var(--tr-s)
+}
+input[type="checkbox"]:hover{
+  border-color:var(--ac);
+  background:var(--ag)
+}
+input[type="checkbox"]:checked{
+  background:var(--ac);
+  border-color:var(--ac);
+  box-shadow:0 0 0 3px rgba(124,140,255,.18)
+}
+input[type="checkbox"]:checked::after{
+  content:'';
+  position:absolute;
+  left:5px;
+  top:1.5px;
+  width:4px;
+  height:9px;
+  border:solid #fff;
+  border-width:0 2px 2px 0;
+  transform:rotate(45deg)
+}
+/* card / page inputs inherit */
+.pcard input[type="number"],
+.pcard input[type="text"]{
+  height:34px;
+  font-size:.82rem
+}
+#bulk_sel,#lp_\d,
+input[id^="lp_"]{
+  height:34px !important;
+  background:rgba(255,255,255,.035) !important;
+  border:1px solid var(--bd) !important;
+  color:var(--t1) !important;
+  border-radius:9px !important
+}
+/* end form controls unified */
+
+/* === INV SELECT UI === */
+.inv-sel{
+  height:38px;
+  box-sizing:border-box;
+  min-width:112px;
+  padding:0 2rem 0 .75rem !important;
+  border-radius:10px;
+  border:1px solid var(--bd);
+  background-color:rgba(255,255,255,.035);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa4b2' stroke-width='2.2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right .7rem center;
+  color:var(--t1);
+  font-size:.8rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:all var(--tr-s);
+  appearance:none;
+  -webkit-appearance:none
+}
+.inv-sel:hover{
+  border-color:var(--bl);
+  background-color:rgba(255,255,255,.05)
+}
+.inv-sel:focus{
+  border-color:rgba(124,140,255,.55);
+  box-shadow:0 0 0 3px rgba(124,140,255,.16)
+}
+.inv-sel option{
+  background:#161b22;
+  color:#eef1f6;
+  padding:.55rem .75rem
+}
+.inv-sel option:checked,
+.inv-sel option:hover{
+  background:rgba(124,140,255,.22);
+  color:#eef1f6
+}
+/* filter row chrome like other toolbars */
+#invCat1, #invCat2, #invCat3, #invCat4{
+  font-family:inherit
+}
+/* end inv select ui */
+
+/* === FIX: header clutter & search icon === */
+.tc:empty{display:none !important;min-width:0 !important;padding:0 !important;border:none !important;box-shadow:none !important;background:transparent !important}
+.sbox > input,
+.sbox input#gS,
+.sbox input#iS{
+  padding-left:2.15rem !important;
+  padding-right:.75rem !important
+}
+.sbox > svg,
+.sbox svg{
+  left:.72rem;
+  z-index:1;
+  pointer-events:none
+}
+#loginLangBtn{display:none !important}
+/* visible only on login screen */
+#loginPage:not([style*="display: none"]):not([style*="display:none"]) #loginLangBtn{
+  display:flex !important
+}
+.bi#langBtn{
+  background:var(--s2);
+  border:1px solid var(--bd);
+  overflow:hidden
+}
+.bi::after,.bm::after,.bl::after,.pg::after{
+  background:transparent !important;
+  pointer-events:none
+}
+/* end fix header */
+</style>
 </head>
 <body>
 
@@ -356,7 +1052,6 @@ tbody td:nth-child(5){font-variant-numeric:tabular-nums}
   <div class="fg"><label data-t="username">用户名</label><input type="text" id="lU" data-t-ph="enterUsername" placeholder="请输入用户名" /></div>
   <div class="fg"><label data-t="password">密码</label><input type="password" id="lP" data-t-ph="enterPassword" placeholder="请输入密码" /></div>
   <button class="btn bp" onclick="doLogin()" data-t="login">登录系统</button>
-  <div class="lhint" id="lh" data-th="slHint">仓库端: <b>admin</b>/admin123 · <b>staff1</b>/staff123</div>
 </div>
 </div></div>
 
@@ -374,7 +1069,7 @@ tbody td:nth-child(5){font-variant-numeric:tabular-nums}
     <span class="tt" id="tT">仪表盘</span>
     <span class="tm" id="tM">仓库端</span>
     <span class="tsp"></span>
-    <button class="bi" onclick="toggleLang()" title="中/PT" id="langBtn" style="font-family:'DM Mono',monospace;font-size:.65rem;width:auto;padding:0 .5rem;border-radius:var(--r)">中/BR</button>
+    <button class="bi" onclick="toggleLang()" title="中/PT" id="langBtn" style="font-family:'DM Mono',monospace;font-size:.65rem;width:auto;height:38px;min-width:52px;padding:0 .75rem;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box">中/BR</button>
     <div class="sbox"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="gS" data-t-ph="searchPH" placeholder="搜索商品、SKU..." oninput="gSearch(this.value)" /></div>
   </header>
   <div class="cnt" id="mc"></div>
@@ -384,7 +1079,7 @@ tbody td:nth-child(5){font-variant-numeric:tabular-nums}
 <!-- ═══════════ MODALS ═══════════ -->
 
 <!-- Product Modal -->
-<div class="mo" id="pmo"><div class="mdl"><div class="mh"><span class="mt" id="pmT">新增商品</span><button class="mx" onclick="cMo('pmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="pmId" /><input type="hidden" id="pmManual" value="0" /><div class="fgm"><label data-t="productImage">商品图片</label><div class="iu"><div class="ib" id="pmIB" onclick="document.getElementById('pmIF').click()"><span class="ia">+</span><input type="file" id="pmIF" accept="image/*" onchange="hImg(this,'pmIB','pmImgData')" /></div></div></div><div class="fgm"><label data-t="productName">商品名称 *</label><input type="text" id="pmN" data-t-ph="enterProductName" placeholder="输入商品名称" /></div><div class="fgm"><label data-t="productCategory">商品分类 * (可多选)</label><div class="cpills" id="pmCats"></div></div><div class="fgm"><label data-t="skuCode">SKU 编码</label><div class="sku-prev" id="skuPrev"><span class="spl">SKU:</span><span class="spv" id="skuAuto">请先选择分类</span><span class="spm" id="skuMode" onclick="toggleSkuMode()">切换手动</span></div></div><div class="fr"><div class="fgm"><label data-t="stockQty">库存数量</label><input type="number" id="pmS" placeholder="0" min="0" /></div><div class="fgm"><label data-t="position">存放位置</label><input type="text" id="pmL" data-t-ph="positionPH" placeholder="如 A区-3层-2号" /></div></div>
+<div class="mo" id="pmo"><div class="mdl"><div class="mh"><span class="mt" id="pmT">新增商品</span><button class="mx" onclick="cMo('pmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="pmId" /><input type="hidden" id="pmManual" value="0" /><div class="fgm"><label data-t="productImage">商品图片</label><div class="iu"><div class="ib" id="pmIB" onclick="document.getElementById('pmIF').click()"><span class="ia">+</span><input type="file" id="pmIF" accept="image/*" onchange="hImg(this,'pmIB','pmImgData')" /></div></div></div><div class="fgm"><label data-t="productName">商品名称 *</label><input type="text" id="pmN" data-t-ph="enterProductName" placeholder="输入商品名称" /></div><div class="fgm"><label data-t="productCategory">商品分类 *</label><div class="cpills" id="pmCats"></div></div><div class="fgm"><label data-t="skuCode">SKU 编码</label><div class="sku-prev" id="skuPrev"><span class="spl">SKU:</span><span class="spv" id="skuAuto">请先选择分类</span><span class="spm" id="skuMode" onclick="toggleSkuMode()">切换手动</span></div></div><div class="fr"><div class="fgm"><label data-t="stockQty">库存数量</label><input type="number" id="pmS" placeholder="0" min="0" /></div><div class="fgm"><label data-t="position">存放位置</label><input type="text" id="pmL" data-t-ph="positionPH" placeholder="如 A区-3层-2号" /></div></div>
 <div class="fgm"><label data-t="productType">商品类型</label>
 <select id="pmCatType" onchange="toggleSizeFields()">
   <option value="general" data-t="general">通用</option>
@@ -405,7 +1100,7 @@ tbody td:nth-child(5){font-variant-numeric:tabular-nums}
   </div>
 </div>
 <div style="font-size:.6rem;color:var(--t3)">' + t('bagCaseHint') + '</div></div>
-<div class="fr"><div class="fgm"><label data-t="sellPrice">销售单价 (¥)</label><input type="number" id="pmP" placeholder="0.00" min="0" step="0.01" /></div><div class="fgm" id="pmCw"><label data-t="costPrice">进货成本 (¥)</label><input type="number" id="pmC" placeholder="0.00" min="0" step="0.01" /></div></div><div class="fgm"><label data-t="remarks">备注</label><textarea id="pmNt" data-t-ph="optionalNote" placeholder="可选备注..."></textarea></div><div class="fgm"><label>标签</label><select id="pmLabel"><option value="">无</option><option value="novo">🆕 Novo</option><option value="oferta">🏷️ Oferta</option><option value="promo">🎉 Promoção</option></select></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('pmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="saveProd()" data-t="saveProduct">保存商品</button></div></div></div>
+<div class="fr"><div class="fgm"><label data-t="sellPrice">销售单价 (¥)</label><input type="number" id="pmP" placeholder="0.00" min="0" step="0.01" /></div><div class="fgm" id="pmCw"><label data-t="costPrice">进货成本 (¥)</label><input type="number" id="pmC" placeholder="0.00" min="0" step="0.01" /></div></div><div class="fgm"><label data-t="remarks">备注</label><textarea id="pmNt" data-t-ph="optionalNote" placeholder="可选备注..."></textarea></div><div class="fgm"><label>标签</label><select id="pmLabel"><option value="normal">Normal</option><option value="novo">Novo</option><option value="oferta">Oferta</option><option value="promocao">Promoção</option></select></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('pmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="saveProd()" data-t="saveProduct">保存商品</button></div></div></div>
 
 <!-- IO Modal -->
 <div class="mo" id="imo"><div class="mdl"><div class="mh"><span class="mt" id="ioT">入库</span><button class="mx" onclick="cMo('imo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="ioTp" /><div class="fgm"><label data-t="selectProduct">商品 *</label><div style="position:relative"><input type="text" id="ioPrSearch" placeholder="' + t('searchProductIO') + '" style="width:100%;padding:.5rem .7rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);color:var(--t1);font-size:.82rem" oninput="filterIOProducts(this.value)" onfocus="filterIOProducts(this.value)" /><input type="hidden" id="ioPr" /><div id="ioPrDropdown" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:200px;overflow-y:auto;background:var(--s2);border:1px solid var(--bd);border-radius:0 0 var(--r) var(--r);z-index:10"></div></div></div><div class="fgm"><label data-t="quantity">数量 *</label><input type="number" id="ioQ" placeholder="0" min="1" /></div><div class="fgm"><label data-t="remarks">备注</label><input type="text" id="ioN" data-t-ph="reasonPH" placeholder="原因..." /></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('imo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="doIO()" data-t="confirm">确认</button></div></div></div>
@@ -440,7 +1135,17 @@ tbody td:nth-child(5){font-variant-numeric:tabular-nums}
 // ═══════════════════════════════════════
 const SB_URL = 'https://qpynlblzpmkoovyaxygn.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFweW5sYmx6cG1rb292eWF4eWduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzMzE4MzIsImV4cCI6MjEwNDkwNzgzMn0.kXn9UjxNYTVZ85kFEdlxIgH5Mw7nESUI9uz37nDrvJ8';
-let sb = null; try { sb = supabase.createClient(SB_URL, SB_KEY); } catch(e) { console.error("SB init failed", e); }
+let sb = null;
+let ADMIN_TOKEN = '';
+function initSb(token) {
+  ADMIN_TOKEN = token || '';
+  try {
+    sb = supabase.createClient(SB_URL, SB_KEY, {
+      global: { headers: ADMIN_TOKEN ? { 'X-Admin-Token': ADMIN_TOKEN } : {} }
+    });
+  } catch(e) { console.error("SB init failed", e); sb = null; }
+}
+initSb('');
 
 // Detect file:// protocol and show warning
 if (window.location.protocol === 'file:') {
@@ -457,7 +1162,7 @@ const T = {
   zh: {
     warehouse:'仓库端', sales:'销售端', whDesc:'库存 · 出入库 · 订单处理', slDesc:'创建订单 · 查询库存',
     whLogin:'仓库端登录', slLogin:'销售端登录', whSub:'请使用仓库管理账号登录', slSub:'请使用销售账号登录',
-    whHint:'仓库端: <b>admin</b>/admin123 · <b>staff1</b>/staff123', slHint:'销售端: <b>sale1</b>/sale123',
+    whHint:'', slHint:'',
     login:'登录系统', username:'用户名', password:'密码', enterUsername:'请输入用户名', enterPassword:'请输入密码',
     enterBoth:'请输入用户名和密码', notConnected:'数据库未连接', wrongCreds:'账号不存在、密码错误或已禁用',
     switchWh:'该账号非仓库端', switchSl:'该账号非销售端',
@@ -477,7 +1182,7 @@ const T = {
     switchManual:'切换手动', switchAuto:'自动', stockQty:'库存数量', position:'存放位置',
     sellPrice:'销售单价 (¥)', costPrice:'进货成本 (¥)', remarks:'备注',
     saveProduct:'保存商品', enterProductName:'输入商品名称', positionPH:'如 A区-3层-2号', optionalNote:'可选备注...',
-    enterNameErr:'请输入商品名称', selectCatErr:'请至少选择一个分类', productUpdated:'商品已更新', productAdded:'商品已添加',
+    enterNameErr:'请输入商品名称', selectCatErr:'请至少选择一个分类', selectLeafCat:'请选择叶子分类', productUpdated:'商品已更新', productAdded:'商品已添加', shelf:'上下架', mall:'商城', gallery:'相册', mallList:'商城上下架', galleryList:'相册上下架', mallOn:'商城上架', mallOff:'商城下架', galleryOn:'相册上架', galleryOff:'相册下架', onShelf:'已上架', offShelf:'未上架',
     productDeleted:'已删除', saveFailed:'保存失败', deleteFailed:'删除失败', confirmDelete:'确定删除「{0}」？',
     addInbound:'新增入库', addOutbound:'新增出库', selectProduct:'商品 *', quantity:'数量 *',
     reasonPH:'原因...', selectAndEnter:'请选择商品并输入数量', insufficient:'库存不足！仅{0}',
@@ -597,7 +1302,7 @@ const T = {
   pt: {
     warehouse:'Armazém', sales:'Vendas', whDesc:'Estoque · Entrada/Saída · Pedidos', slDesc:'Criar pedido · Consultar estoque',
     whLogin:'Login do Armazém', slLogin:'Login de Vendas', whSub:'Faça login com sua conta de armazém', slSub:'Faça login com sua conta de vendas',
-    whHint:'Armazém: <b>admin</b>/admin123 · <b>staff1</b>/staff123', slHint:'Vendas: <b>sale1</b>/sale123',
+    whHint:'', slHint:'',
     login:'Entrar', username:'Usuário', password:'Senha', enterUsername:'Digite o usuário', enterPassword:'Digite a senha',
     enterBoth:'Digite usuário e senha', notConnected:'Banco de dados não conectado', wrongCreds:'Conta não existe, senha incorreta ou desativada',
     switchWh:'Conta não é do armazém', switchSl:'Conta não é de vendas',
@@ -617,7 +1322,7 @@ const T = {
     switchManual:'Manual', switchAuto:'Automático', stockQty:'Quantidade', position:'Localização',
     sellPrice:'Preço de Venda (¥)', costPrice:'Custo (¥)', remarks:'Observações',
     saveProduct:'Salvar Produto', enterProductName:'Nome do produto', positionPH:'Ex: Setor A-3-2', optionalNote:'Observação opcional...',
-    enterNameErr:'Digite o nome do produto', selectCatErr:'Selecione pelo menos uma categoria', productUpdated:'Produto atualizado', productAdded:'Produto adicionado',
+    enterNameErr:'Digite o nome do produto', selectCatErr:'Selecione pelo menos uma categoria', selectLeafCat:'Selecione uma categoria folha', shelf:'Vitrine', mall:'Loja', gallery:'Galeria', mallList:'Loja online', galleryList:'Galeria', mallOn:'Publicar na loja', mallOff:'Remover da loja', galleryOn:'Publicar na galeria', galleryOff:'Remover da galeria', onShelf:'Publicado', offShelf:'Não publicado', productUpdated:'Produto atualizado', productAdded:'Produto adicionado',
     productDeleted:'Excluído', saveFailed:'Falha ao salvar', deleteFailed:'Falha ao excluir', confirmDelete:'Excluir「{0}」?',
     addInbound:'Nova Entrada', addOutbound:'Nova Saída', selectProduct:'Produto *', quantity:'Quantidade *',
     reasonPH:'Motivo...', selectAndEnter:'Selecione produto e quantidade', insufficient:'Estoque insuficiente! Apenas {0}',
@@ -775,7 +1480,7 @@ const CUSTAT = {pending:{l:'pendingReview',c:'b-pd'},approved:{l:'approved',c:'b
 const ROLES = {wh_admin:'whAdmin',wh_staff:'whStaff',sales:'roleSales'};
 const PERMS = [{k:'viewInventory',l:'viewInventory'},{k:'addProduct',l:'addProduct'},{k:'editProduct',l:'editProduct'},{k:'deleteProduct',l:'deleteProduct'},{k:'inbound',l:'inboundOp'},{k:'outbound',l:'outboundOp'},{k:'viewAnalytics',l:'analytics'},{k:'manageAccounts',l:'accounts'},{k:'manageCategories',l:'categories'},{k:'viewCost',l:'viewCost'},{k:'createOrder',l:'createOrder'},{k:'processOrder',l:'processOrder'}];
 const CAT_COLORS = ['#5b9df0','#c77dff','#3ee08c','#e8a634','#e878a0','#5bcfcf','#f0a05b','#8c919d'];
-const CLOTHING_SIZES = ['XS','S','M','L','XL','XXL','XXXL'];
+const CLOTHING_SIZES = ['XS','S','M','L','XL','2XL','3XL','4XL'];
 const SHOE_SIZES = ['35','36','37','38','39','40','41','42','43','44','45'];
 function toggleSpecFields() {
   document.getElementById('pmBagPrice').disabled = !document.getElementById('pmHasBag').checked;
@@ -820,17 +1525,103 @@ function fmtDate(iso) {
 }
 function has(k) { if (!user) return false; if (user.r === 'wh_admin') return true; return user.perm[k] === 1; }
 function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function safeUrl(u) {
+  if (!u) return '';
+  const s = String(u).replace(/[\r\n\0"<>]/g, '').trim();
+  if (/^(https?:\/\/|data:image\/(png|jpe?g|gif|webp);base64,)/i.test(s)) return s.replace(/"/g, '%22');
+  return '';
+}
 function oMo(id) { document.getElementById(id).classList.add('show'); document.body.style.overflow = 'hidden'; }
 function cMo(id) { document.getElementById(id).classList.remove('show'); document.body.style.overflow = ''; }
 function prodById(id) { return DB.prods.find(p => p.id === id); }
+
+function tokenizeSearch(q) {
+  return String(q || '').toLowerCase().trim().split(/\s+/).filter(Boolean);
+}
+function searchHaystack(p) {
+  const name = (p.name || '').toLowerCase();
+  const sku = (p.sku || '').toLowerCase();
+  let catText = '';
+  if (p.catIds && p.catIds.length) {
+    catText = p.catIds.map(cid => {
+      if (typeof catById === 'function') {
+        const c = catById(cid);
+        return c ? ((c.name || '') + ' ' + (c.code || '')).toLowerCase() : '';
+      }
+      return '';
+    }).join(' ');
+  }
+  return name + ' ' + sku + ' ' + catText;
+}
+function matchSearch(p, tokens) {
+  if (!tokens || !tokens.length) return true;
+  const hay = searchHaystack(p);
+  return tokens.every(t => hay.indexOf(t) >= 0);
+}
+function scoreSearch(p, tokens) {
+  if (!tokens || !tokens.length) return 0;
+  const name = (p.name || '').toLowerCase();
+  const sku = (p.sku || '').toLowerCase();
+  let s = 0;
+  tokens.forEach(t => {
+    if (name.indexOf(t) >= 0) s += 3;
+    if (sku.indexOf(t) >= 0) s += 2;
+    if (name.indexOf(t) === 0) s += 2;
+    let idx = name.indexOf(t), n = 0;
+    while (idx >= 0) { n++; idx = name.indexOf(t, idx + t.length); }
+    s += n;
+  });
+  return s;
+}
 function catById(id) { return DB.cats.find(c => c.id === id); }
+function catChainOf(id) {
+  var chain = [], cur = catById(Number(id)), guard = 0;
+  while (cur && guard < 12) { chain.unshift(cur); cur = (cur.parent_id != null) ? catById(cur.parent_id) : null; guard++; }
+  return chain;
+}
+
+function labelText(label) {
+  const l = label || 'normal';
+  if (l === 'novo') return 'Novo';
+  if (l === 'oferta') return 'Oferta';
+  if (l === 'promocao' || l === 'promo') return 'Promoção';
+  return 'Normal';
+}
+function labelBadge(label) {
+  const l = label || 'normal';
+  let cls = (l === 'promo') ? 'promocao' : l; if (cls === 'maiscaro' || cls === 'mais caro' || cls === 'mai') cls = 'novo';
+  return '<span class="badge b-' + cls + '" style="font-size:.55rem;margin-left:.3rem">' + labelText(l) + '</span>';
+}
+
+function deepestCatId(ids) {
+  if (!ids || !ids.length) return null;
+  let best = null, bestDepth = -1;
+  ids.map(Number).forEach(id => {
+    const c = catById(id);
+    if (!c) return;
+    const d = Number(c.depth) || 0;
+    if (!best || d > bestDepth || (d === bestDepth && c.id > best.id)) { best = c; bestDepth = d; }
+  });
+  return best ? best.id : null;
+}
+function productInCat(p, catId) {
+  if (!p || !p.catIds || !p.catIds.length) return false;
+  return p.catIds.some(cid => {
+    let c = catById(cid);
+    while (c) {
+      if (c.id === catId) return true;
+      c = c.parent_id != null ? catById(c.parent_id) : null;
+    }
+    return false;
+  });
+}
 function cusById(id) { return DB.cus.find(c => c.id === id); }
 function catTagsP(p, compact) {
   if (!p || !p.catIds) return '';
   return p.catIds.map(cid => {
     const c = catById(cid); if (!c) return '';
     const ci = c.id % CAT_COLORS.length;
-    return '<span class="ctag" style="background:'+CAT_COLORS[ci]+'18;color:'+CAT_COLORS[ci]+';border:1px solid '+CAT_COLORS[ci]+'30">'+c.icon+(compact?'':' '+c.code)+'</span>';
+    return '<span class="ctag" title="' + esc(getCatPathWithCodes(cid)) + '" style="background:'+CAT_COLORS[ci]+'18;color:'+CAT_COLORS[ci]+';border:1px solid '+CAT_COLORS[ci]+'30">'+c.icon+(compact?'':' '+getCatCodePath(cid))+'</span>';
   }).join('');
 }
 function toast(m, tp='inf') {
@@ -843,12 +1634,28 @@ function toast(m, tp='inf') {
   setTimeout(() => { el.style.opacity='0'; el.style.transform='translateX(30px)'; el.style.transition='.3s'; setTimeout(() => el.remove(), 300); }, 3000);
 }
 function genSku(catIds, excludeId) {
-  const codes = (catIds||[]).map(id => (DB.cats.find(c => c.id===id)||{}).code).filter(Boolean).map(c => c.toUpperCase()).sort();
-  const prefix = codes.length ? codes.join('-') : 'GEN';
-  const fp = prefix + '-';
+  // SKU = category code chain (root->leaf, joined as-is) + 3-digit seq within the leaf category
+  const catMap = {}; DB.cats.forEach(c => { catMap[c.id] = c; });
+  const deepest = (arr) => { let d = null; (arr||[]).map(Number).forEach(id => { const c = catMap[id]; if (!c) return; const cd = Number(c.depth)||0, dd = d ? (Number(d.depth)||0) : -1; if (!d || cd > dd || (cd === dd && c.id > d.id)) d = c; }); return d; };
+  const leaf = deepest(catIds);
+  if (!leaf) return 'GEN-001';
+  const codes = [];
+  let cur = leaf;
+  while (cur) { const s = String(cur.code || ''); if (s) codes.unshift(s); cur = (cur.parent_id != null) ? catMap[cur.parent_id] : null; }
+  const prefix = codes.join('');
+  const re = new RegExp('^' + prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\d{3}$');
+  if (excludeId != null) {
+    const self = DB.prods.filter(p => p.id === excludeId)[0];
+    if (self && self.sku && re.test(self.sku)) return self.sku; // keep its own seq on edit
+  }
   let mx = 0;
-  DB.prods.forEach(p => { if (p.id===excludeId) return; if (p.sku && p.sku.startsWith(fp)) { const n = parseInt(p.sku.substring(fp.length)); if (!isNaN(n) && n > mx) mx = n; } });
-  return fp + String(mx+1).padStart(3,'0');
+  DB.prods.forEach(p => {
+    if (p.id === excludeId) return;
+    const pl = deepest(p.catIds);
+    if (!pl || pl.id !== leaf.id) return;
+    if (p.sku && re.test(p.sku)) { const n = parseInt(p.sku.substring(prefix.length), 10); if (!isNaN(n) && n > mx) mx = n; }
+  });
+  return prefix + String(mx + 1).padStart(3, '0');
 }
 function genOrdNo() {
   const d = new Date();
@@ -875,25 +1682,126 @@ document.addEventListener('keydown', e => { if (e.key==='Escape') document.query
 // ═══════════════════════════════════════
 // JS-6: DATA LOADING
 // ═══════════════════════════════════════
+async function fetchPaged(build) {
+  const PAGE = 1000; const out = [];
+  for (let from = 0; ; from += PAGE) {
+    const res = await build().range(from, from + PAGE - 1);
+    if (res.error) return { data: out, error: res.error };
+    const rows = res.data || [];
+    for (let i = 0; i < rows.length; i++) out.push(rows[i]);
+    if (rows.length < PAGE) break;
+  }
+  return { data: out, error: null };
+}
+
+// Optional: Edge Function write gateway (deployed admin-api).
+// If fetch fails, callers should fall back to sb.from(...).
+
+// Write gateway via Edge Function admin-api (service key stays server-side).
+function adminFrom(table) {
+  const asThenable = (promise) => {
+    const t = {
+      then: (onOk, onErr) => promise.then(onOk, onErr),
+      catch: (onErr) => promise.catch(onErr),
+    };
+    return t;
+  };
+  return {
+    insert(row) {
+      const wantSingle = { v: false };
+      const wantSelect = { v: false };
+      const run = () => adminApi('insert', { table, row, single: wantSingle.v, select: wantSelect.v });
+      const chain = {
+        select() { wantSelect.v = true; return chain; },
+        single() {
+          wantSingle.v = true;
+          return asThenable(run().then((d) => ({ data: d, error: null }), (e) => ({ data: null, error: e })));
+        },
+        then: (onOk, onErr) => run().then(
+          (d) => {
+            const out = wantSingle.v ? { data: d, error: null } : { data: d, error: null };
+            return onOk ? onOk(out) : out;
+          },
+          onErr
+        ),
+        catch: (onErr) => run().catch(onErr),
+      };
+      return chain;
+    },
+    upsert(rows) {
+      return asThenable(adminApi('upsert', { table, rows }).then(() => ({ data: null, error: null })));
+    },
+    update(patch) {
+      const where = {};
+      const chain = {
+        eq(k, v) { where[k] = v; return chain; },
+        then: (onOk, onErr) => adminApi('update', { table, patch, where }).then(
+          () => onOk ? onOk({ data: null, error: null }) : { data: null, error: null },
+          onErr
+        ),
+        catch: (onErr) => adminApi('update', { table, patch, where }).catch(onErr),
+      };
+      return chain;
+    },
+    delete() {
+      const where = {};
+      const chain = {
+        eq(k, v) { where[k] = v; return chain; },
+        then: (onOk, onErr) => adminApi('delete', { table, where }).then(
+          () => onOk ? onOk({ data: null, error: null }) : { data: null, error: null },
+          onErr
+        ),
+        catch: (onErr) => adminApi('delete', { table, where }).catch(onErr),
+      };
+      return chain;
+    },
+  };
+}
+
+
+async function adminSelect(table, opts) {
+  return adminApi('select', Object.assign({ table }, opts || {}));
+}
+async function adminApi(action, payload) {
+  const url = 'https://qpynlblzpmkoovyaxygn.supabase.co/functions/v1/admin-api';
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Admin-Token': ADMIN_TOKEN || ''
+    },
+    body: JSON.stringify(Object.assign({ action }, payload || {}))
+  });
+  let data = null;
+  try { data = await res.json(); } catch (_) {}
+  if (!res.ok || !data || data.ok === false) {
+    throw new Error((data && data.error) || ('admin_api_' + res.status));
+  }
+  return data.data;
+}
+function safeQ(p) {
+  return Promise.resolve(p).then(r => ({ data: (r && r.data) || [], error: (r && r.error) || null }))
+    .catch(() => ({ data: [], error: { message: 'denied' } }));
+}
 async function loadAllData() {
   if (!sb) { console.warn('[CS] No DB connection'); return; }
   try {
     const [catR,acctR,prodR,pcR,ordR,oiR,inbR,outbR,cusR,chgR] = await Promise.all([
-      sb.from('categories').select('*').order('order_num'),
-      sb.from('accounts').select('*'),
-      sb.from('products').select('*'),
-      sb.from('product_categories').select('*'),
-      sb.from('orders').select('*').order('created_at',{ascending:false}),
-      sb.from('order_items').select('*'),
-      sb.from('inbound_records').select('*').order('created_at',{ascending:false}),
-      sb.from('outbound_records').select('*').order('created_at',{ascending:false}),
-      sb.from('customers').select('*').order('created_at',{ascending:false}),
-      sb.from('order_changes').select('*').order('created_at',{ascending:false})
+      safeQ(sb.from('categories').select('*').order('order_num')),
+      safeQ(sb.rpc('app_list_accounts')),
+      safeQ(fetchPaged(function() { return sb.from('products').select('*').order('id', { ascending: true }); })),
+      safeQ(fetchPaged(function() { return sb.from('product_categories').select('*').order('product_id', { ascending: true }).order('category_id', { ascending: true }); })),
+      safeQ(ADMIN_TOKEN ? adminSelect('orders', { order: { column: 'created_at', ascending: false }, limit: 1000 }) : fetchPaged(function() { return sb.from('orders').select('*').order('created_at',{ascending:false}).order('id', { ascending: false }); })),
+      safeQ(ADMIN_TOKEN ? adminSelect('order_items', { limit: 5000 }) : sb.from('order_items').select('*')),
+      safeQ(ADMIN_TOKEN ? adminSelect('inbound_records', { order: { column: 'created_at', ascending: false }, limit: 1000 }) : sb.from('inbound_records').select('*').order('created_at',{ascending:false})),
+      safeQ(ADMIN_TOKEN ? adminSelect('outbound_records', { order: { column: 'created_at', ascending: false }, limit: 1000 }) : sb.from('outbound_records').select('*').order('created_at',{ascending:false})),
+      safeQ(ADMIN_TOKEN ? adminSelect('customers', { order: { column: 'created_at', ascending: false }, limit: 1000 }) : fetchPaged(function() { return sb.from('customers').select('*').order('created_at',{ascending:false}).order('id', { ascending: false }); })),
+      safeQ(ADMIN_TOKEN ? adminSelect('order_changes', { order: { column: 'created_at', ascending: false }, limit: 1000 }) : sb.from('order_changes').select('*').order('created_at',{ascending:false}))
     ]);
     DB.cats = (catR.data||[]).map(c => ({id:Number(c.id),name:c.name,code:c.code,icon:c.icon,order:c.order_num,parent_id:c.parent_id!=null?Number(c.parent_id):null,depth:Number(c.depth||0),visible:c.visible!==false,image:c.image||'',description:c.description||'',locked:c.locked||false,product_count:Number(c.product_count||0)}));
-    DB.accts = (acctR.data||[]).map(a => ({id:a.id,u:a.username,p:a.password,n:a.display_name,r:a.role,s:a.status,c:fmtDate(a.created_at).split(' ')[0],perm:a.perms||{}}));
+    DB.accts = (acctR.data||[]).map(a => ({id:a.id,u:a.username,n:a.display_name,r:a.role,s:a.status,c:fmtDate(a.created_at).split(' ')[0],perm:a.perms||{}}));
     const pc = pcR.data||[];
-    DB.prods = (prodR.data||[]).map(p => ({id:p.id,name:p.name,catIds:pc.filter(x=>x.product_id===p.id).map(x=>x.category_id),sku:p.sku,skuManual:p.sku_manual?1:0,stock:p.stock,price:Number(p.price),cost:Number(p.cost),loc:p.location||'',note:p.note||'',cr:fmtDate(p.created_at).split(' ')[0],img:p.image||'',category_type:p.category_type||'general',sizes:p.sizes||[],size_stock:p.size_stock||{},has_bag:p.has_bag||false,bag_price:Number(p.bag_price||0),has_case:p.has_case||false,case_price:Number(p.case_price||0),label:p.label||''}));
+    DB.prods = (prodR.data||[]).map(p => ({id:p.id,name:p.name,catIds:(function(){const ids=pc.filter(x=>x.product_id===p.id).map(x=>x.category_id);const d=deepestCatId(ids);return d?[d]:[]})(),sku:p.sku,skuManual:p.sku_manual?1:0,stock:p.stock,price:Number(p.price),cost:Number(p.cost),loc:p.location||'',note:p.note||'',cr:fmtDate(p.created_at).split(' ')[0],img:p.image||'',category_type:p.category_type||'general',sizes:p.sizes||[],size_stock:p.size_stock||{},has_bag:p.has_bag||false,bag_price:Number(p.bag_price||0),has_case:p.has_case||false,case_price:Number(p.case_price||0),label:p.label||'',ml:!!p.mall_listed,gl:p.gallery_listed!==false}));
     const oi = oiR.data||[];
     DB.ords = (ordR.data||[]).map(o => ({id:o.id,no:o.order_no,items:oi.filter(x=>x.order_id===o.id).map(x=>({pid:x.product_id,qty:x.qty,price:Number(x.price||0),original_price:Number(x.original_price||0),unit_price:Number(x.unit_price||0)})),pk:o.pickup_method,st:o.status,oi:o.order_image||'',bi:o.bill_image||'',note:o.note||'',cr:fmtDate(o.created_at),by:o.created_by,pb:o.processed_by||'',payM:o.payment_method||'cash',payS:o.payment_status||'pending',payI:o.payment_image||'',payU:o.payment_upload||'yes',pacI:o.packing_image||'',supI:o.supplementary_image||'',supT:o.supplementary_type||'',custId:o.customer_id||'',shipAddr:o.shipping_address||'',shipCost:Number(o.shipping_cost||0),billDeadline:o.bill_deadline||null,origTotal:Number(o.original_total||0),priceModified:o.price_modified||false,onibusName:o.onibus_name||'',onibusImg:o.onibus_schedule_img||'',billUploadedAt:o.bill_uploaded_at||null,adminConfirmedShip:o.admin_confirmed_ship||false,adminShipBy:o.admin_ship_confirmed_by||''}));
     DB.inb = (inbR.data||[]).map(r => ({id:r.id,pid:r.product_id,qty:r.qty,op:r.operator,note:r.note||'',t:fmtDate(r.created_at)}));
@@ -924,16 +1832,30 @@ function selPortal(p) {
 function doLogin() {
   const u = document.getElementById('lU').value.trim(), p = document.getElementById('lP').value, e = document.getElementById('le');
   if (!u || !p) { e.textContent = t('enterBoth'); e.classList.add('show'); return; }
-  if (!DB.accts.length) { e.textContent = t('notConnected'); e.classList.add('show'); return; }
-  const a = DB.accts.find(x => x.u===u && x.p===p && x.s==='active');
-  if (!a) { e.textContent = t('wrongCreds'); e.classList.add('show'); return; }
-  const isWh = a.r==='wh_admin' || a.r==='wh_staff';
-  if (portal==='wh' && !isWh) { e.textContent = t('switchSl'); e.classList.add('show'); return; }
-  if (portal==='sl' && a.r!=='sales') { e.textContent = t('switchWh'); e.classList.add('show'); return; }
   e.classList.remove('show');
-  user = a;
-  sessionStorage.setItem('cs4', JSON.stringify({id:a.id,pl:portal}));
-  enterApp();
+  e.textContent = '';
+  sb.rpc('app_login', { p_username: u, p_password: p }).then(({ data, error }) => {
+    if (error || !data || !data.ok || !data.user) {
+      e.textContent = t('wrongCreds');
+      e.classList.add('show');
+      return;
+    }
+    const a = {
+      id: data.user.id, u: data.user.username, n: data.user.display_name || '',
+      r: data.user.role, s: data.user.status || 'active',
+      perm: data.user.perms || {}, c: ''
+    };
+    const isWh = a.r==='wh_admin' || a.r==='wh_staff';
+    if (portal==='wh' && !isWh) { e.textContent = t('switchSl'); e.classList.add('show'); return; }
+    if (portal==='sl' && a.r!=='sales') { e.textContent = t('switchWh'); e.classList.add('show'); return; }
+    initSb(data.token);
+    user = a;
+    sessionStorage.setItem('cs4', JSON.stringify({ id: a.id, pl: portal, tk: data.token }));
+    enterApp();
+  }).catch(() => {
+    e.textContent = t('notConnected');
+    e.classList.add('show');
+  });
 }
 async function enterApp() {
   document.getElementById('loginPage').style.display = 'none';
@@ -947,9 +1869,14 @@ async function enterApp() {
   document.getElementById('tM').style.cssText = sl ? 'background:var(--ig);color:var(--in)' : 'background:var(--ag);color:var(--ac)';
   buildNav();
   goPage(sl ? 'sWork' : 'dash');
+  loadAllData().then(() => { try { render(curP || (sl ? 'sWork' : 'dash')); } catch (_) {} });
 }
 function doLogout() {
-  user = null; sessionStorage.removeItem('cs4');
+  const tk = ADMIN_TOKEN;
+  user = null;
+  initSb('');
+  sessionStorage.removeItem('cs4');
+  if (tk && sb) { try { sb.rpc('app_logout', { p_token: tk }); } catch (_) {} }
   document.getElementById('appPage').style.display = 'none';
   document.getElementById('loginPage').style.display = '';
   document.body.classList.remove('mode-sale');
@@ -998,9 +1925,9 @@ function buildNav() {
       if (has('manageCategories')) h += '<div class="ni" data-p="cats" onclick="goPage(\'cats\',this)">'+sv.cat+' '+t('categories')+'</div>';
     }
     h += '<div class="nl">'+t('productLabels')+'</div>';
-    h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'novo\',this)">🆕 Novo</div>';
-    h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'oferta\',this)">🏷️ Oferta</div>';
-    h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'promo\',this)">🎉 Promoção</div>';
+    h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'novo\',this)">Novo</div>';
+    h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'oferta\',this)">Oferta</div>';
+    h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'promocao\',this)">Promoção</div>';
     h += '<div class="nl">'+t('customerMgmtNav')+'</div>';
     if (has('manageAccounts')) h += '<div class="ni" data-p="memberLevels" onclick="goPage(\'memberLevels\',this)">'+sv.cus+' '+t('memberLevel')+'</div>';
     h += '<div class="nl">'+t('financeMgmtNav')+'</div>';
@@ -1090,7 +2017,7 @@ function rInv() {
   }
   var topCats = DB.cats.filter(function(c){ return c.parent_id === null; }).sort(function(a,b){ return a.order - b.order; });
   var ch = '<div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">';
-  ch += '<select id="invCat1" onchange="onInvCat1Change()" style="padding:.35rem .6rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);color:var(--t1);font-size:.78rem;min-width:100px">';
+  ch += '<select id="invCat1" class="inv-sel" onchange="onInvCat1Change()">';
   ch += '<option value="all"' + (fCat === 'all' ? ' selected' : '') + '>' + t('all') + '</option>';
   topCats.forEach(function(c) {
     var sel = (fCat === '' + c.id) || (initParent === c.id);
@@ -1101,7 +2028,7 @@ function rInv() {
   if (selectedTop) {
     var children = DB.cats.filter(function(c){ return c.parent_id === selectedTop; }).sort(function(a,b){ return a.order - b.order; });
     if (children.length) {
-      ch += '<select id="invCat2" onchange="onInvCat2Change()" style="padding:.35rem .6rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);color:var(--t1);font-size:.78rem;min-width:100px">';
+      ch += '<select id="invCat2" class="inv-sel" onchange="onInvCat2Change()">';
       ch += '<option value="' + selectedTop + '"' + (fCat === '' + selectedTop ? ' selected' : '') + '>' + t('allSubCats') + '</option>';
       children.forEach(function(c) {
         ch += '<option value="' + c.id + '"' + (fCat === '' + c.id ? ' selected' : '') + '>' + c.icon + ' ' + esc(c.name) + '</option>';
@@ -1112,7 +2039,11 @@ function rInv() {
   ch += '</div>';
   let fl = [...DB.prods];
   const q = (document.getElementById('iS')?.value || '').toLowerCase().trim();
-  if (q) fl = fl.filter(p => p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q) || (p.catIds || []).some(cid => { const c = catById(cid); return c && (c.name.toLowerCase().includes(q) || c.code.toLowerCase().includes(q)); }));
+  const tokens = tokenizeSearch(q);
+  if (tokens.length) {
+    fl = fl.filter(p => matchSearch(p, tokens));
+    fl.sort((a, b) => scoreSearch(b, tokens) - scoreSearch(a, tokens));
+  }
   if (fCat !== 'all') {
     // Include all descendant categories
     const catIds = [Number(fCat)];
@@ -1121,7 +2052,7 @@ function rInv() {
     fl = fl.filter(p => (p.catIds || []).some(cid => catIds.includes(cid)));
   }
   if (fLabel) {
-    fl = fl.filter(p => p.label === fLabel);
+    fl = fl.filter(p => (p.label || 'normal') === fLabel || (fLabel === 'promocao' && p.label === 'promo'));
   }
   fl.sort((a, b) => { let va = a[sF], vb = b[sF]; if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); } return va < vb ? -sD : va > vb ? sD : 0; });
   const total = fl.length;
@@ -1138,6 +2069,8 @@ function rInv() {
       const lv = p.stock === 0 ? 'lo' : p.stock <= 10 ? 'md' : 'hi';
       let ac = '';
       if (has('editProduct')) ac += '<button class="bi" title="' + t('edit') + '" onclick="openEditP(' + p.id + ')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>';
+      if (has('editProduct')) ac += '<button class="bi" title="' + (p.ml ? t('mallOff') : t('mallOn')) + '" onclick="event.stopPropagation();toggleMallListed(' + p.id + ')" style="color:' + (p.ml ? 'var(--sf)' : 'var(--t3)') + '">🛒</button>';
+      if (has('editProduct')) ac += '<button class="bi" title="' + (p.gl ? t('galleryOff') : t('galleryOn')) + '" onclick="event.stopPropagation();toggleGalleryListed(' + p.id + ')" style="color:' + (p.gl ? 'var(--sf)' : 'var(--t3)') + '">🖼</button>';
       if (has('deleteProduct')) ac += '<button class="bi" title="' + t('delete') + '" onclick="delP(' + p.id + ')" style="color:var(--dg)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>';
       const sc = has('viewCost');
       const lvC = lv === 'lo' ? 'dg' : lv === 'md' ? 'wa' : 'sf';
@@ -1145,8 +2078,8 @@ function rInv() {
     if (p.sizes && p.sizes.length > 0) {
       sizeDetail = '<div style="font-size:.55rem;color:var(--t3);margin-top:.15rem;font-family:DM Mono,monospace">' + p.sizes.map(function(s) { return s + ':' + ((p.size_stock || {})[s] || 0); }).join(' ') + '</div>';
     }
-    const labelTag = p.label ? ' <span class="badge b-' + p.label + '" style="font-size:.5rem;margin-left:.3rem">' + (p.label==='novo'?'🆕 Novo':p.label==='oferta'?'🏷️ Oferta':'🎉 Promo') + '</span>' : '';
-    return '<tr><td><div class="prow"><div class="pimg">' + (p.img ? '<img src="' + p.img + '" alt="" onerror="this.remove()">' : '') + '</div><div class="pinfo"><strong>' + esc(p.name) + '</strong>' + labelTag + (p.note ? '<br><span style="font-size:.62rem;color:var(--t3)">' + esc(p.note) + '</span>' : '') + '</div></div></td><td><span class="sk">' + esc(p.sku) + '</span></td><td class="hide-md"><div class="ctags">' + catTagsP(p) + '</div></td><td class="hide-sm"><span style="font-size:.68rem;color:var(--t3)">' + esc(p.loc || '-') + '</span></td><td><div class="si2"><span class="sn" style="color:var(--' + lvC + ')">' + p.stock + '</span><div class="sbr2"><div class="sbf2 ' + lv + '" style="width:' + pct + '%"></div></div></div>' + '<span class="stb ' + (lv === 'hi' ? 'stb-ok' : lv === 'md' ? 'stb-low' : 'stb-out') + '">' + (lv === 'hi' ? t('stockOk') : lv === 'md' ? t('lowStock') : t('outOfStock')) + '</span>' + sizeDetail + '</td<td><span style="font-family:DM Mono,monospace">¥' + p.price.toLocaleString() + '</span>' + (sc ? '<br><span style="font-size:.58rem;color:var(--dg)">¥' + t('cost') + ' ' + p.cost + '</span>' : '') + '</td><td><div class="ac">' + (ac || '<span style="color:var(--t3);font-size:.65rem">' + t('readOnly') + '</span>') + '</div></td></tr>';
+    const labelTag = p.label ? ' <span class="badge b-' + (p.label==='promo'?'promocao':(p.label||'normal')) + '" style="font-size:.5rem;margin-left:.3rem">' + (labelText(p.label)) + '</span>' : '';
+    return '<tr><td><div class="prow"><div class="pimg">' + (p.img ? '<img src="' + safeUrl(p.img) + '" alt="" onerror="this.remove()">' : '') + '</div><div class="pinfo" style="flex:1;min-width:0"><strong>' + esc(p.name) + '</strong>' + labelTag + (p.note ? '<br><span style="font-size:.62rem;color:var(--t3)">' + esc(p.note) + '</span>' : '') + '</div></div></td><td><span class="sk">' + esc(p.sku) + '</span></td><td class="hide-md"><div class="ctags">' + catTagsP(p) + '</div></td><td class="hide-sm"><span style="font-size:.68rem;color:var(--t3)">' + esc(p.loc || '-') + '</span></td><td><div class="si2"><span class="sn" style="color:var(--' + lvC + ')">' + p.stock + '</span><div class="sbr2"><div class="sbf2 ' + lv + '" style="width:' + pct + '%"></div></div></div>' + '<span class="stb ' + (lv === 'hi' ? 'stb-ok' : lv === 'md' ? 'stb-low' : 'stb-out') + '">' + (lv === 'hi' ? t('stockOk') : lv === 'md' ? t('lowStock') : t('outOfStock')) + '</span>' + sizeDetail + '</td><td><span style="font-family:DM Mono,monospace">¥' + p.price.toLocaleString() + '</span>' + (sc ? '<br><span style="font-size:.58rem;color:var(--dg)">¥' + t('cost') + ' ' + p.cost + '</span>' : '') + '</td><td><div class="ac">' + (ac || '<span style="color:var(--t3);font-size:.65rem">' + t('readOnly') + '</span>') + '</div></td></tr>';
     }).join('');
   }
   let pg = '';
@@ -1175,7 +2108,7 @@ function onInvCat1Change() {
   var pid = Number(v);
   var children = DB.cats.filter(function(c){ return c.parent_id === pid; }).sort(function(a,b){ return a.order - b.order; });
   if (children.length) {
-    if (!sub) { sub = document.createElement('select'); sub.id='invCat2'; sub.style.cssText='padding:.35rem .6rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);color:var(--t1);font-size:.78rem;min-width:100px'; sub.onchange=onInvCat2Change; document.getElementById('invCat1').parentNode.appendChild(sub); }
+    if (!sub) { sub = document.createElement('select'); sub.id='invCat2'; sub.className='inv-sel'; sub.onchange=onInvCat2Change; document.getElementById('invCat1').parentNode.appendChild(sub); }
     sub.innerHTML = '<option value="' + pid + '">' + t('allSubCats') + '</option>' + children.map(function(c){ return '<option value="' + c.id + '">' + c.icon + ' ' + esc(c.name) + '</option>'; }).join('');
     sub.style.display = '';
   } else { if(sub) sub.style.display='none'; }
@@ -1193,7 +2126,7 @@ function openAddP() {
   document.getElementById('pmId').value = '';
   document.getElementById('pmN').value = '';
   document.getElementById('pmNt').value = '';
-  document.getElementById('pmLabel').value = '';
+  document.getElementById('pmLabel').value = 'normal';
   document.getElementById('pmL').value = '';
   document.getElementById('pmS').value = '';
   document.getElementById('pmP').value = '';
@@ -1214,6 +2147,7 @@ function openAddP() {
   document.getElementById('pmCasePrice').value = '';
   document.getElementById('pmCasePrice').disabled = true;
   document.getElementById('pmCats').innerHTML = renderCatPills(pmCats);
+  applyCatCascade(pmCats.length ? Number(pmCats[0]) : null);
   updateSkuPreview();
   const ib = document.getElementById('pmIB');
   ib.innerHTML = '<span class="ia">+</span><input type="file" id="pmIF" accept="image/*" onchange="hImg(this,\'pmIB\',\'pmImgData\')" />';
@@ -1226,7 +2160,7 @@ function openEditP(id) {
   document.getElementById('pmT').textContent = t('edit') + ' ' + t('product');
   document.getElementById('pmId').value = id;
   document.getElementById('pmN').value = p.name;
-  pmCats = [...(p.catIds || [])];
+  pmCats = [deepestCatId(p.catIds || [])].filter(x => x != null);
   pmSkuManual = !!p.skuManual;
   document.getElementById('pmManual').value = p.skuManual ? '1' : '0';
   document.getElementById('pmS').value = p.stock;
@@ -1234,7 +2168,7 @@ function openEditP(id) {
   document.getElementById('pmC').value = p.cost;
   document.getElementById('pmL').value = p.loc || '';
   document.getElementById('pmNt').value = p.note || '';
-  document.getElementById('pmLabel').value = p.label || '';
+  document.getElementById('pmLabel').value = p.label || 'normal';
   pmImgData = p.img || '';
   document.getElementById('pmCw').style.display = has('viewCost') ? '' : 'none';
   // Populate new fields
@@ -1256,10 +2190,11 @@ function openEditP(id) {
   document.getElementById('pmCasePrice').value = p.case_price || '';
   document.getElementById('pmCasePrice').disabled = !p.has_case;
   document.getElementById('pmCats').innerHTML = renderCatPills(pmCats);
+  applyCatCascade(pmCats.length ? Number(pmCats[0]) : null);
   updateSkuPreview();
   const ib = document.getElementById('pmIB');
   if (p.img) {
-    ib.innerHTML = '<img src="' + p.img + '" /><span class="ir" onclick="event.stopPropagation();pmImgData=\'\';rmImg(\'pmImgData\',\'pmIB\')">×</span>';
+    ib.innerHTML = '<img src="' + safeUrl(p.img) + '" /><span class="ir" onclick="event.stopPropagation();pmImgData=\'\';rmImg(\'pmImgData\',\'pmIB\')">×</span>';
   } else {
     ib.innerHTML = '<span class="ia">+</span><input type="file" id="pmIF" accept="image/*" onchange="hImg(this,\'pmIB\',\'pmImgData\')" />';
   }
@@ -1268,23 +2203,84 @@ function openEditP(id) {
 
 
 function renderCatPills(selected) {
-  // Cascade selector: show selected cats as tags + a button to open picker
-  let html = '<div class="cascade-selected">';
-  selected.forEach(cid => {
-    const c = catById(cid);
-    if (!c) return;
-    // Build path
-    const path = getCatPath(cid);
-    html += '<span class="cascade-tag">' + c.icon + ' ' + esc(path) + ' <span class="ct-rm" onclick="event.stopPropagation();togglePMCat(' + cid + ')">✕</span></span>';
+  // 与库存管理同一套级联下拉（catChainOf + 逐层 select）
+  // 注意：不在 HTML 里写 selected，渲染后用 applyCatCascade 按 chain 强制 .value，避免深层回显丢失
+  const selId = (selected && selected.length) ? Number(selected[0]) : null;
+  const chain = selId ? catChainOf(selId) : [];
+  const topCats = DB.cats.filter(function(c){ return c.parent_id === null; }).sort(function(a,b){ return a.order - b.order; });
+  let html = '';
+  if (selId) {
+    const c = catById(selId);
+    if (c) {
+      html += '<div class="cascade-selected"><span class="cascade-tag">' + c.icon + ' ' + esc(getCatPath(selId)) + ' <span class="ct-rm" onclick="event.stopPropagation();togglePMCat(0)">✕</span></span></div>';
+    }
+  }
+  html += '<div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">';
+  html += '<select id="pmCat1" class="inv-sel" onchange="onPmCascadeChange(1)">';
+  html += '<option value="">' + t('selectCategoryFirst') + '</option>';
+  topCats.forEach(function(c) {
+    html += '<option value="' + c.id + '">' + c.icon + ' ' + esc(c.name) + '</option>';
   });
-  html += '</div>';
-  html += '<div class="cascade-selector" id="cascadePicker" style="margin-top:.3rem">';
-  // Build tree recursively, showing one level at a time
-  html += buildCascadeLevel(null, 0, selected);
+  html += '</select>';
+  if (selId) {
+    for (let lv = 1; lv <= chain.length; lv++) {
+      const parent = chain[lv - 1];
+      const children = DB.cats.filter(function(c){ return c.parent_id === parent.id; }).sort(function(a,b){ return a.order - b.order; });
+      if (!children.length) break;
+      html += '<select id="pmCat' + (lv + 1) + '" class="inv-sel" onchange="onPmCascadeChange(' + (lv + 1) + ')">';
+      html += '<option value="' + parent.id + '">' + t('allSubCats') + '</option>';
+      children.forEach(function(c) {
+        html += '<option value="' + c.id + '">' + c.icon + ' ' + esc(c.name) + '</option>';
+      });
+      html += '</select>';
+    }
+  }
   html += '</div>';
   return html;
 }
 
+function applyCatCascade(selId) {
+  const chain = selId ? catChainOf(selId) : [];
+  for (let i = 0; i < chain.length; i++) {
+    const s = document.getElementById('pmCat' + (i + 1));
+    if (s) s.value = String(chain[i].id);
+  }
+  const last = chain[chain.length - 1];
+  if (last) {
+    const s = document.getElementById('pmCat' + (chain.length + 1));
+    if (s) s.value = String(last.id);
+  }
+}
+
+function refreshPmCats() {
+  const selId = (pmCats && pmCats.length) ? Number(pmCats[0]) : null;
+  const box = document.getElementById('pmCats');
+  if (!box) return;
+  box.innerHTML = renderCatPills(pmCats);
+  applyCatCascade(selId);
+  updateSkuPreview();
+}
+
+
+function getCatCodePath(catId) {
+  const parts = [];
+  let c = catById(catId);
+  while (c) {
+    if (c.code) parts.unshift(String(c.code));
+    c = c.parent_id ? catById(c.parent_id) : null;
+  }
+  return parts.join('');
+}
+function getCatPathWithCodes(catId) {
+  const names = [], codes = [];
+  let c = catById(catId);
+  while (c) {
+    names.unshift(c.name);
+    codes.unshift(c.code || '');
+    c = c.parent_id ? catById(c.parent_id) : null;
+  }
+  return names.map((n, i) => n + '[' + codes[i] + ']').join(' > ');
+}
 function getCatPath(catId) {
   const parts = [];
   let c = catById(catId);
@@ -1295,42 +2291,36 @@ function getCatPath(catId) {
   return parts.join(' > ');
 }
 
-function buildCascadeLevel(parentId, depth, selected) {
-  const children = DB.cats.filter(c => c.parent_id === parentId && c.visible !== false).sort((a, b) => a.order - b.order);
-  if (!children.length) return '';
-  let html = '';
-  children.forEach(c => {
-    const cnt = DB.prods.filter(p => (p.catIds || []).includes(c.id)).length;
-    const subChildren = DB.cats.filter(x => x.parent_id === c.id);
-    const isSelected = selected.includes(c.id);
-    const indent = depth > 0 ? '<span style="opacity:.4;font-size:.6rem;margin-right:.2rem">' + '└ '.repeat(depth) + '</span>' : '';
-    html += '<div class="cascade-item ' + (isSelected ? 'on' : '') + (subChildren.length ? ' has-children' : '') + '" style="padding-left:' + (0.6 + depth * 0.8) + 'rem" onclick="togglePMCat(' + c.id + ')">';
-    html += indent;
-    html += '<span>' + c.icon + '</span>';
-    html += '<span style="font-size:.78rem">' + esc(c.name) + '</span>';
-    html += '<span style="font-family:DM Mono,monospace;font-size:.6rem;color:var(--t3)">[' + c.code + ']</span>';
-    html += '<span style="font-size:.6rem;color:var(--t3)">' + cnt + '</span>';
-    if (subChildren.length) html += '<span class="ci-arrow">▸</span>';
-    html += '</div>';
-    // Recursively show sub-levels
-    html += buildCascadeLevel(c.id, depth + 1, selected);
-  });
-  return html;
+function onPmCascadeChange(level) {
+  const sel = document.getElementById('pmCat' + level);
+  if (!sel) return;
+  const v = sel.value;
+  if (!v) { pmCats = []; }
+  else {
+    const id = Number(v);
+    // 与库存一致：可选到任意层；商品仍只挂叶子（saveProd 用 deepestCatId）
+    pmCats = [id];
+  }
+  pmSkuManual = false;
+  document.getElementById('pmManual').value = '0';
+  refreshPmCats();
 }
 
 function togglePMCat(id) {
-  pmCats = [id];
+  if (!id) { pmCats = []; }
+  else { pmCats = [id]; }
   pmSkuManual = false;
   document.getElementById('pmManual').value = '0';
-  document.getElementById('pmCats').innerHTML = renderCatPills(pmCats);
-  updateSkuPreview();
+  refreshPmCats();
 }
 
 function updateSkuPreview() {
   const preview = genSku(pmCats, parseInt(document.getElementById('pmId').value) || null);
   const c = document.getElementById('skuPrev');
   if (pmSkuManual) {
-    c.innerHTML = '<span class="spl">SKU:</span><input type="text" id="skuAuto" value="' + esc(preview) + '" /><span class="spm" onclick="toggleSkuMode()">' + t('switchAuto') + '</span>';
+    const curId = parseInt(document.getElementById('pmId').value) || null;
+    const curSku = curId ? ((prodById(curId) || {}).sku || '') : '';
+    c.innerHTML = '<span class="spl">SKU:</span><input type="text" id="skuAuto" value="' + esc(curSku || preview) + '" /><span class="spm" onclick="toggleSkuMode()">' + t('switchAuto') + '</span>';
   } else {
     c.innerHTML = '<span class="spl">SKU:</span><span class="spv" id="skuAuto">' + (pmCats.length ? esc(preview) : t('selectCategoryFirst')) + '</span><span class="spm" onclick="toggleSkuMode()">' + t('switchManual') + '</span>';
   }
@@ -1347,6 +2337,11 @@ async function saveProd() {
   const name = document.getElementById('pmN').value.trim();
   if (!name) { toast(t('enterNameErr'), 'er'); return; }
   if (!pmCats.length) { toast(t('selectCatErr'), 'er'); return; }
+  const _leafId = deepestCatId(pmCats);
+  if (_leafId == null || DB.cats.some(c => c.parent_id === _leafId)) {
+    toast(t('selectLeafCat') || t('selectCatErr'), 'er');
+    return;
+  }
   const sku = pmSkuManual ? (document.getElementById('skuAuto') ? document.getElementById('skuAuto').value : '') : genSku(pmCats, parseInt(id) || null);
   const stock = parseInt(document.getElementById('pmS').value) || 0;
   const price = parseFloat(document.getElementById('pmP').value) || 0;
@@ -1368,18 +2363,19 @@ async function saveProd() {
   const hasCase = document.getElementById('pmHasCase').checked;
   const casePrice = hasCase ? (parseFloat(document.getElementById('pmCasePrice').value) || 0) : 0;
   const row = { name, sku, sku_manual: pmSkuManual, stock: sumStock, price, cost, location: loc, note, image: pmImgData || '',
-    category_type: catType, sizes: sizes, size_stock: sizeStock, has_bag: hasBag, bag_price: bagPrice, has_case: hasCase, case_price: casePrice, label: document.getElementById('pmLabel').value };
+    category_type: catType, sizes: sizes, size_stock: sizeStock, has_bag: hasBag, bag_price: bagPrice, has_case: hasCase, case_price: casePrice, label: document.getElementById('pmLabel').value || 'normal' };
   try {
     if (id) {
-      const { error } = await sb.from('products').update(row).eq('id', id);
-      if (error) throw error;
-      await sb.from('product_categories').delete().eq('product_id', id);
-      if (pmCats.length) await sb.from('product_categories').insert(pmCats.map(cid => ({ product_id: Number(id), category_id: cid })));
+      await adminApi('update', { table: 'products', patch: row, where: { id: Number(id) } });
+      await adminApi('delete', { table: 'product_categories', where: { product_id: Number(id) } });
+      const _pc = [deepestCatId(pmCats)].filter(x => x != null);
+      if (_pc.length) await adminApi('insert', { table: 'product_categories', rows: _pc.map(cid => ({ product_id: Number(id), category_id: cid })) });
       toast(t('productUpdated'), 'ok');
     } else {
-      const { data, error } = await sb.from('products').insert(row).select().single();
-      if (error) throw error;
-      if (pmCats.length && data) await sb.from('product_categories').insert(pmCats.map(cid => ({ product_id: data.id, category_id: cid })));
+      const data = await adminApi('insert', { table: 'products', row: Object.assign({}, row, { status: 'active' }), single: true, select: true });
+      const idNew = data && data.id;
+      const _pcn = [deepestCatId(pmCats)].filter(x => x != null);
+      if (_pcn.length && idNew) await adminApi('insert', { table: 'product_categories', rows: _pcn.map(cid => ({ product_id: Number(idNew), category_id: cid })) });
       toast(t('productAdded'), 'ok');
     }
     await loadAllData();
@@ -1388,11 +2384,34 @@ async function saveProd() {
   } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
 }
 
+async function toggleMallListed(id) {
+  const p = prodById(id);
+  if (!p) return;
+  const next = !p.ml;
+  try {
+    await adminApi('update', { table: 'products', patch: { mall_listed: next }, where: { id: Number(id) } });
+    p.ml = next;
+    toast(next ? t('mallOn') : t('mallOff'), 'ok');
+    render(curP);
+  } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
+}
+async function toggleGalleryListed(id) {
+  const p = prodById(id);
+  if (!p) return;
+  const next = !p.gl;
+  try {
+    await adminApi('update', { table: 'products', patch: { gallery_listed: next }, where: { id: Number(id) } });
+    p.gl = next;
+    toast(next ? t('galleryOn') : t('galleryOff'), 'ok');
+    render(curP);
+  } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
+}
+
 async function delP(id) {
   const p = prodById(id);
   if (!p || !confirm(t('confirmDelete', p.name))) return;
   try {
-    await sb.from('products').delete().eq('id', id);
+    await adminFrom('products').delete().eq('id', id);
     await loadAllData();
     toast(t('productDeleted'), 'inf');
     render(curP);
@@ -1412,7 +2431,7 @@ function rRec(tp) {
   } else {
     tb = recs.map(r => {
       const p = prodById(r.pid);
-      return '<tr><td style="font-family:DM Mono,monospace;font-size:.7rem;color:var(--t3)">' + esc(r.t) + '</td><td><div class="prow"><div class="pimg">' + (p && p.img ? '<img src="' + p.img + '" alt="" onerror="this.remove()">' : '') + '</div><div class="pinfo"><strong>' + (p ? esc(p.name) : t('deleted')) + '</strong></div></div></td><td class="hide-sm"><span class="sk">' + (p ? esc(p.sku) : '-') + '</span></td><td><span class="qty-pill ' + (isIn ? 'in' : 'out') + '">' + (isIn ? '+' : '-') + r.qty + '</span></td><td class="hide-md">' + esc(r.op) + '</td><td class="hide-sm">' + esc(r.note || '-') + '</td></tr>';
+      return '<tr><td style="font-family:DM Mono,monospace;font-size:.7rem;color:var(--t3)">' + esc(r.t) + '</td><td><div class="prow"><div class="pimg">' + (p && p.img ? '<img src="' + safeUrl(p.img) + '" alt="" onerror="this.remove()">' : '') + '</div><div class="pinfo"><strong>' + (p ? esc(p.name) : t('deleted')) + '</strong></div></div></td><td class="hide-sm"><span class="sk">' + (p ? esc(p.sku) : '-') + '</span></td><td><span class="qty-pill ' + (isIn ? 'in' : 'out') + '">' + (isIn ? '+' : '-') + r.qty + '</span></td><td class="hide-md">' + esc(r.op) + '</td><td class="hide-sm">' + esc(r.note || '-') + '</td></tr>';
     }).join('');
   }
   return '<div class="tb"><span class="tbsp"></span>' + (can ? '<button class="btn bp bs aw" onclick="openIO(\'' + tp + '\')">' + (isIn ? t('addInbound') : t('addOutbound')) + '</button>' : '') + '</div><div class="tw"><div class="ts"><table><thead><tr><th>' + t('createdAt') + '</th><th>' + t('product') + '</th><th class="hide-sm">' + t('sku') + '</th><th>' + t('quantity') + '</th><th class="hide-md">' + t('operator') + '</th><th class="hide-sm">' + t('remarks') + '</th></tr></thead><tbody>' + tb + '</tbody></table></div></div>';
@@ -1501,9 +2520,9 @@ async function doIO() {
   if (tp === 'out' && qty > p.stock) { toast(t('insufficient', p.stock), 'er'); return; }
   try {
     if (tp === 'in') {
-      await sb.from('inbound_records').insert({ product_id: pid, qty, operator: user.u, note });
+      await adminFrom('inbound_records').insert({ product_id: pid, qty, operator: user.u, note });
     } else {
-      await sb.from('outbound_records').insert({ product_id: pid, qty, operator: user.u, note });
+      await adminFrom('outbound_records').insert({ product_id: pid, qty, operator: user.u, note });
     }
     // Update size_stock and stock
     if (p.sizes && p.sizes.length > 0 && Object.keys(sizeUpdates).length > 0) {
@@ -1515,13 +2534,13 @@ async function doIO() {
         }
       });
       var newStock = Object.values(newSizeStock).reduce(function(a,b){return a+b},0);
-      await sb.from('products').update({ size_stock: newSizeStock, stock: newStock }).eq('id', pid);
+      await adminFrom('products').update({ size_stock: newSizeStock, stock: newStock }).eq('id', pid);
     } else {
       // Fallback for non-sized products
       if (tp === 'in') {
-        await sb.from('products').update({ stock: p.stock + qty }).eq('id', pid);
+        await adminFrom('products').update({ stock: p.stock + qty }).eq('id', pid);
       } else {
-        await sb.from('products').update({ stock: p.stock - qty }).eq('id', pid);
+        await adminFrom('products').update({ stock: p.stock - qty }).eq('id', pid);
       }
     }
     await loadAllData();
@@ -1598,13 +2617,17 @@ async function saveAcct() {
   if (!id && DB.accts.find(a => a.u === u)) { toast(t('usernameExists'), 'er'); return; }
   const dp = r === 'wh_admin' ? { viewInventory: 1, addProduct: 1, editProduct: 1, deleteProduct: 1, inbound: 1, outbound: 1, viewAnalytics: 1, manageAccounts: 1, manageCategories: 1, viewCost: 1, createOrder: 1, processOrder: 1 } : { viewInventory: 1 };
   try {
-    if (id) {
-      const upd = { username: u, display_name: n, role: r };
-      if (p) upd.password = p;
-      await sb.from('accounts').update(upd).eq('id', id);
-    } else {
-      await sb.from('accounts').insert({ username: u, password: p, display_name: n, role: r, status: 'active', perms: dp });
-    }
+    const { data, error } = await sb.rpc('app_save_account', {
+      p_id: id ? Number(id) : null,
+      p_username: u,
+      p_password: p || null,
+      p_display_name: n,
+      p_role: r,
+      p_status: 'active',
+      p_perms: dp
+    });
+    if (error) throw error;
+    if (data && data.ok === false) throw new Error(data.error || 'save_failed');
     await loadAllData();
     cMo('amo');
     toast(t('saved'), 'ok');
@@ -1617,7 +2640,7 @@ async function togAcct(id) {
   if (!a || a.id === user.id) { toast(t('selfDisable'), 'er'); return; }
   const ns = a.s === 'active' ? 'disabled' : 'active';
   try {
-    await sb.from('accounts').update({ status: ns }).eq('id', id);
+    await adminFrom('accounts').update({ status: ns }).eq('id', id);
     await loadAllData();
     render('accts');
   } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
@@ -1628,7 +2651,7 @@ async function delAcct(id) {
   if (!a || a.id === user.id) { toast(t('selfDelete'), 'er'); return; }
   if (!confirm(t('confirmDeleteUser', a.u))) return;
   try {
-    await sb.from('accounts').delete().eq('id', id);
+    await adminFrom('accounts').delete().eq('id', id);
     await loadAllData();
     render('accts');
   } catch (err) { toast(t('deleteFailed') + ': ' + err.message, 'er'); }
@@ -1653,7 +2676,7 @@ async function savePerms() {
   const newPerm = {};
   document.querySelectorAll('#prL .ts2').forEach(sw => { newPerm[sw.dataset.key] = sw.classList.contains('on') ? 1 : 0; });
   try {
-    await sb.from('accounts').update({ perms: newPerm }).eq('id', id);
+    await adminFrom('accounts').update({ perms: newPerm }).eq('id', id);
     await loadAllData();
     cMo('prmo');
     toast(t('permUpdated'), 'ok');
@@ -1674,7 +2697,7 @@ function rCats() {
     const children = getChildren(parentId);
     if (!children.length) return '';
     return children.map(c => {
-      const cnt = DB.prods.filter(p => (p.catIds || []).includes(c.id)).length;
+      const cnt = DB.prods.filter(p => productInCat(p, c.id)).length;
       const subCats = getChildren(c.id);
       const hasChildren = subCats.length > 0;
       const collapsed = catCollapsed[c.id] === true;
@@ -1761,7 +2784,7 @@ async function addCat() {
   const depth = parent ? (parent.depth || 0) + 1 : 0;
   const siblings = DB.cats.filter(c => c.parent_id === parentId);
   const mx = siblings.reduce((m, c) => Math.max(m, c.order), 0);
-  const { error } = await sb.from('categories').insert({ name, code, icon, order_num: mx + 1, parent_id: parentId, depth, visible: true, locked: false });
+  const { error } = await adminFrom('categories').insert({ name, code, icon, order_num: mx + 1, parent_id: parentId, depth, visible: true, locked: false });
   if (error) { toast(t('saveFailed') + ': ' + error.message, 'er'); return; }
   await loadAllData();
   ['ncI', 'ncC'].forEach(id => { document.getElementById(id).value = ''; });
@@ -1786,7 +2809,7 @@ async function openAddSubCat(parentId) {
   const depth = (p.depth || 0) + 1;
   const siblings = DB.cats.filter(c => c.parent_id === parentId);
   const mx = siblings.reduce((m, c) => Math.max(m, c.order), 0);
-  const { error } = await sb.from('categories').insert({ name: name.trim(), code: codeUp, icon, order_num: mx + 1, parent_id: parentId, depth, visible: true, locked: false });
+  const { error } = await adminFrom('categories').insert({ name: name.trim(), code: codeUp, icon, order_num: mx + 1, parent_id: parentId, depth, visible: true, locked: false });
   if (error) { toast(t('saveFailed') + ': ' + error.message, 'er'); return; }
   await loadAllData();
   render('cats');
@@ -1795,7 +2818,7 @@ async function openAddSubCat(parentId) {
 
 async function toggleCatVis(id, current) {
   try {
-    await sb.from('categories').update({ visible: !current }).eq('id', id);
+    await adminFrom('categories').update({ visible: !current }).eq('id', id);
     await loadAllData();
     render('cats');
   } catch (err) { toast(t('saveFailed'), 'er'); }
@@ -1803,7 +2826,7 @@ async function toggleCatVis(id, current) {
 
 async function toggleCatLock(id, current) {
   try {
-    await sb.from('categories').update({ locked: !current }).eq('id', id);
+    await adminFrom('categories').update({ locked: !current }).eq('id', id);
     await loadAllData();
     render('cats');
     toast(current ? t('unlockCat') : t('lockCat'), 'ok');
@@ -1817,7 +2840,7 @@ async function renameCat(id) {
   const n = prompt(t('enterNewName'), c.name);
   if (n && n.trim() && n.trim() !== c.name) {
     try {
-      await sb.from('categories').update({ name: n.trim() }).eq('id', id);
+      await adminFrom('categories').update({ name: n.trim() }).eq('id', id);
       await loadAllData();
       render('cats');
     } catch (err) { toast(t('saveFailed'), 'er'); }
@@ -1831,7 +2854,7 @@ async function editCatIcon(id) {
   const n = prompt(t('enterNewIcon'), c.icon);
   if (n && n.trim()) {
     try {
-      await sb.from('categories').update({ icon: n.trim() }).eq('id', id);
+      await adminFrom('categories').update({ icon: n.trim() }).eq('id', id);
       await loadAllData();
       render('cats');
     } catch (err) { toast(t('saveFailed'), 'er'); }
@@ -1847,7 +2870,7 @@ async function editCatCode(id) {
   const code = n.trim().toUpperCase();
   if (DB.cats.some(x => x.code === code && x.id !== id && (x.parent_id || null) === (c.parent_id || null))) { toast(t('codeExists'), 'er'); return; }
   try {
-    await sb.from('categories').update({ code }).eq('id', id);
+    await adminFrom('categories').update({ code }).eq('id', id);
     await loadAllData();
     render('cats');
   } catch (err) { toast(t('saveFailed'), 'er'); }
@@ -1862,8 +2885,8 @@ async function moveCat(id, d) {
   const ti = i + d;
   if (ti < 0 || ti >= siblings.length) return;
   try {
-    await sb.from('categories').update({ order_num: siblings[ti].order }).eq('id', siblings[i].id);
-    await sb.from('categories').update({ order_num: siblings[i].order }).eq('id', siblings[ti].id);
+    await adminFrom('categories').update({ order_num: siblings[ti].order }).eq('id', siblings[i].id);
+    await adminFrom('categories').update({ order_num: siblings[i].order }).eq('id', siblings[ti].id);
     await loadAllData();
     render('cats');
   } catch (err) { toast(t('sortFailed'), 'er'); }
@@ -1884,7 +2907,7 @@ async function delCat(id) {
   const c = catById(id);
   if (!c) return;
   if (c.locked) { toast(t('catLocked'), 'er'); return; }
-  if (DB.prods.some(p => (p.catIds || []).includes(id))) { toast(t('noDeleteWithProducts'), 'er'); return; }
+  if (DB.prods.some(p => productInCat(p, id))) { toast(t('noDeleteWithProducts'), 'er'); return; }
   const children = DB.cats.filter(x => x.parent_id === id);
   const msg = children.length
     ? t('confirmDelete') + '「' + c.name + '」' + t('subCats') + ' (' + children.length + '), ' + t('confirm') + '?'
@@ -1894,10 +2917,10 @@ async function delCat(id) {
     // Delete children first
     if (children.length) {
       for (const child of children) {
-        await sb.from('categories').delete().eq('id', child.id);
+        await adminFrom('categories').delete().eq('id', child.id);
       }
     }
-    await sb.from('categories').delete().eq('id', id);
+    await adminFrom('categories').delete().eq('id', id);
     await loadAllData();
     render('cats');
   } catch (err) { toast(t('deleteFailed'), 'er'); }
@@ -1917,8 +2940,8 @@ async function catDD(e) {
   // Same parent: swap order
   if ((a.parent_id || null) === (b.parent_id || null)) {
     try {
-      await sb.from('categories').update({ order_num: b.order }).eq('id', a.id);
-      await sb.from('categories').update({ order_num: a.order }).eq('id', b.id);
+      await adminFrom('categories').update({ order_num: b.order }).eq('id', a.id);
+      await adminFrom('categories').update({ order_num: a.order }).eq('id', b.id);
       await loadAllData();
       render('cats');
     } catch (err) { toast(t('sortFailed'), 'er'); }
@@ -1927,12 +2950,12 @@ async function catDD(e) {
     const newDepth = (b.depth || 0);
     const depthDiff = newDepth - (a.depth || 0) + 1;
     try {
-      await sb.from('categories').update({ parent_id: b.id, depth: newDepth + 1 }).eq('id', a.id);
+      await adminFrom('categories').update({ parent_id: b.id, depth: newDepth + 1 }).eq('id', a.id);
       // Update all descendants' depth
       function updateDescendantDepth(pid, dd) {
         DB.cats.filter(c => c.parent_id === pid).forEach(async c => {
           const nd = (c.depth || 0) + dd;
-          await sb.from('categories').update({ depth: nd }).eq('id', c.id);
+          await adminFrom('categories').update({ depth: nd }).eq('id', c.id);
           updateDescendantDepth(c.id, dd);
         });
       }
@@ -1979,13 +3002,13 @@ async function confirmMoveCat(id) {
   try {
     const siblings = DB.cats.filter(x => x.parent_id === targetId && x.id !== id);
     const mx = siblings.reduce((m, x) => Math.max(m, x.order), 0);
-    await sb.from('categories').update({ parent_id: targetId, depth: newDepth, order_num: mx + 1 }).eq('id', id);
+    await adminFrom('categories').update({ parent_id: targetId, depth: newDepth, order_num: mx + 1 }).eq('id', id);
     // Update descendants depth
     async function updateDescDepth(pid, dd) {
       const children = DB.cats.filter(x => x.parent_id === pid);
       for (const ch of children) {
         const nd = (ch.depth || 0) + dd;
-        await sb.from('categories').update({ depth: nd }).eq('id', ch.id);
+        await adminFrom('categories').update({ depth: nd }).eq('id', ch.id);
         await updateDescDepth(ch.id, dd);
       }
     }
@@ -2116,7 +3139,7 @@ function rWhOrd() {
 async function adminConfirmShip(id) {
   if (!confirm(t('confirmEarlyShip'))) return;
   try {
-    await sb.from('orders').update({ admin_confirmed_ship: true, admin_ship_confirmed_by: user.u }).eq('id', id);
+    await adminFrom('orders').update({ admin_confirmed_ship: true, admin_ship_confirmed_by: user.u }).eq('id', id);
     await loadAllData();
     toast(t('confirmEarlyShipDone'), 'ok');
     render(curP);
@@ -2130,7 +3153,7 @@ function editOrdShipInfo(id) {
   if (o.pk === 'onibus') {
     const name = prompt('Ônibus 客户姓名：', o.onibusName || '');
     if (name !== null) {
-      sb.from('orders').update({ onibus_name: name.trim() }).eq('id', id).then(() => {
+      adminFrom('orders').update({ onibus_name: name.trim() }).eq('id', id).then(() => {
         // If schedule image not set, prompt upload
         if (!o.onibusImg) {
           toast('请在打包时上传班次图片', 'inf');
@@ -2141,7 +3164,7 @@ function editOrdShipInfo(id) {
   } else if (o.pk === 'motoboy' || o.pk === 'correios') {
     const addr = prompt('收货地址：', o.shipAddr || '');
     if (addr !== null) {
-      sb.from('orders').update({ shipping_address: addr.trim() }).eq('id', id).then(() => {
+      adminFrom('orders').update({ shipping_address: addr.trim() }).eq('id', id).then(() => {
         loadAllData().then(() => viewOrd(id));
       });
     }
@@ -2174,7 +3197,7 @@ function viewOrd(id) {
     else if (o.supT === 'package_surface') supLabel = t('packageSurface');
     imgHtml += '<div style="margin-bottom:.5rem"><div style="font-size:.62rem;color:var(--t3);margin-bottom:.2rem">' + supLabel + '</div><img src="' + o.supI + '" style="max-width:200px;border-radius:var(--r);border:1px solid var(--bd)" /></div>';
   }
-  if (o.onibusImg) imgHtml += '<div style="margin-bottom:.5rem"><div style="font-size:.62rem;color:var(--t3);margin-bottom:.2rem">Ônibus ' + t('scheduleImage') + '</div><img src="' + o.onibusImg + '" style="max-width:200px;border-radius:var(--r);border:1px solid var(--bd)" /></div>';
+  if (o.onibusImg) imgHtml += '<div style="margin-bottom:.5rem"><div style="font-size:.62rem;color:var(--t3);margin-bottom:.2rem">Ônibus ' + t('scheduleImage') + '</div><img src="' + safeUrl(o.onibusImg) + '" style="max-width:200px;border-radius:var(--r);border:1px solid var(--bd)" /></div>';
   if (o.oi) imgHtml += '<div style="margin-bottom:.5rem"><div style="font-size:.62rem;color:var(--t3);margin-bottom:.2rem">' + t('orderImage') + '</div><img src="' + o.oi + '" style="max-width:200px;border-radius:var(--r);border:1px solid var(--bd)" /></div>';
   if (o.bi) imgHtml += '<div style="margin-bottom:.5rem"><div style="font-size:.62rem;color:var(--t3);margin-bottom:.2rem">' + t('billImage') + '</div><img src="' + o.bi + '" style="max-width:200px;border-radius:var(--r);border:1px solid var(--bd)" /></div>';
   if (o.payI) imgHtml += '<div style="margin-bottom:.5rem"><div style="font-size:.62rem;color:var(--t3);margin-bottom:.2rem">Payment</div><img src="' + o.payI + '" style="max-width:200px;border-radius:var(--r);border:1px solid var(--bd)" /></div>';
@@ -2237,7 +3260,7 @@ function updOrdStatus(id, st) {
       toast(msg, 'er'); return;
     }
   }
-  sb.from('orders').update({ status: st, processed_by: user.u }).eq('id', id).then(() => {
+  adminFrom('orders').update({ status: st, processed_by: user.u }).eq('id', id).then(() => {
     loadAllData().then(() => { toast(t('opSuccess'), 'ok'); render(curP); });
   }).catch(err => toast(t('opFailed') + ': ' + err.message, 'er'));
 }
@@ -2252,10 +3275,10 @@ async function cancelOrd(id) {
     for (const item of o.items) {
       const p = prodById(item.pid);
       if (p) {
-        await sb.from('products').update({ stock: p.stock + item.qty }).eq('id', item.pid);
+        await adminFrom('products').update({ stock: p.stock + item.qty }).eq('id', item.pid);
       }
     }
-    await sb.from('orders').update({ status: 'cancel', processed_by: user.u }).eq('id', id);
+    await adminFrom('orders').update({ status: 'cancel', processed_by: user.u }).eq('id', id);
     await loadAllData();
     toast('订单已取消，库存已回补', 'ok');
     render(curP);
@@ -2308,7 +3331,7 @@ async function confirmPack() {
     let supType = 'waybill';
     if (o.pk === 'pickup') supType = 'label';
     else if (o.pk === 'onibus') supType = 'package_surface';
-    await sb.from('orders').update({
+    await adminFrom('orders').update({
       processed_by: user.u,
       packing_image: pkPacImg, supplementary_image: pkSupImg, supplementary_type: supType
     }).eq('id', id);
@@ -2346,7 +3369,7 @@ async function submitChange() {
   if (newM === o.pk) { toast(t('sameMethodErr'), 'er'); return; }
   if (!chImg) { toast(t('uploadBillErr'), 'er'); return; }
   try {
-    await sb.from('order_changes').insert({
+    await adminFrom('order_changes').insert({
       order_id: oid, old_method: o.pk, new_method: newM,
       shipping_cost: cost, bill_image: chImg, status: 'pending', requested_by: user.u
     });
@@ -2382,7 +3405,7 @@ function openPayConf(id) {
 async function confirmPay() {
   const id = parseInt(document.getElementById('payOid').value);
   try {
-    await sb.from('orders').update({ payment_status: 'confirmed' }).eq('id', id);
+    await adminFrom('orders').update({ payment_status: 'confirmed' }).eq('id', id);
     await loadAllData();
     cMo('paymo');
     toast(t('confirmed'), 'ok');
@@ -2393,7 +3416,7 @@ async function confirmPay() {
 async function rejectPay() {
   const id = parseInt(document.getElementById('payOid').value);
   try {
-    await sb.from('orders').update({ payment_status: 'rejected' }).eq('id', id);
+    await adminFrom('orders').update({ payment_status: 'rejected' }).eq('id', id);
     await loadAllData();
     cMo('paymo');
     toast(t('rejected'), 'inf');
@@ -2468,7 +3491,7 @@ async function saveOrdPrice(orderId) {
       }
     });
     // Update order total and mark as price_modified
-    await sb.from('orders').update({
+    await adminFrom('orders').update({
       shipping_cost: 0,
       price_modified: true
     }).eq('id', orderId);
@@ -2480,7 +3503,7 @@ async function saveOrdPrice(orderId) {
         // Find the order_item record to update
         const { data: oiRecords } = await sb.from('order_items').select('id').eq('order_id', orderId).eq('product_id', item.pid);
         if (oiRecords && oiRecords.length) {
-          await sb.from('order_items').update({ unit_price: newPrice }).eq('id', oiRecords[0].id);
+          await adminFrom('order_items').update({ unit_price: newPrice }).eq('id', oiRecords[0].id);
         }
       }
     }
@@ -2544,9 +3567,9 @@ async function savePaySettings() {
       const val = el.value.trim();
       const { data: existing } = await sb.from('site_settings').select('key').eq('key', key).limit(1);
       if (existing && existing.length) {
-        await sb.from('site_settings').update({ value: val, updated_at: new Date().toISOString() }).eq('key', key);
+        await adminFrom('site_settings').update({ value: val, updated_at: new Date().toISOString() }).eq('key', key);
       } else {
-        await sb.from('site_settings').insert({ key, value: val, label: key });
+        await adminFrom('site_settings').insert({ key, value: val, label: key });
       }
     }
     toast(t('payAccountSaved'), 'ok');
@@ -2634,9 +3657,9 @@ async function saveMemberLevel() {
     try {
       var { data: rows } = await sb.from('member_levels').select('id').eq('level_key', key).limit(1);
       if (rows && rows.length) {
-        await sb.from('member_levels').update({ name: data.name, icon: data.icon, description: data.desc, discount: data.discount, enabled: data.enabled }).eq('level_key', key);
+        await adminFrom('member_levels').update({ name: data.name, icon: data.icon, description: data.desc, discount: data.discount, enabled: data.enabled }).eq('level_key', key);
       } else {
-        await sb.from('member_levels').insert({ level_key: key, name: data.name, icon: data.icon, description: data.desc, discount: data.discount, enabled: data.enabled });
+        await adminFrom('member_levels').insert({ level_key: key, name: data.name, icon: data.icon, description: data.desc, discount: data.discount, enabled: data.enabled });
       }
     } catch(e) {
       console.warn('member_levels table not available, saved locally:', e.message);
@@ -2686,7 +3709,7 @@ function rApprovals() {
 
 async function reviewCus(id, status) {
   try {
-    await sb.from('customers').update({ status, approved_by: user.u }).eq('id', id);
+    await adminFrom('customers').update({ status, approved_by: user.u }).eq('id', id);
     await loadAllData();
     toast(t('reviewDone'), 'ok');
     render('approvals');
@@ -2695,9 +3718,9 @@ async function reviewCus(id, status) {
 
 async function reviewChange(id, status, newM, cost, oid) {
   try {
-    await sb.from('order_changes').update({ status, reviewed_by: user.u }).eq('id', id);
+    await adminFrom('order_changes').update({ status, reviewed_by: user.u }).eq('id', id);
     if (status === 'approved') {
-      await sb.from('orders').update({ pickup_method: newM, shipping_cost: cost }).eq('id', oid);
+      await adminFrom('orders').update({ pickup_method: newM, shipping_cost: cost }).eq('id', oid);
     }
     await loadAllData();
     toast(t('reviewDone'), 'ok');
@@ -2764,7 +3787,7 @@ function initNO() { renderOrdTotal(); updShipFromInfo();
     const onSec = document.getElementById('onibusSec');
     if (onSec) onSec.style.display = '';
     if (dOnibName) { const el = document.getElementById('ordOnibusName'); if (el) el.value = dOnibName; }
-    if (dOnibusImg) { const b = document.getElementById('onIB'); if (b) b.innerHTML = '<img src="' + dOnibusImg + '" /><span class="ir" onclick="event.stopPropagation();dOnibusImg=\'\';rmImg(\'dOnibusImg\',\'onIB\')">×</span>'; }
+    if (dOnibusImg) { const b = document.getElementById('onIB'); if (b) b.innerHTML = '<img src="' + safeUrl(dOnibusImg) + '" /><span class="ir" onclick="event.stopPropagation();dOnibusImg=\'\';rmImg(\'dOnibusImg\',\'onIB\')">×</span>'; }
   }
 }
 
@@ -2925,7 +3948,7 @@ function rmOI(i) { dItems.splice(i, 1); renderOrdItems(); updateCreditInfo(); re
 function renderOrdPics() {
   if (dOI) { const b = document.getElementById('oIB'); if (b) b.innerHTML = '<img src="' + dOI + '" /><span class="ir" onclick="event.stopPropagation();dOI=\'\';rmImg(\'dOI\',\'oIB\')">×</span>'; }
   if (dBI) { const b = document.getElementById('bIB'); if (b) b.innerHTML = '<img src="' + dBI + '" /><span class="ir" onclick="event.stopPropagation();dBI=\'\';rmImg(\'dBI\',\'bIB\')">×</span>'; }
-  if (dPayImg) { const b = document.getElementById('payIB'); if (b) b.innerHTML = '<img src="' + dPayImg + '" /><span class="ir" onclick="event.stopPropagation();dPayImg=\'\';rmImg(\'dPayImg\',\'payIB\')">×</span>'; }
+  if (dPayImg) { const b = document.getElementById('payIB'); if (b) b.innerHTML = '<img src="' + safeUrl(dPayImg) + '" /><span class="ir" onclick="event.stopPropagation();dPayImg=\'\';rmImg(\'dPayImg\',\'payIB\')">×</span>'; }
 }
 
 // ═══════════════════════════════════════
@@ -2954,9 +3977,9 @@ async function saveDraft() {
   try {
     const row = { ...buildOrderRow(), status: 'draft' };
     let ordId;
-    if (dEditId) { await sb.from('orders').update(row).eq('id', dEditId); ordId = dEditId; await sb.from('order_items').delete().eq('order_id', dEditId); }
-    else { const { data, error } = await sb.from('orders').insert(row).select().single(); if (error) throw error; ordId = data.id; }
-    if (dItems.length) await sb.from('order_items').insert(dItems.map(i => ({ order_id: ordId, product_id: i.pid, qty: i.qty })));
+    if (dEditId) { await adminFrom('orders').update(row).eq('id', dEditId); ordId = dEditId; await adminFrom('order_items').delete().eq('order_id', dEditId); }
+    else { const { data, error } = await adminFrom('orders').insert(row).select().single(); if (error) throw error; ordId = data.id; }
+    if (dItems.length) await adminFrom('order_items').insert(dItems.map(i => ({ order_id: ordId, product_id: i.pid, qty: i.qty })));
     await loadAllData();
     toast(t('draftSaved'), 'ok');
     clearDraft();
@@ -2985,12 +4008,12 @@ async function submitOrd() {
   try {
     const row = { ...buildOrderRow(), status: 'pending' };
     let ordId;
-    if (dEditId) { await sb.from('orders').update(row).eq('id', dEditId); ordId = dEditId; await sb.from('order_items').delete().eq('order_id', dEditId); }
-    else { const { data, error } = await sb.from('orders').insert(row).select().single(); if (error) throw error; ordId = data.id; }
-    if (dItems.length) await sb.from('order_items').insert(dItems.map(i => ({ order_id: ordId, product_id: i.pid, qty: i.qty })));
+    if (dEditId) { await adminFrom('orders').update(row).eq('id', dEditId); ordId = dEditId; await adminFrom('order_items').delete().eq('order_id', dEditId); }
+    else { const { data, error } = await adminFrom('orders').insert(row).select().single(); if (error) throw error; ordId = data.id; }
+    if (dItems.length) await adminFrom('order_items').insert(dItems.map(i => ({ order_id: ordId, product_id: i.pid, qty: i.qty })));
     // Lock stock immediately
     for (const it of dItems) {
-      await sb.from('products').update({ stock: (prodById(it.pid)?.stock || 0) - it.qty }).eq('id', it.pid);
+      await adminFrom('products').update({ stock: (prodById(it.pid)?.stock || 0) - it.qty }).eq('id', it.pid);
     }
     await loadAllData();
     toast(t('orderSubmitted'), 'ok');
@@ -3050,9 +4073,9 @@ function autoCancelOrd(id) {
     try {
       for (const item of o.items) {
         const p = prodById(item.pid);
-        if (p) await sb.from('products').update({ stock: p.stock + item.qty }).eq('id', item.pid);
+        if (p) await adminFrom('products').update({ stock: p.stock + item.qty }).eq('id', item.pid);
       }
-      await sb.from('orders').update({ status: 'cancel', processed_by: 'auto' }).eq('id', id);
+      await adminFrom('orders').update({ status: 'cancel', processed_by: 'auto' }).eq('id', id);
       await loadAllData();
       toast('订单 ' + o.no + ' 未按时上传账单，已自动取消并释放库存', 'inf');
       render(curP);
@@ -3082,7 +4105,7 @@ async function delOrd(id) {
   const o = DB.ords.find(x => x.id === id);
   if (!o || o.st !== 'draft') return;
   if (!confirm(t('confirmDeleteDraft'))) return;
-  try { await sb.from('orders').delete().eq('id', id); await loadAllData(); render('sOrds'); } catch (err) { toast(t('deleteFailed'), 'er'); }
+  try { await adminFrom('orders').delete().eq('id', id); await loadAllData(); render('sOrds'); } catch (err) { toast(t('deleteFailed'), 'er'); }
 }
 
 // ═══════════════════════════════════════
@@ -3134,7 +4157,7 @@ async function saveCus() {
   const corrAddr = document.getElementById('cusCA').value.trim();
   const creditLimit = parseFloat(document.getElementById('cusCL').value) || 0;
   try {
-    await sb.from('customers').insert({
+    await adminFrom('customers').insert({
       name, phone, moto_address: motoAddr, correio_address: corrAddr,
       credit_limit: creditLimit, credit_used: 0, status: 'pending', created_by: user.u
     });
@@ -3171,9 +4194,22 @@ function gSearch(q) {
   const s = sessionStorage.getItem('cs4');
   if (s) {
     try {
-      const { id, pl } = JSON.parse(s);
-      const a = DB.accts.find(x => x.id === id && x.s === 'active');
-      if (a && a.r==='sales') { user = a; portal = 'sl'; enterApp(); }
+      const { id, pl, tk } = JSON.parse(s);
+      if (tk) {
+        initSb(tk);
+        sb.rpc('app_list_accounts').then(({ data }) => {
+          const list = Array.isArray(data) ? data : [];
+          const a = list.find(x => x.id === id && x.status === 'active');
+          if (a && a.role==='sales') {
+            user = {
+              id: a.id, u: a.username, n: a.display_name || '',
+              r: a.role, s: a.status, perm: a.perms || {}, c: ''
+            };
+            portal = 'sl';
+            enterApp();
+          }
+        }).catch(() => {});
+      }
     } catch (e) { }
   }
 })();
