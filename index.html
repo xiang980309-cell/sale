@@ -115,7 +115,7 @@ input,button,select,textarea{font-family:inherit;font-size:inherit;border:none;o
 
 /* === STATS === */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1.3rem;width:100%}
-.sc{background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);padding:1rem 1.1rem;transition:all var(--tr);position:relative;overflow:hidden;min-width:0}
+.sc{background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);padding:1rem 1.1rem;transition:all var(--tr);position:relative;overflow:hidden;min-width:0;cursor:pointer}
 .sc::after{content:'';position:absolute;top:0;left:0;width:100%;height:3px}
 .sc:nth-child(1)::after{background:var(--ac)}.sc:nth-child(2)::after{background:var(--sf)}.sc:nth-child(3)::after{background:var(--in)}.sc:nth-child(4)::after{background:var(--dg)}
 .sc:hover{border-color:var(--bl);transform:translateY(-2px);box-shadow:var(--sh)}
@@ -1170,7 +1170,7 @@ const T = {
     analytics:'数据分析', accounts:'账号管理', categories:'分类管理', orderProcess:'订单处理',
     salesWorkspace:'工作台', newOrder:'新建订单', orderList:'订单列表', customerMgmt:'客户管理',
     productQuery:'商品查询', approvalCenter:'审批中心',
-    overview:'概览', management:'管理', orders:'订单', analysis:'分析', approval:'审核', system:'系统',
+    overview:'概览', management:'管理', orders:'订单', analysis:'分析', approval:'审核', system:'系统管理',
     searchPH:'搜索商品、SKU...',
     productTypes:'商品种类', totalStock:'总库存量', pendingOrders:'待处理订单', alertProducts:'预警商品',
     running:'运营中', sufficient:'种充足', needProcess:'需处理', recentOps:'最近操作', lowStockAlert:'低库存预警',
@@ -1310,7 +1310,7 @@ const T = {
     analytics:'Análises', accounts:'Contas', categories:'Categorias', orderProcess:'Pedidos',
     salesWorkspace:'Área de Trabalho', newOrder:'Novo Pedido', orderList:'Lista de Pedidos', customerMgmt:'Clientes',
     productQuery:'Consultar Produtos', approvalCenter:'Aprovações',
-    overview:'Visão Geral', management:'Gestão', orders:'Pedidos', analysis:'Análises', approval:'Aprovações', system:'Sistema',
+    overview:'Visão Geral', management:'Gestão', orders:'Pedidos', analysis:'Análises', approval:'Aprovações', system:'Gestão do Sistema',
     searchPH:'Buscar produtos, SKU...',
     productTypes:'Tipos de Produtos', totalStock:'Estoque Total', pendingOrders:'Pedidos Pendentes', alertProducts:'Alertas',
     running:'Em operação', sufficient:'abastecidos', needProcess:'A processar', recentOps:'Operações Recentes', lowStockAlert:'Estoque Baixo',
@@ -1474,6 +1474,16 @@ const PICKUPS = {motoboy:{l:'Motoboy',i:'🏍️',d:'同城配送'},correios:{l:
 // === 管理员设定项（默认值；可用 localStorage 'cs4cfg' 覆盖） ===
 const CFG = { billDeadlineHours: 2, releaseTime: '23:00', motoboyFee: 15, onibusBig: 50, onibusSmall: 30, correiosBase: 15, correiosPerKg: 6, correiosItemKg: 0.5, motoboyAddr: '', correiosAddr: '' };
 try { const _cfg = JSON.parse(localStorage.getItem('cs4cfg') || '{}'); Object.assign(CFG, _cfg); } catch (e) {}
+async function loadShipCfgFromDb() {
+  try {
+    const { data } = await sb.from('site_settings').select('key,value').in('key', ['addr_motoboy', 'addr_correios']);
+    (data || []).forEach(r => {
+      if (r.key === 'addr_motoboy' && r.value) CFG.motoboyAddr = r.value;
+      if (r.key === 'addr_correios' && r.value) CFG.correiosAddr = r.value;
+    });
+    if (typeof updShipFromInfo === 'function') updShipFromInfo();
+  } catch (e) {}
+}
 const OSTAT = {draft:{l:'draft',c:'b-dr'},pending:{l:'pending',c:'b-pd'},picking:{l:'picking',c:'b-pk'},done:{l:'done',c:'b-dn'},cancel:{l:'cancel',c:'b-cn'}};
 const PSTAT = {pending_bill:{l:'billPending',c:'b-pd'},pending:{l:'pendingConfirm',c:'b-pd'},confirmed:{l:'confirmed',c:'b-dn'},rejected:{l:'rejected',c:'b-cn'}};
 const CUSTAT = {pending:{l:'pendingReview',c:'b-pd'},approved:{l:'approved',c:'b-dn'},rejected:{l:'rejected',c:'b-cn'}};
@@ -1870,6 +1880,7 @@ async function enterApp() {
   buildNav();
   goPage(sl ? 'sWork' : 'dash');
   loadAllData().then(() => { try { render(curP || (sl ? 'sWork' : 'dash')); } catch (_) {} });
+  loadShipCfgFromDb();
 }
 function doLogout() {
   const tk = ADMIN_TOKEN;
@@ -1917,21 +1928,20 @@ function buildNav() {
     if (has('inbound')) h += '<div class="ni" data-p="inb" onclick="goPage(\'inb\',this)">'+sv.inn+' '+t('inboundRecord')+'</div>';
     if (has('outbound')) h += '<div class="ni" data-p="outb" onclick="goPage(\'outb\',this)">'+sv.out+' '+t('outboundRecord')+'</div>';
     h += '<div class="nl">'+t('orders')+'</div><div class="ni" data-p="whOrd" onclick="goPage(\'whOrd\',this)">'+sv.ord+' '+t('orderProcess')+'</div>';
-    if (has('viewAnalytics')) h += '<div class="nl">'+t('analysis')+'</div><div class="ni" data-p="ana" onclick="goPage(\'ana\',this)">'+sv.ana+' '+t('analytics')+'</div>';
-    if (user.r==='wh_admin') h += '<div class="nl">'+t('approval')+'</div><div class="ni" data-p="approvals" onclick="goPage(\'approvals\',this)">'+sv.chk+' '+t('approvalCenter')+'</div>';
-    if (has('manageAccounts')||has('manageCategories')) {
-      h += '<div class="nl">'+t('system')+'</div>';
-      if (has('manageAccounts')) h += '<div class="ni" data-p="accts" onclick="goPage(\'accts\',this)">'+sv.usr+' '+t('accounts')+'</div>';
-      if (has('manageCategories')) h += '<div class="ni" data-p="cats" onclick="goPage(\'cats\',this)">'+sv.cat+' '+t('categories')+'</div>';
-    }
     h += '<div class="nl">'+t('productLabels')+'</div>';
     h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'novo\',this)">Novo</div>';
     h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'oferta\',this)">Oferta</div>';
     h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'promocao\',this)">Promoção</div>';
-    h += '<div class="nl">'+t('customerMgmtNav')+'</div>';
-    if (has('manageAccounts')) h += '<div class="ni" data-p="memberLevels" onclick="goPage(\'memberLevels\',this)">'+sv.cus+' '+t('memberLevel')+'</div>';
-    h += '<div class="nl">'+t('financeMgmtNav')+'</div>';
-    if (user.r==='wh_admin') h += '<div class="ni" data-p="paySettings" onclick="goPage(\'paySettings\',this)">'+'💳'+' '+t('payAccount')+'</div>';
+    if (user.r==='wh_admin') {
+      h += '<div class="nl">'+t('financeMgmtNav')+'</div>';
+      h += '<div class="ni" data-p="ana" onclick="goPage(\'ana\',this)">'+sv.ana+' '+t('analytics')+'</div>';
+      h += '<div class="ni" data-p="paySettings" onclick="goPage(\'paySettings\',this)">'+'💳'+' '+t('payAccount')+'</div>';
+      h += '<div class="nl">'+t('system')+'</div>';
+      h += '<div class="ni" data-p="approvals" onclick="goPage(\'approvals\',this)">'+sv.chk+' '+t('approvalCenter')+'</div>';
+      h += '<div class="ni" data-p="memberLevels" onclick="goPage(\'memberLevels\',this)">'+sv.cus+' '+t('memberLevel')+'</div>';
+      h += '<div class="ni" data-p="accts" onclick="goPage(\'accts\',this)">'+sv.usr+' '+t('accounts')+'</div>';
+      h += '<div class="ni" data-p="cats" onclick="goPage(\'cats\',this)">'+sv.cat+' '+t('categories')+'</div>';
+    }
   }
   n.innerHTML = h;
 }
@@ -3742,7 +3752,7 @@ function rSW() {
     const its = o.items.map(i => { const p = prodById(i.pid); return p ? p.name : t('deleted'); }).join(', ');
     return '<div class="ai"><div class="ad ord"></div><div class="at"><p><strong>' + esc(o.no) + '</strong> · ' + esc(its) + '</p><span style="font-size:.62rem;color:var(--t3)">' + (pk.i || '') + ' ' + esc(pk.l || '') + ' · <span class="badge ' + sc.c + '">' + t(sc.l) + '</span></span></div><span class="atm">' + esc(o.cr) + '</span></div>';
   }).join('') : '<div class="empty"><p>' + t('noOrders') + '</p></div>';
-  return '<div class="stats"><div class="sc"><div class="sl">' + t('productTypes') + '</div><div class="sv">' + P.length + '</div><div class="sch up">' + t('types') + '</div></div><div class="sc"><div class="sl">' + t('totalStock') + '</div><div class="sv">' + P.reduce((s, p) => s + p.stock, 0).toLocaleString() + '</div><div class="sch up">' + t('items') + '</div></div><div class="sc"><div class="sl">' + t('pendingOrders') + '</div><div class="sv" style="color:' + (pend ? 'var(--wa)' : 'var(--sf)') + '">' + pend + '</div></div><div class="sc"><div class="sl">' + t('picking') + '</div><div class="sv" style="color:' + (pick ? 'var(--in)' : 'var(--sf)') + '">' + pick + '</div></div></div><div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem"><button class="btn bp aw" onclick="goPage(this.dataset.go)" data-go="sNewOrd">' + t('newOrder') + '</button><button class="btn bs bg aw" onclick="goPage(this.dataset.go)" data-go="sOrds">' + t('orderList') + '</button><button class="btn bs bg aw" onclick="goPage(this.dataset.go)" data-go="sCus">' + t('customerMgmt') + '</button></div><div class="pnl"><div class="pnH"><span class="pnT">' + t('recentOps') + '</span></div><div class="pnB">' + rh + '</div></div>';
+  return '<div class="stats"><div class="sc" onclick="goPage(\'sProds\')"><div class="sl">' + t('productTypes') + '</div><div class="sv">' + P.length + '</div><div class="sch up">' + t('types') + '</div></div><div class="sc" onclick="goPage(\'sProds\')"><div class="sl">' + t('totalStock') + '</div><div class="sv">' + P.reduce((s, p) => s + p.stock, 0).toLocaleString() + '</div><div class="sch up">' + t('items') + '</div></div><div class="sc" onclick="goPage(\'sOrds\')"><div class="sl">' + t('pendingOrders') + '</div><div class="sv" style="color:' + (pend ? 'var(--wa)' : 'var(--sf)') + '">' + pend + '</div></div><div class="sc" onclick="goPage(\'sOrds\')"><div class="sl">' + t('picking') + '</div><div class="sv" style="color:' + (pick ? 'var(--in)' : 'var(--sf)') + '">' + pick + '</div></div></div><div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem"><button class="btn bp aw" onclick="goPage(this.dataset.go)" data-go="sNewOrd">' + t('newOrder') + '</button><button class="btn bs bg aw" onclick="goPage(this.dataset.go)" data-go="sOrds">' + t('orderList') + '</button><button class="btn bs bg aw" onclick="goPage(this.dataset.go)" data-go="sCus">' + t('customerMgmt') + '</button></div><div class="pnl"><div class="pnH"><span class="pnT">' + t('recentOps') + '</span></div><div class="pnB">' + rh + '</div></div>';
 }
 
 // ═══════════════════════════════════════
@@ -3821,7 +3831,7 @@ function selPk(pk) {
     }
   } else { addrSec.style.display = 'none'; }
   // Onibus section
-  if (onibusSec) onibusSec.style.display = pk === 'onibus' ? '' : 'none'; updShipFromInfo();
+  if (onibusSec) onibusSec.style.display = pk === 'onibus' ? '' : 'none'; loadShipCfgFromDb();
 }
 
 function selOnibusPkg(sz) {
@@ -4123,8 +4133,7 @@ function doSPSearch() {
   if (!rs.length) { el.innerHTML = '<div class="empty"><p>' + t('noMatch') + '</p></div>'; return; }
   el.innerHTML = rs.map(p => {
     const st = p.stock === 0 ? '<span style="color:var(--dg);font-weight:600">' + t('outOfStock') + '</span>' : p.stock <= 10 ? '<span style="color:var(--wa)">' + t('onlyLeft', p.stock) + '</span>' : '<span style="color:var(--sf)">' + t('inStock', p.stock) + '</span>';
-    const icon = (catById((p.catIds || [])[0]) || { icon: '📦' }).icon;
-    return '<div class="pnl" style="margin-bottom:.5rem"><div class="pnB" style="display:flex;align-items:center;gap:.8rem"><div style="width:42px;height:42px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:var(--s2);border:1px solid var(--bd);flex-shrink:0">' + icon + '</div><div style="flex:1;min-width:0"><div style="font-weight:500">' + esc(p.name) + '</div><div style="font-size:.68rem;color:var(--t3)">' + esc(p.sku) + ' · ' + catTagsP(p, true) + '</div></div><div style="text-align:right;flex-shrink:0"><div style="font-family:DM Mono,monospace;font-weight:600">¥' + p.price.toLocaleString() + '</div><div style="font-size:.72rem">' + st + '</div></div></div></div>';
+    return '<div class="pnl" style="margin-bottom:.5rem"><div class="pnB" style="display:flex;align-items:center;gap:.8rem"><div class="pimg" style="width:48px;height:48px;flex-shrink:0">' + (p.img ? '<img src="' + safeUrl(p.img) + '" alt="" onerror="this.remove()">' : '') + '</div><div style="flex:1;min-width:0"><div style="font-weight:500">' + esc(p.name) + '</div><div style="font-size:.68rem;color:var(--t3)">' + esc(p.sku) + ' · ' + catTagsP(p, true) + '</div></div><div style="text-align:right;flex-shrink:0"><div style="font-family:DM Mono,monospace;font-weight:600">¥' + p.price.toLocaleString() + '</div><div style="font-size:.72rem">' + st + '</div></div></div></div>';
   }).join('');
 }
 
