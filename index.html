@@ -1115,7 +1115,10 @@ input[id^="lp_"]{
 <div class="mo" id="odmo"><div class="mdl xw"><div class="mh"><span class="mt" id="odT">订单详情</span><button class="mx" onclick="cMo('odmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb" id="odB"></div><div class="mf" id="odF"></div></div></div>
 
 <!-- Customer Modal -->
-<div class="mo" id="cusmo"><div class="mdl"><div class="mh"><span class="mt" id="cusT">新建客户</span><button class="mx" onclick="cMo('cusmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="cusId" /><div class="fgm"><label data-t="customerName">客户姓名 *</label><input type="text" id="cusNm" data-t-ph="enterCustomerName" placeholder="客户名称" /></div><div class="fgm"><label data-t="phone">联系电话</label><input type="text" id="cusPh" data-t-ph="phonePH" placeholder="电话号码" /></div><div class="fgm"><label data-t="motoAddr">🏍️ Motoboy 地址</label><textarea id="cusMA" data-t-ph="motoAddrPH" placeholder="同城配送地址..." style="min-height:40px"></textarea></div><div class="fgm"><label data-t="corrAddr">📮 Correios 地址</label><textarea id="cusCA" data-t-ph="corrAddrPH" placeholder="邮寄地址 (含CEP)..." style="min-height:40px"></textarea></div><div class="fgm"><label data-t="applyCredit">申请信用额度 (¥)</label><input type="number" id="cusCL" placeholder="0.00" min="0" step="0.01" /><div style="font-size:.6rem;color:var(--t3);margin-top:.2rem" data-t="needApproval">需管理员审核通过后生效</div></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('cusmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="saveCus()" data-t="submit">提交</button></div></div></div>
+<div class="mo" id="cusmo"><div class="mdl"><div class="mh"><span class="mt" id="cusT">新建客户</span><button class="mx" onclick="cMo('cusmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="cusId" /><div class="fgm"><label data-t="customerName">客户姓名 *</label><input type="text" id="cusNm" data-t-ph="enterCustomerName" placeholder="客户名称" /></div><div class="fgm"><label data-t="phone">联系电话</label><input type="text" id="cusPh" data-t-ph="phonePH" placeholder="电话号码" /></div><div class="fgm"><label data-t="motoAddr">🏍️ Motoboy 地址</label><textarea id="cusMA" data-t-ph="motoAddrPH" placeholder="同城配送地址..." style="min-height:40px"></textarea></div><div class="fgm"><label data-t="corrAddr">📮 Correios 地址</label><textarea id="cusCA" data-t-ph="corrAddrPH" placeholder="邮寄地址 (含CEP)..." style="min-height:40px"></textarea></div><div class="fgm"><label data-t="applyCredit">申请信用额度 (¥)</label><input type="text" inputmode="decimal" id="cusCL" placeholder="0.00" /><div style="font-size:.6rem;color:var(--t3);margin-top:.2rem" data-t="needApproval">需管理员审核通过后生效</div></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('cusmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="saveCus()" data-t="submit">提交</button></div></div></div>
+
+<!-- Customer Detail Modal -->
+<div class="mo" id="cusDmo"><div class="mdl"><div class="mh"><span class="mt" id="cusDT">客户详情</span><button class="mx" onclick="cMo('cusDmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="cusDId" /><div class="fgm"><label data-t="customerName">客户姓名</label><input type="text" id="cusDNm" /></div><div class="fgm"><label data-t="phone">联系电话</label><input type="text" id="cusDPh" /></div><div class="fgm"><label data-t="motoAddr">🏍️ Motoboy 地址</label><textarea id="cusDMA" style="min-height:40px"></textarea></div><div class="fgm"><label data-t="corrAddr">📮 Correios 地址</label><textarea id="cusDCA" style="min-height:40px"></textarea></div><div class="fgm"><label data-t="creditLimit">信用额度 (¥)</label><input type="text" inputmode="decimal" id="cusDCL" /><div style="font-size:.6rem;color:var(--t3);margin-top:.2rem" data-t="needAdminApprove2">修改需管理员审核通过后生效</div></div><div id="cusDReq"></div></div><div class="mf" id="cusDFoot"></div></div></div>
 
 <!-- Change Request Modal -->
 <div class="mo" id="chmo"><div class="mdl"><div class="mh"><span class="mt" data-t="changeMethod">申请修改发货方式</span><button class="mx" onclick="cMo('chmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="chOid" /><div class="fgm"><label data-t="oldMethod">原发货方式</label><input type="text" id="chOld" readonly style="background:var(--s3)" /></div><div class="fgm"><label data-t="newMethod">新发货方式 *</label><select id="chNew"><option value="motoboy">🏍️ Motoboy</option><option value="correios">📮 Correios</option><option value="pickup">🏪 到店自取</option><option value="onibus">🚌 Ônibus</option></select></div><div class="fgm"><label data-t="shippingCost">物流费用 (¥)</label><input type="number" id="chCost" placeholder="0.00" min="0" step="0.01" /></div><div class="fgm"><label data-t="shippingBill">物流费用账单 *</label><div class="iu"><div class="ib" id="chIB" onclick="document.getElementById('chIF').click()"><span class="ia">+</span><input type="file" id="chIF" accept="image/*" onchange="hImg(this,'chIB','chImg')" /></div></div></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('chmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="submitChange()" data-t="submitRequest">提交申请</button></div></div></div>
@@ -1232,6 +1235,10 @@ const T = {
     applyCredit:'申请信用额度 (¥)', needApproval:'需管理员审核通过后生效',
     enterCustomerName:'客户名称', phonePH:'电话号码', motoAddrPH:'同城配送地址...', corrAddrPH:'邮寄地址 (含CEP)...',
     customerCreated:'客户已创建，等待管理员审核', noCustomers:'暂无客户',
+    cusDetail:'客户详情', editCusInfo:'修改信息', submitCusChange:'提交修改申请', cusChangeSubmitted:'修改申请已提交，等待管理员审核',
+    cusChangePending:'已有待审核的修改申请', cusChangeLog:'修改申请', oldVal:'原值', newVal:'新值',
+    cusChangeApplied:'修改已生效', cusChangeRejected:'修改申请已拒绝', cusChangeReview:'客户信息修改',
+    needAdminApprove2:'修改需管理员审核通过后生效',
     pendingReview:'待审核', approved:'已通过',
     creditLimit:'信用额度', creditUsed:'已用', available:'可用', createdDate:'创建日期',
     searchProduct:'搜索商品...', searchPrice:'查看价格和库存', inStock:'有货({0})', outOfStock:'缺货', onlyLeft:'仅剩{0}',
@@ -1372,6 +1379,10 @@ const T = {
     applyCredit:'Limite de Crédito (¥)', needApproval:'Requer aprovação do administrador',
     enterCustomerName:'Nome do cliente', phonePH:'Número de telefone', motoAddrPH:'Endereço de entrega...', corrAddrPH:'Endereço postal (com CEP)...',
     customerCreated:'Cliente criado, aguardando aprovação', noCustomers:'Sem clientes',
+    cusDetail:'Detalhes do Cliente', editCusInfo:'Editar dados', submitCusChange:'Enviar alteração', cusChangeSubmitted:'Alteração enviada, aguardando aprovação',
+    cusChangePending:'Já existe alteração pendente', cusChangeLog:'Solicitação', oldVal:'Anterior', newVal:'Novo',
+    cusChangeApplied:'Alteração aplicada', cusChangeRejected:'Alteração rejeitada', cusChangeReview:'Alteração de cliente',
+    needAdminApprove2:'Só entra em vigor após aprovação',
     pendingReview:'Pendente', approved:'Aprovado',
     creditLimit:'Limite', creditUsed:'Usado', available:'Disponível', createdDate:'Data de Criação',
     searchProduct:'Buscar produto...', searchPrice:'Ver preço e estoque', inStock:'Disponível({0})', outOfStock:'Esgotado', onlyLeft:'Apenas {0}',
@@ -1522,7 +1533,7 @@ let pmCats = [], pmSkuManual = false, pmImgData = '';
 let dItems = [], dPk = '', dOI = '', dBI = '', dNote = '', dEditId = null, dOnibName = '', dOnibusImg = '';
 let dOnibusPkg = '';
 let dCustId = '', dPayMethod = 'cash', dPayUpload = 'yes', dPayImg = '', dShipAddr = '';
-let pkPacImg = '', pkSupImg = '', chImg = '';
+var pkPacImg = '', pkSupImg = '', chImg = '';
 let dragCid = null;
 let catCollapsed = {}; // category collapse state: {catId: true/false}
 
@@ -1676,11 +1687,12 @@ function genOrdNo() {
 function hImg(inp, bid, vn) {
   const f = inp.files[0]; if (!f) return;
   const r = new FileReader();
-  r.onload = function(e) { window[vn] = e.target.result; const b = document.getElementById(bid); b.innerHTML = '<img src="'+e.target.result+'" /><span class="ir" onclick="event.stopPropagation();window[\''+vn+'\']=\'\';rmImg(\''+vn+'\',\''+bid+'\')">×</span>'; };
+  r.onload = function(e) { window[vn] = e.target.result; try { if (vn === 'pkSupImg') pkSupImg = e.target.result; if (vn === 'pkPacImg') pkPacImg = e.target.result; if (vn === 'chImg') chImg = e.target.result; } catch(_){} const b = document.getElementById(bid); b.innerHTML = '<img src="'+e.target.result+'" /><span class="ir" onclick="event.stopPropagation();window[\''+vn+'\']=\'\';rmImg(\''+vn+'\',\''+bid+'\')">×</span>'; };
   r.readAsDataURL(f);
 }
 function rmImg(vn, bid) {
   window[vn] = '';
+  try { if (vn === 'pkSupImg') pkSupImg = ''; if (vn === 'pkPacImg') pkPacImg = ''; if (vn === 'chImg') chImg = ''; } catch(_){}
   const b = document.getElementById(bid);
   const inId = bid.replace('IB','IF');
   b.innerHTML = '<span class="ia">+</span><input type="file" id="'+inId+'" accept="image/*" onchange="hImg(this,\''+bid+'\',\''+vn+'\')" />';
@@ -1820,6 +1832,11 @@ async function loadAllData() {
     DB.inb = (inbR.data||[]).map(r => ({id:r.id,pid:r.product_id,qty:r.qty,op:r.operator,note:r.note||'',t:fmtDate(r.created_at)}));
     DB.outb = (outbR.data||[]).map(r => ({id:r.id,pid:r.product_id,qty:r.qty,op:r.operator,note:r.note||'',t:fmtDate(r.created_at)}));
     DB.cus = (cusR.data||[]).map(c => ({id:c.id,name:c.name,phone:c.phone||'',motoAddr:c.moto_address||'',corrAddr:c.correio_address||'',creditLimit:Number(c.credit_limit||0),creditUsed:Number(c.credit_used||0),status:c.status,by:c.created_by,apprBy:c.approved_by||'',cr:fmtDate(c.created_at).split(' ')[0]}));
+    try {
+      const { data: reqRow } = await sb.from('site_settings').select('value').eq('key', 'cus_change_reqs').limit(1);
+      DB.cusReqs = (reqRow && reqRow[0] && reqRow[0].value) ? JSON.parse(reqRow[0].value) : [];
+      if (!Array.isArray(DB.cusReqs)) DB.cusReqs = [];
+    } catch (_) { DB.cusReqs = []; }
     DB.chgs = (chgR.data||[]).map(c => ({id:c.id,oid:c.order_id,oldM:c.old_method,newM:c.new_method,cost:Number(c.shipping_cost||0),billI:c.bill_image||'',st:c.status,by:c.requested_by,revBy:c.reviewed_by||'',cr:fmtDate(c.created_at)}));
     // Load member levels
     try {
@@ -4166,10 +4183,91 @@ function rSCus() {
   let rows = myCus.map(c => {
     const stC = CUSTAT[c.status] || {};
     const avail = c.creditLimit - c.creditUsed;
-    return '<tr><td><strong>' + esc(c.name) + '</strong></td><td>' + esc(c.phone) + '</td><td style="max-width:150px;white-space:normal;font-size:.68rem">' + esc(c.motoAddr || '-') + '</td><td style="max-width:150px;white-space:normal;font-size:.68rem">' + esc(c.corrAddr || '-') + '</td><td style="font-family:DM Mono,monospace">¥' + c.creditLimit.toLocaleString() + '</td><td style="font-family:DM Mono,monospace;color:' + (avail > 0 ? 'var(--sf)' : 'var(--dg)') + '">¥' + avail.toLocaleString() + '</td><td><span class="badge ' + stC.c + '">' + t(stC.l || c.status) + '</span></td><td style="font-size:.68rem;color:var(--t3)">' + esc(c.cr) + '</td></tr>';
+    return '<tr style="cursor:pointer" onclick="openCusDetail(' + c.id + ')"><td><strong>' + esc(c.name) + '</strong></td><td style="font-family:DM Mono,monospace">¥' + c.creditLimit.toLocaleString() + '</td><td style="font-family:DM Mono,monospace;color:' + (avail > 0 ? 'var(--sf)' : 'var(--dg)') + '">¥' + avail.toLocaleString() + '</td><td><span class="badge ' + stC.c + '">' + t(stC.l || c.status) + '</span></td><td style="font-size:.68rem;color:var(--t3)">' + esc(c.cr) + '</td></tr>';
   }).join('');
-  if (!myCus.length) rows = '<tr><td colspan="8"><div class="empty"><p>' + t('noCustomers') + '</p></div></td></tr>';
-  return '<div class="tb"><span class="tbsp"></span><button class="btn bp bs aw" onclick="openAddCus()">+ ' + t('addCustomer') + '</button></div><div class="tw"><div class="ts"><table><thead><tr><th>' + t('customerName') + '</th><th>' + t('phone') + '</th><th>Motoboy</th><th>Correios</th><th>' + t('creditLimit') + '</th><th>' + t('available') + '</th><th>' + t('status') + '</th><th>' + t('createdDate') + '</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+  if (!myCus.length) rows = '<tr><td colspan="5"><div class="empty"><p>' + t('noCustomers') + '</p></div></td></tr>';
+  return '<div class="tb"><span class="tbsp"></span><button class="btn bp bs aw" onclick="openAddCus()">+ ' + t('addCustomer') + '</button></div><div class="tw"><div class="ts"><table><thead><tr><th>' + t('customerName') + '</th><th>' + t('creditLimit') + '</th><th>' + t('available') + '</th><th>' + t('status') + '</th><th>' + t('createdDate') + '</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+}
+
+function openCusDetail(id) {
+  const c = cusById(id);
+  if (!c) return;
+  const stC = CUSTAT[c.status] || {};
+  document.getElementById('cusDT').textContent = t('cusDetail') + ' · ' + c.name;
+  document.getElementById('cusDId').value = c.id;
+  document.getElementById('cusDNm').value = c.name || '';
+  document.getElementById('cusDPh').value = c.phone || '';
+  document.getElementById('cusDMA').value = c.motoAddr || '';
+  document.getElementById('cusDCA').value = c.corrAddr || '';
+  document.getElementById('cusDCL').value = c.creditLimit || 0;
+  const reqs = (DB.cusReqs || []).filter(r => Number(r.customer_id) === Number(c.id) && r.status === 'pending');
+  const done = (DB.cusReqs || []).filter(r => Number(r.customer_id) === Number(c.id) && r.status !== 'pending').slice(0, 5);
+  let reqHtml = '';
+  if (reqs.length) {
+    reqHtml += '<div style="margin:.6rem 0;padding:.55rem .75rem;border:1px dashed var(--wa);border-radius:var(--r);font-size:.72rem;color:var(--wa)">' + t('cusChangePending') + '</div>';
+  }
+  if (done.length) {
+    reqHtml += '<div style="margin:.6rem 0;font-size:.68rem;color:var(--t3)">' + t('cusChangeLog') + '</div>';
+    reqHtml += done.map(r => {
+      const cols = Object.keys(r.patch || {}).map(k => {
+        const ov = (r.old || {})[k], nv = (r.patch || {})[k];
+        return '<div style="font-size:.66rem">' + esc(k) + ': ' + esc(String(ov ?? '')) + ' → ' + esc(String(nv ?? '')) + '</div>';
+      }).join('');
+      return '<div style="padding:.35rem 0;border-bottom:1px solid var(--bd)"><span class="badge ' + (r.status === 'approved' ? 'b-dn' : 'b-cn') + '">' + t(r.status === 'approved' ? 'approved' : 'rejected') + '</span> ' + esc(r.reviewed_at || r.requested_at || '') + cols + '</div>';
+    }).join('');
+  }
+  document.getElementById('cusDReq').innerHTML = reqHtml;
+  document.getElementById('cusDFoot').innerHTML =
+    (reqs.length ? '' : '<button class="btn bp bs aw" onclick="submitCusChange()">' + t('submitCusChange') + '</button>')
+    + '<button class="btn bg bs" onclick="cMo(\'cusDmo\')">' + t('close') + '</button>';
+  oMo('cusDmo');
+}
+
+async function submitCusChange() {
+  const id = Number(document.getElementById('cusDId').value);
+  const c = cusById(id);
+  if (!c) return;
+  const patch = {
+    name: (document.getElementById('cusDNm').value || '').trim(),
+    phone: (document.getElementById('cusDPh').value || '').trim(),
+    moto_address: (document.getElementById('cusDMA').value || '').trim(),
+    correio_address: (document.getElementById('cusDCA').value || '').trim(),
+    credit_limit: parseFloat(document.getElementById('cusDCL').value) || 0
+  };
+  const old = {
+    name: c.name || '', phone: c.phone || '', moto_address: c.motoAddr || '',
+    correio_address: c.corrAddr || '', credit_limit: c.creditLimit || 0
+  };
+  const changed = Object.keys(patch).some(k => String(patch[k] ?? '') !== String(old[k] ?? ''));
+  if (!changed) { toast(t('editCusInfo'), 'inf'); return; }
+  try {
+    const reqs = (DB.cusReqs || []).slice();
+    reqs.unshift({
+      id: Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+      customer_id: c.id,
+      customer_name: c.name,
+      requested_by: user.u,
+      patch, old,
+      status: 'pending',
+      requested_at: new Date().toISOString(),
+      reviewed_by: '', reviewed_at: '', review_note: ''
+    });
+    await saveCusReqs(reqs);
+    DB.cusReqs = reqs;
+    cMo('cusDmo');
+    toast(t('cusChangeSubmitted'), 'ok');
+    render('sCus');
+  } catch (err) { toast(t('saveFailed') + ': ' + (err && err.message || err), 'er'); }
+}
+
+async function saveCusReqs(reqs) {
+  const val = JSON.stringify(reqs || []);
+  const { data: existing } = await sb.from('site_settings').select('key').eq('key', 'cus_change_reqs').limit(1);
+  if (existing && existing.length) {
+    await adminFrom('site_settings').update({ value: val, updated_at: new Date().toISOString() }).eq('key', 'cus_change_reqs');
+  } else {
+    await adminFrom('site_settings').insert({ key: 'cus_change_reqs', value: val, label: 'cus_change_reqs' });
+  }
 }
 
 function openAddCus() {
