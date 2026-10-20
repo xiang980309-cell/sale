@@ -3264,7 +3264,7 @@ function viewOrd(id) {
     + '</div></div>'
     + (o.note ? '<div class="odS"><div class="odL">' + t('remarks') + '</div><div style="font-size:.82rem;color:var(--t2)">' + esc(o.note) + '</div></div>' : '')
     + (imgHtml ? '<div class="odS"><div class="odL">Images</div><div>' + imgHtml + '</div></div>' : '')
-    + '<div class="odS"><div class="odL">' + t('items') + '</div><div class="tw"><table><thead><tr><th>' + t('name') + '</th><th>' + t('sku') + '</th><th class="hide-md">' + t('category') + '</th><th class="hide-sm">' + t('location') + '</th><th>' + t('quantity') + '</th><th>' + t('price') + '</th><th>Subtotal</th></tr></thead><tbody>' + its + '</tbody></table></div></div>';
+    + '<div class="odS"><div class="odL">' + t('items') + '</div><div class="tw"><table><thead><tr><th>' + t('name') + '</th><th class="hide-sm">' + t('location') + '</th><th>' + t('quantity') + '</th><th>' + t('price') + '</th><th>Subtotal</th></tr></thead><tbody>' + its + '</tbody></table></div></div>';
 
   let ft = '<button class="btn bg bs" onclick="cMo(\'odmo\')">' + t('close') + '</button>';
   if (o.st === 'picking' && has('processOrder')) {
