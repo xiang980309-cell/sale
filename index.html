@@ -3326,7 +3326,7 @@ async function cancelOrd(id) {
   if (window._cancelBusy) return;
   window._cancelBusy = true;
   try {
-    const { data: result, error: ce } = await sb.rpc('admin_cancel_order', { p_order_id: id });
+    const { data: result, error: ce } = await sb.rpc('app_cancel_order', { p_order_id: id });
     if (ce) throw ce;
     if (result && result.error) throw new Error(result.error);
     for (const item of o.items) {
