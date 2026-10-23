@@ -1081,38 +1081,9 @@ input[id^="lp_"]{
 <!-- ═══════════ MODALS ═══════════ -->
 
 <!-- Product Modal -->
-<div class="mo" id="pmo"><div class="mdl"><div class="mh"><span class="mt" id="pmT">新增商品</span><button class="mx" onclick="cMo('pmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="pmId" /><input type="hidden" id="pmManual" value="0" /><div class="fgm"><label data-t="productImage">商品图片</label><div class="iu"><div class="ib" id="pmIB" onclick="document.getElementById('pmIF').click()"><span class="ia">+</span><input type="file" id="pmIF" accept="image/*" onchange="hImg(this,'pmIB','pmImgData')" /></div></div></div><div class="fgm"><label data-t="productName">商品名称 *</label><input type="text" id="pmN" data-t-ph="enterProductName" placeholder="输入商品名称" /></div><div class="fgm"><label data-t="productCategory">商品分类 *</label><div class="cpills" id="pmCats"></div></div><div class="fgm"><label data-t="skuCode">SKU 编码</label><div class="sku-prev" id="skuPrev"><span class="spl">SKU:</span><span class="spv" id="skuAuto">请先选择分类</span><span class="spm" id="skuMode" onclick="toggleSkuMode()">切换手动</span></div></div><div class="fr"><div class="fgm"><label data-t="stockQty">库存数量</label><input type="number" id="pmS" placeholder="0" min="0" /></div><div class="fgm"><label data-t="position">存放位置</label><input type="text" id="pmL" data-t-ph="positionPH" placeholder="如 A区-3层-2号" /></div></div>
-<div class="fgm"><label data-t="productType">商品类型</label>
-<select id="pmCatType" onchange="toggleSizeFields()">
-  <option value="general" data-t="general">通用</option>
-  <option value="clothing" data-t="clothing">衣服</option>
-  <option value="shoes" data-t="shoes">鞋子</option>
-</select></div>
-<div class="fgm" id="pmSizesArea" style="display:none"><label data-t="sizeStock">尺码库存</label>
-<div id="pmSizesList" style="display:flex;flex-wrap:wrap;gap:.4rem"></div></div>
-<div class="fgm"><label data-t="bagCaseSpec">包/箱规格</label>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.3rem">
-  <div style="display:flex;align-items:center;gap:.4rem">
-    <label style="display:flex;align-items:center;gap:.3rem;cursor:pointer;margin:0"><input type="checkbox" id="pmHasBag" onchange="toggleSpecFields()"><span data-t="bag">包</span></label>
-    <input type="number" id="pmBagPrice" data-t-ph="bagPrice" placeholder="包价" style="flex:1;min-width:0" disabled>
-  </div>
-  <div style="display:flex;align-items:center;gap:.4rem">
-    <label style="display:flex;align-items:center;gap:.3rem;cursor:pointer;margin:0"><input type="checkbox" id="pmHasCase" onchange="toggleSpecFields()"><span data-t="case">箱</span></label>
-    <input type="number" id="pmCasePrice" data-t-ph="casePrice" placeholder="箱价" style="flex:1;min-width:0" disabled>
-  </div>
-</div>
-<div style="font-size:.6rem;color:var(--t3)" data-t="bagCaseHint">包：仅小批发客和大批发客可见 · 箱：仅大批发客可见</div></div>
-<div class="fr"><div class="fgm"><label data-t="sellPrice">销售单价 (¥)</label><input type="number" id="pmP" placeholder="0.00" min="0" step="0.01" /></div><div class="fgm" id="pmCw"><label data-t="costPrice">进货成本 (¥)</label><input type="number" id="pmC" placeholder="0.00" min="0" step="0.01" /></div></div><div class="fgm"><label data-t="remarks">备注</label><textarea id="pmNt" data-t-ph="optionalNote" placeholder="可选备注..."></textarea></div><div class="fgm"><label data-t="labelTag">标签</label><select id="pmLabel"><option value="normal">Normal</option><option value="novo">Novo</option><option value="oferta">Oferta</option><option value="promocao">Promoção</option></select></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('pmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="saveProd()" data-t="saveProduct">保存商品</button></div></div></div>
-
 <!-- IO Modal -->
-<div class="mo" id="imo"><div class="mdl"><div class="mh"><span class="mt" id="ioT">入库</span><button class="mx" onclick="cMo('imo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="ioTp" /><div class="fgm"><label data-t="selectProduct">商品 *</label><div style="position:relative"><input type="text" id="ioPrSearch" data-t-ph="searchProductIO" placeholder="搜索商品或SKU..." style="width:100%;padding:.5rem .7rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);color:var(--t1);font-size:.82rem" oninput="filterIOProducts(this.value)" onfocus="filterIOProducts(this.value)" /><input type="hidden" id="ioPr" /><div id="ioPrDropdown" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:200px;overflow-y:auto;background:var(--s2);border:1px solid var(--bd);border-radius:0 0 var(--r) var(--r);z-index:10"></div></div></div><div class="fgm"><label data-t="quantity">数量 *</label><input type="number" id="ioQ" placeholder="0" min="1" /></div><div class="fgm"><label data-t="remarks">备注</label><input type="text" id="ioN" data-t-ph="reasonPH" placeholder="原因..." /></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('imo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="doIO()" data-t="confirm">确认</button></div></div></div>
-
 <!-- Account Modal -->
-<div class="mo" id="amo"><div class="mdl"><div class="mh"><span class="mt" id="amT">新增账号</span><button class="mx" onclick="cMo('amo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="amId" /><div class="fgm"><label data-t="username">用户名 *</label><input type="text" id="amU" data-t-ph="enterUsername" placeholder="登录用户名" /></div><div class="fgm"><label data-t="displayName">姓名 *</label><input type="text" id="amN" data-t-ph="enterDisplayName" placeholder="显示名称" /></div><div class="fgm"><label data-t="password">密码 *</label><input type="password" id="amP" data-t-ph="enterPassword" placeholder="登录密码" /></div><div class="fgm"><label data-t="role">角色</label><select id="amR"><option value="wh_staff" data-t="roleWhStaff">仓库员工</option><option value="sales" data-t="roleSales">销售人员</option><option value="wh_admin" data-t="roleWhAdmin">仓库管理员</option></select></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('amo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="saveAcct()" data-t="save">保存</button></div></div></div>
-
 <!-- Permissions Modal -->
-<div class="mo" id="prmo"><div class="mdl"><div class="mh"><span class="mt" data-t="permissionSettings">权限设置</span><button class="mx" onclick="cMo('prmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="prId" /><div id="prL"></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('prmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="savePerms()" data-t="savePerms">保存权限</button></div></div></div>
-
 <!-- Order Detail Modal -->
 <div class="mo" id="odmo"><div class="mdl xw"><div class="mh"><span class="mt" id="odT">订单详情</span><button class="mx" onclick="cMo('odmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb" id="odB"></div><div class="mf" id="odF"></div></div></div>
 
@@ -1123,17 +1094,8 @@ input[id^="lp_"]{
 <div class="mo" id="cusDmo"><div class="mdl"><div class="mh"><span class="mt" id="cusDT">客户详情</span><button class="mx" onclick="cMo('cusDmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="cusDId" /><div class="fgm"><label data-t="customerName">客户姓名</label><input type="text" id="cusDNm" /></div><div class="fgm"><label data-t="phone">联系电话</label><input type="text" id="cusDPh" /></div><div class="fgm"><label data-t="motoAddr">🏍️ Motoboy 地址</label><textarea id="cusDMA" style="min-height:40px"></textarea></div><div class="fgm"><label data-t="corrAddr">📮 Correios 地址</label><textarea id="cusDCA" style="min-height:40px"></textarea></div><div class="fgm"><label data-t="creditLimit">信用额度 (¥)</label><input type="text" inputmode="decimal" id="cusDCL" /><div style="font-size:.6rem;color:var(--t3);margin-top:.2rem" data-t="needAdminApprove2">修改需管理员审核通过后生效</div></div><div id="cusDReq"></div></div><div class="mf" id="cusDFoot"></div></div></div>
 
 <!-- Change Request Modal -->
-<div class="mo" id="chmo"><div class="mdl"><div class="mh"><span class="mt" data-t="changeMethod">申请修改发货方式</span><button class="mx" onclick="cMo('chmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="chOid" /><div class="fgm"><label data-t="oldMethod">原发货方式</label><input type="text" id="chOld" readonly style="background:var(--s3)" /></div><div class="fgm"><label data-t="newMethod">新发货方式 *</label><select id="chNew"><option value="motoboy">🏍️ Motoboy</option><option value="correios">📮 Correios</option><option value="pickup">🏪 到店自取</option><option value="onibus">🚌 Ônibus</option></select></div><div class="fgm"><label data-t="shippingCost">物流费用 (¥)</label><input type="number" id="chCost" placeholder="0.00" min="0" step="0.01" /></div><div class="fgm"><label data-t="shippingBill">物流费用账单 *</label><div class="iu"><div class="ib" id="chIB" onclick="document.getElementById('chIF').click()"><span class="ia">+</span><input type="file" id="chIF" accept="image/*" onchange="hImg(this,'chIB','chImg')" /></div></div></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('chmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="submitChange()" data-t="submitRequest">提交申请</button></div></div></div>
-
 <!-- Packing Modal -->
-<div class="mo" id="pkmo"><div class="mdl wide"><div class="mh"><span class="mt" data-t="packShip">打包发货</span><button class="mx" onclick="cMo('pkmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="pkOid" /><div id="pkInfo" style="margin-bottom:1rem"></div><div class="fgm"><label>📷 <span data-t="packingPhoto">实际打包商品照片</span> *</label><div class="iu"><div class="ib" id="pkPacIB" onclick="document.getElementById('pkPacIF').click()"><span class="ia">+</span><input type="file" id="pkPacIF" accept="image/*" onchange="hImg(this,'pkPacIB','pkPacImg')" /></div></div></div><div class="fgm"><label>📷 <span data-t="suppPhoto">补充信息照片</span> *</label><div style="font-size:.68rem;color:var(--t2);margin-bottom:.4rem" id="pkSupDesc">根据发货方式拍摄对应照片</div><div class="iu"><div class="ib" id="pkSupIB" onclick="document.getElementById('pkSupIF').click()"><span class="ia">+</span><input type="file" id="pkSupIF" accept="image/*" onchange="hImg(this,'pkSupIB','pkSupImg')" /></div></div></div><div class="fgm"><label data-t="remarks">备注</label><input type="text" id="pkNote" data-t-ph="optionalNote" placeholder="可选备注..." /></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('pkmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="confirmPack()" data-t="confirmComplete">✓ 确认完成</button></div></div></div>
-
 <!-- Payment Modal -->
-<div class="mo" id="paymo"><div class="mdl"><div class="mh"><span class="mt" data-t="confirmPayment">确认收款</span><button class="mx" onclick="cMo('paymo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="payOid" /><div id="payInfo" style="margin-bottom:1rem"></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('paymo')" data-t="cancel">取消</button><button class="btn bs aw" style="background:var(--dg);color:#fff" onclick="rejectPay()" data-t="reject">拒绝</button><button class="btn bp bs aw" onclick="confirmPay()" data-t="confirmPayBtn">✓ 确认收款</button></div></div></div>
-
-<div class="tc" id="tc"></div>
-<div class="print-area" id="pa"></div>
-
 <script>
 // ═══════════════════════════════════════
 // JS-1: SUPABASE CONFIG
@@ -1501,47 +1463,9 @@ const OSTAT = {draft:{l:'draft',c:'b-dr'},pending:{l:'pending',c:'b-pd'},picking
 const PSTAT = {pending_bill:{l:'billPending',c:'b-pd'},pending:{l:'pendingConfirm',c:'b-pd'},confirmed:{l:'confirmed',c:'b-dn'},rejected:{l:'rejected',c:'b-cn'}};
 const CUSTAT = {pending:{l:'pendingReview',c:'b-pd'},approved:{l:'approved',c:'b-dn'},rejected:{l:'rejected',c:'b-cn'}};
 const ROLES = {wh_admin:'whAdmin',wh_staff:'whStaff',sales:'roleSales'};
-const PERMS = [{k:'viewInventory',l:'viewInventory'},{k:'addProduct',l:'addProduct'},{k:'editProduct',l:'editProduct'},{k:'deleteProduct',l:'deleteProduct'},{k:'inbound',l:'inboundOp'},{k:'outbound',l:'outboundOp'},{k:'viewAnalytics',l:'analytics'},{k:'manageAccounts',l:'accounts'},{k:'manageCategories',l:'categories'},{k:'viewCost',l:'viewCost'},{k:'createOrder',l:'createOrder'},{k:'processOrder',l:'processOrder'}];
 const CAT_COLORS = ['#5b9df0','#c77dff','#3ee08c','#e8a634','#e878a0','#5bcfcf','#f0a05b','#8c919d'];
 const CLOTHING_SIZES = ['XS','S','M','L','XL','2XL','3XL','4XL'];
 const SHOE_SIZES = ['35','36','37','38','39','40','41','42','43','44','45'];
-function toggleSpecFields() {
-  document.getElementById('pmBagPrice').disabled = !document.getElementById('pmHasBag').checked;
-  document.getElementById('pmCasePrice').disabled = !document.getElementById('pmHasCase').checked;
-}
-function toggleSizeFields() {
-  var catType = document.getElementById('pmCatType').value;
-  var area = document.getElementById('pmSizesArea');
-  if (catType === 'general') { area.style.display = 'none'; return; }
-  area.style.display = '';
-  var sizes = catType === 'clothing' ? CLOTHING_SIZES : SHOE_SIZES;
-  var list = document.getElementById('pmSizesList');
-  // Read existing values if any
-  var existing = {};
-  list.querySelectorAll('input[data-size]').forEach(function(inp) { existing[inp.dataset.size] = inp.value; });
-  list.innerHTML = sizes.map(function(s) {
-    var val = existing[s] || '';
-    return '<div style="display:flex;align-items:center;gap:.3rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:.25rem .4rem"><span style="font-size:.72rem;font-family:DM Mono,monospace;min-width:28px">' + s + '</span><input type="number" data-size="' + s + '" value="' + val + '" min="0" placeholder="0" style="width:55px;padding:.15rem .3rem;background:var(--s3);border:1px solid var(--bd);border-radius:4px;color:var(--t1);font-size:.75rem;font-family:DM Mono,monospace;text-align:center"></div>';
-  }).join('');
-}
-
-// ═══════════════════════════════════════
-// JS-4: STATE
-// ═══════════════════════════════════════
-let DB = {cats:[],accts:[],prods:[],ords:[],inb:[],outb:[],cus:[],chgs:[]};
-let user = null, portal = 'sl', curP = '';
-let sF = 'name', sD = 1, fCat = 'all', fLabel = '', iPg = 1; const PG = 8;
-let pmCats = [], pmSkuManual = false, pmImgData = '';
-let dItems = [], dPk = '', dOI = '', dBI = '', dNote = '', dEditId = null, dOnibName = '', dOnibusImg = '';
-let dOnibusPkg = '';
-let dCustId = '', dPayMethod = 'cash', dPayUpload = 'yes', dPayImg = '', dShipAddr = '';
-var pkPacImg = '', pkSupImg = '', chImg = '';
-let dragCid = null;
-let catCollapsed = {}; // category collapse state: {catId: true/false}
-
-// ═══════════════════════════════════════
-// JS-5: UTILITIES
-// ═══════════════════════════════════════
 function fmtDate(iso) {
   if (!iso) return '';
   try { const d = new Date(iso); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); } catch(e) { return iso; }
@@ -1656,45 +1580,36 @@ function toast(m, tp='inf') {
   c.appendChild(el);
   setTimeout(() => { el.style.opacity='0'; el.style.transform='translateX(30px)'; el.style.transition='.3s'; setTimeout(() => el.remove(), 300); }, 3000);
 }
-function genSku(catIds, excludeId) {
-  // SKU = category code chain (root->leaf, joined as-is) + 3-digit seq within the leaf category
-  const catMap = {}; DB.cats.forEach(c => { catMap[c.id] = c; });
-  const deepest = (arr) => { let d = null; (arr||[]).map(Number).forEach(id => { const c = catMap[id]; if (!c) return; const cd = Number(c.depth)||0, dd = d ? (Number(d.depth)||0) : -1; if (!d || cd > dd || (cd === dd && c.id > d.id)) d = c; }); return d; };
-  const leaf = deepest(catIds);
-  if (!leaf) return 'GEN-001';
-  const codes = [];
-  let cur = leaf;
-  while (cur) { const s = String(cur.code || ''); if (s) codes.unshift(s); cur = (cur.parent_id != null) ? catMap[cur.parent_id] : null; }
-  const prefix = codes.join('');
-  const re = new RegExp('^' + prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\d{3}$');
-  if (excludeId != null) {
-    const self = DB.prods.filter(p => p.id === excludeId)[0];
-    if (self && self.sku && re.test(self.sku)) return self.sku; // keep its own seq on edit
-  }
-  let mx = 0;
-  DB.prods.forEach(p => {
-    if (p.id === excludeId) return;
-    const pl = deepest(p.catIds);
-    if (!pl || pl.id !== leaf.id) return;
-    if (p.sku && re.test(p.sku)) { const n = parseInt(p.sku.substring(prefix.length), 10); if (!isNaN(n) && n > mx) mx = n; }
-  });
-  return prefix + String(mx + 1).padStart(3, '0');
-}
 function genOrdNo() {
   const d = new Date();
   const ds = String(d.getFullYear())+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
   const cnt = DB.ords.filter(o => o.no && o.no.includes(ds)).length + 1;
   return 'ORD-'+ds+'-'+String(cnt).padStart(3,'0');
 }
+function setImgVar(vn, val) {
+  // let 顶层变量不在 window 上，必须写回词法绑定，否则 save* 读到空串
+  if (vn === 'pmImgData') pmImgData = val;
+  else if (vn === 'pkSupImg') pkSupImg = val;
+  else if (vn === 'pkPacImg') pkPacImg = val;
+  else if (vn === 'chImg') chImg = val;
+  else if (vn === 'dOI') dOI = val;
+  else if (vn === 'dBI') dBI = val;
+  else if (vn === 'dPayImg') dPayImg = val;
+  else if (vn === 'dOnibusImg') dOnibusImg = val;
+  else { try { window[vn] = val; } catch(_){} }
+}
 function hImg(inp, bid, vn) {
   const f = inp.files[0]; if (!f) return;
   const r = new FileReader();
-  r.onload = function(e) { window[vn] = e.target.result; try { if (vn === 'pkSupImg') pkSupImg = e.target.result; if (vn === 'pkPacImg') pkPacImg = e.target.result; if (vn === 'chImg') chImg = e.target.result; } catch(_){} const b = document.getElementById(bid); b.innerHTML = '<img src="'+e.target.result+'" /><span class="ir" onclick="event.stopPropagation();window[\''+vn+'\']=\'\';rmImg(\''+vn+'\',\''+bid+'\')">×</span>'; };
+  r.onload = function(e) {
+    setImgVar(vn, e.target.result);
+    const b = document.getElementById(bid);
+    b.innerHTML = '<img src="'+e.target.result+'" /><span class="ir" onclick="event.stopPropagation();rmImg(\''+vn+'\',\''+bid+'\')">×</span>';
+  };
   r.readAsDataURL(f);
 }
 function rmImg(vn, bid) {
-  window[vn] = '';
-  try { if (vn === 'pkSupImg') pkSupImg = ''; if (vn === 'pkPacImg') pkPacImg = ''; if (vn === 'chImg') chImg = ''; } catch(_){}
+  setImgVar(vn, '');
   const b = document.getElementById(bid);
   const inId = bid.replace('IB','IF');
   b.innerHTML = '<span class="ia">+</span><input type="file" id="'+inId+'" accept="image/*" onchange="hImg(this,\''+bid+'\',\''+vn+'\')" />';
@@ -1883,9 +1798,7 @@ function doLogin() {
       r: data.user.role, s: data.user.status || 'active',
       perm: data.user.perms || {}, c: ''
     };
-    const isWh = a.r==='wh_admin' || a.r==='wh_staff';
-    if (portal==='wh' && !isWh) { e.textContent = t('switchSl'); e.classList.add('show'); return; }
-    if (portal==='sl' && a.r!=='sales') { e.textContent = t('switchWh'); e.classList.add('show'); return; }
+    if (a.r !== 'sales') { e.textContent = t('switchSl'); e.classList.add('show'); return; }
     initSb(data.token);
     user = a;
     sessionStorage.setItem('cs4', JSON.stringify({ id: a.id, pl: portal, tk: data.token, exp: Date.now() + 8 * 3600 * 1000 }));
@@ -1895,19 +1808,18 @@ function doLogin() {
     e.classList.add('show');
   });
 }
-async function enterApp() {
+function enterApp() {
   document.getElementById('loginPage').style.display = 'none';
   document.getElementById('appPage').style.display = 'block';
-  const sl = user.r==='sales';
-  document.body.classList.toggle('mode-sale', sl);
+  document.body.classList.add('mode-sale');
   document.getElementById('uN').textContent = user.n;
   document.getElementById('uA').textContent = user.n.charAt(0);
   document.getElementById('uR').textContent = t(ROLES[user.r]||user.r);
-  document.getElementById('tM').textContent = sl ? t('sales') : t('warehouse');
-  document.getElementById('tM').style.cssText = sl ? 'background:var(--ig);color:var(--in)' : 'background:var(--ag);color:var(--ac)';
+  document.getElementById('tM').textContent = t('sales');
+  document.getElementById('tM').style.cssText = 'background:var(--ig);color:var(--in)';
   buildNav();
-  goPage(sl ? 'sWork' : 'dash');
-  loadAllData().then(() => { try { render(curP || (sl ? 'sWork' : 'dash')); } catch (_) {} });
+  goPage('sWork');
+  loadAllData().then(() => { try { render(curP || 'sWork'); } catch (_) {} });
   loadShipCfgFromDb();
 }
 function doLogout() {
@@ -1929,65 +1841,22 @@ document.getElementById('lU').addEventListener('keydown', e => { if (e.key==='En
 // JS-8: NAV + ROUTER
 // ═══════════════════════════════════════
 function buildNav() {
-  const n = document.getElementById('sbNav'), sl = user.r==='sales';
+  const n = document.getElementById('sbNav');
   const V = '<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">', R = '</svg>';
   const sv = {
     d:V+'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>'+R,
-    inv:V+'<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>'+R,
-    inn:V+'<polyline points="3 6 5 6 21 6"/><path d="M16 16l4-4-4-4"/><path d="M20 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>'+R,
-    out:V+'<polyline points="3 6 5 6 21 6"/><path d="M8 16l-4-4 4-4"/><path d="M4 12h11"/><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>'+R,
-    ana:V+'<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'+R,
-    usr:V+'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>'+R,
     ord:V+'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>'+R,
-    cat:V+'<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>'+R,
     sr:V+'<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>'+R,
-    cus:V+'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'+R,
-    chk:V+'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'+R
+    cus:V+'<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'+R
   };
-  let h = '';
-  if (sl) {
-    h = '<div class="nl">'+t('overview')+'</div><div class="ni on" data-p="sWork" onclick="goPage(\'sWork\',this)">'+sv.d+' '+t('salesWorkspace')+'</div>'
-      + '<div class="nl">'+t('orders')+'</div><div class="ni" data-p="sNewOrd" onclick="goPage(\'sNewOrd\',this)">'+sv.ord+' '+t('newOrder')+'</div><div class="ni" data-p="sOrds" onclick="goPage(\'sOrds\',this)">'+sv.ord+' '+t('orderList')+'</div>'
-      + '<div class="nl">'+t('customerMgmt')+'</div><div class="ni" data-p="sCus" onclick="goPage(\'sCus\',this)">'+sv.cus+' '+t('customerMgmt')+'</div>'
-      + '<div class="nl">'+t('management')+'</div><div class="ni" data-p="sProds" onclick="goPage(\'sProds\',this)">'+sv.sr+' '+t('productQuery')+'</div>';
-  } else {
-    h = '<div class="nl">'+t('overview')+'</div><div class="ni on" data-p="dash" onclick="goPage(\'dash\',this)">'+sv.d+' '+t('dashboard')+'</div><div class="nl">'+t('management')+'</div>';
-    if (has('viewInventory')) h += '<div class="ni" data-p="inv" onclick="goPage(\'inv\',this)">'+sv.inv+' '+t('inventory')+'</div>';
-    if (has('inbound')) h += '<div class="ni" data-p="inb" onclick="goPage(\'inb\',this)">'+sv.inn+' '+t('inboundRecord')+'</div>';
-    if (has('outbound')) h += '<div class="ni" data-p="outb" onclick="goPage(\'outb\',this)">'+sv.out+' '+t('outboundRecord')+'</div>';
-    h += '<div class="nl">'+t('orders')+'</div><div class="ni" data-p="whOrd" onclick="goPage(\'whOrd\',this)">'+sv.ord+' '+t('orderProcess')+'</div>';
-    h += '<div class="nl">'+t('productLabels')+'</div>';
-    h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'novo\',this)">Novo</div>';
-    h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'oferta\',this)">Oferta</div>';
-    h += '<div class="ni" data-p="inv" onclick="goPageLabel(\'inv\',\'promocao\',this)">Promoção</div>';
-    if (user.r==='wh_admin') {
-      h += '<div class="nl">'+t('financeMgmtNav')+'</div>';
-      h += '<div class="ni" data-p="ana" onclick="goPage(\'ana\',this)">'+sv.ana+' '+t('analytics')+'</div>';
-      h += '<div class="ni" data-p="paySettings" onclick="goPage(\'paySettings\',this)">'+'💳'+' '+t('payAccount')+'</div>';
-      h += '<div class="nl">'+t('system')+'</div>';
-      h += '<div class="ni" data-p="approvals" onclick="goPage(\'approvals\',this)">'+sv.chk+' '+t('approvalCenter')+'</div>';
-      h += '<div class="ni" data-p="memberLevels" onclick="goPage(\'memberLevels\',this)">'+sv.cus+' '+t('memberLevel')+'</div>';
-      h += '<div class="ni" data-p="accts" onclick="goPage(\'accts\',this)">'+sv.usr+' '+t('accounts')+'</div>';
-      h += '<div class="ni" data-p="cats" onclick="goPage(\'cats\',this)">'+sv.cat+' '+t('categories')+'</div>';
-    }
-  }
+  let h = '<div class="nl">'+t('overview')+'</div><div class="ni on" data-p="sWork" onclick="goPage(\'sWork\',this)">'+sv.d+' '+t('salesWorkspace')+'</div>'
+    + '<div class="nl">'+t('orders')+'</div><div class="ni" data-p="sNewOrd" onclick="goPage(\'sNewOrd\',this)">'+sv.ord+' '+t('newOrder')+'</div><div class="ni" data-p="sOrds" onclick="goPage(\'sOrds\',this)">'+sv.ord+' '+t('orderList')+'</div>'
+    + '<div class="nl">'+t('customerMgmt')+'</div><div class="ni" data-p="sCus" onclick="goPage(\'sCus\',this)">'+sv.cus+' '+t('customerMgmt')+'</div>'
+    + '<div class="nl">'+t('management')+'</div><div class="ni" data-p="sProds" onclick="goPage(\'sProds\',this)">'+sv.sr+' '+t('productQuery')+'</div>';
   n.innerHTML = h;
 }
-// 页面 → 所需权限（P1-2: goPage 路由权限门）
-const PAGE_PERM = {
-  inv: 'viewInventory',
-  inb: 'inbound',
-  outb: 'outbound',
-  ana: null, accts: null, cats: null,
-  paySettings: null, memberLevels: null
-};
 function canPage(p) {
-  if (user && user.r === 'wh_admin') return true;
-  if (user && user.r === 'sales') return ['sWork','sNewOrd','sOrds','sProds','sCus','dash'].indexOf(p) >= 0;
-  const need = PAGE_PERM[p];
-  if (need === undefined) return true;
-  if (need === null) return false;
-  return has(need);
+  return ['sWork','sNewOrd','sOrds','sProds','sCus','dash'].indexOf(p) >= 0;
 }
 function goPage(p, el) {
   if (!canPage(p)) { toast(t('noPermission') || '无权限访问', 'er'); return; }
@@ -2002,47 +1871,18 @@ function goPage(p, el) {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sov').classList.remove('show');
 }
-function goPageLabel(p, label, el) {
-  fLabel = label;
-  fCat = 'all';
-  iPg = 1;
-  goPage(p, el);
-}
 function togSB() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sov').classList.toggle('show'); }
 function render(p) {
   const c = document.getElementById('mc');
   switch(p) {
     case 'dash': c.innerHTML = rDash(); break;
-    case 'inv': c.innerHTML = rInv(); break;
-    case 'inb': c.innerHTML = rRec('in'); break;
-    case 'outb': c.innerHTML = rRec('out'); break;
-    case 'ana': c.innerHTML = rAna(); break;
-    case 'accts': c.innerHTML = rAccts(); break;
-    case 'cats': c.innerHTML = rCats(); break;
-    case 'whOrd': c.innerHTML = rWhOrd(); break;
     case 'sWork': c.innerHTML = rSW(); break;
     case 'sNewOrd': c.innerHTML = rNewOrd(); initNO(); break;
     case 'sOrds': c.innerHTML = rSOrds(); break;
     case 'sProds': c.innerHTML = rSProds(); break;
     case 'sCus': c.innerHTML = rSCus(); break;
-    case 'approvals':
-      c.innerHTML = rApprovals();
-      if (ADMIN_TOKEN) loadAllData().then(() => {
-        if (curP === 'approvals') document.getElementById('mc').innerHTML = rApprovals();
-      });
-      break;
-    case 'paySettings': c.innerHTML = rPaySettings(); loadPaySettings(); break;
-    case 'memberLevels': c.innerHTML = rMemberLevels(); break;
   }
 }
-
-// ═══════════════════════════════════════════════
-// PART 2: 所有渲染函数和操作函数
-// ═══════════════════════════════════════════════
-
-// ═══════════════════════════════════════
-// DASHBOARD
-// ═══════════════════════════════════════
 function rDash() {
   const P = DB.prods;
   const total = P.reduce((s, p) => s + p.stock, 0);
@@ -2067,261 +1907,6 @@ function rDash() {
 // ═══════════════════════════════════════
 // INVENTORY
 // ═══════════════════════════════════════
-function rInv() {
-  const mx = Math.max(...DB.prods.map(p => p.stock), 1);
-  // Category cascade dropdowns
-  var initParent = null;
-  if (fCat !== 'all') {
-    var fc = DB.cats.find(function(x){ return x.id === Number(fCat); });
-    if (fc && fc.parent_id) initParent = fc.parent_id;
-  }
-  var topCats = DB.cats.filter(function(c){ return c.parent_id === null; }).sort(function(a,b){ return a.order - b.order; });
-  var ch = '<div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">';
-  ch += '<select id="invCat1" class="inv-sel" onchange="onInvCat1Change()">';
-  ch += '<option value="all"' + (fCat === 'all' ? ' selected' : '') + '>' + t('all') + '</option>';
-  topCats.forEach(function(c) {
-    var sel = (fCat === '' + c.id) || (initParent === c.id);
-    ch += '<option value="' + c.id + '"' + (sel ? ' selected' : '') + '>' + c.icon + ' ' + esc(c.name) + '</option>';
-  });
-  ch += '</select>';
-  var selectedTop = initParent || (!initParent && fCat !== 'all' ? Number(fCat) : null);
-  if (selectedTop) {
-    var children = DB.cats.filter(function(c){ return c.parent_id === selectedTop; }).sort(function(a,b){ return a.order - b.order; });
-    if (children.length) {
-      ch += '<select id="invCat2" class="inv-sel" onchange="onInvCat2Change()">';
-      ch += '<option value="' + selectedTop + '"' + (fCat === '' + selectedTop ? ' selected' : '') + '>' + t('allSubCats') + '</option>';
-      children.forEach(function(c) {
-        ch += '<option value="' + c.id + '"' + (fCat === '' + c.id ? ' selected' : '') + '>' + c.icon + ' ' + esc(c.name) + '</option>';
-      });
-      ch += '</select>';
-    }
-  }
-  ch += '</div>';
-  let fl = [...DB.prods];
-  const q = (document.getElementById('iS')?.value || '').toLowerCase().trim();
-  const tokens = tokenizeSearch(q);
-  if (tokens.length) {
-    fl = fl.filter(p => matchSearch(p, tokens));
-    fl.sort((a, b) => scoreSearch(b, tokens) - scoreSearch(a, tokens));
-  }
-  if (fCat !== 'all') {
-    // Include all descendant categories
-    const catIds = [Number(fCat)];
-    function addDescendants(pid) { DB.cats.filter(c => c.parent_id === pid).forEach(c => { catIds.push(c.id); addDescendants(c.id); }); }
-    addDescendants(Number(fCat));
-    fl = fl.filter(p => (p.catIds || []).some(cid => catIds.includes(cid)));
-  }
-  if (fLabel) {
-    fl = fl.filter(p => (p.label || 'normal') === fLabel || (fLabel === 'promocao' && p.label === 'promo'));
-  }
-  fl.sort((a, b) => { let va = a[sF], vb = b[sF]; if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); } return va < vb ? -sD : va > vb ? sD : 0; });
-  const total = fl.length;
-  const tp = Math.max(1, Math.ceil(total / PG));
-  if (iPg > tp) iPg = tp;
-  const st = (iPg - 1) * PG;
-  const items = fl.slice(st, st + PG);
-  let tb = '';
-  if (!items.length) {
-    tb = '<tr><td colspan="7"><div class="empty"><p>' + t('noMatch') + '</p></div></td></tr>';
-  } else {
-    tb = items.map(p => {
-      const pct = (p.stock / mx) * 100;
-      const lv = p.stock === 0 ? 'lo' : p.stock <= 10 ? 'md' : 'hi';
-      let ac = '';
-      if (has('editProduct')) ac += '<button class="bi" title="' + t('edit') + '" onclick="openEditP(' + p.id + ')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>';
-      if (has('editProduct')) ac += '<button class="bi" title="' + (p.ml ? t('mallOff') : t('mallOn')) + '" onclick="event.stopPropagation();toggleMallListed(' + p.id + ')" style="color:' + (p.ml ? 'var(--sf)' : 'var(--t3)') + '">🛒</button>';
-      if (has('editProduct')) ac += '<button class="bi" title="' + (p.gl ? t('galleryOff') : t('galleryOn')) + '" onclick="event.stopPropagation();toggleGalleryListed(' + p.id + ')" style="color:' + (p.gl ? 'var(--sf)' : 'var(--t3)') + '">🖼</button>';
-      if (has('deleteProduct')) ac += '<button class="bi" title="' + t('delete') + '" onclick="delP(' + p.id + ')" style="color:var(--dg)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>';
-      const sc = has('viewCost');
-      const lvC = lv === 'lo' ? 'dg' : lv === 'md' ? 'wa' : 'sf';
-      var sizeDetail = '';
-    if (p.sizes && p.sizes.length > 0) {
-      sizeDetail = '<div style="font-size:.55rem;color:var(--t3);margin-top:.15rem;font-family:DM Mono,monospace">' + p.sizes.map(function(s) { return s + ':' + ((p.size_stock || {})[s] || 0); }).join(' ') + '</div>';
-    }
-    const labelTag = p.label ? ' <span class="badge b-' + (p.label==='promo'?'promocao':(p.label||'normal')) + '" style="font-size:.5rem;margin-left:.3rem">' + (labelText(p.label)) + '</span>' : '';
-    return '<tr><td><div class="prow"><div class="pimg">' + (p.img ? '<img src="' + safeUrl(p.img) + '" alt="" onerror="this.remove()">' : '') + '</div><div class="pinfo" style="flex:1;min-width:0"><strong>' + esc(p.name) + '</strong>' + labelTag + (p.note ? '<br><span style="font-size:.62rem;color:var(--t3)">' + esc(p.note) + '</span>' : '') + '</div></div></td><td><span class="sk">' + esc(p.sku) + '</span></td><td class="hide-md"><div class="ctags">' + catTagsP(p) + '</div></td><td class="hide-sm"><span style="font-size:.68rem;color:var(--t3)">' + esc(p.loc || '-') + '</span></td><td><div class="si2"><span class="sn" style="color:var(--' + lvC + ')">' + p.stock + '</span><div class="sbr2"><div class="sbf2 ' + lv + '" style="width:' + pct + '%"></div></div></div>' + '<span class="stb ' + (lv === 'hi' ? 'stb-ok' : lv === 'md' ? 'stb-low' : 'stb-out') + '">' + (lv === 'hi' ? t('stockOk') : lv === 'md' ? t('lowStock') : t('outOfStock')) + '</span>' + sizeDetail + '</td><td><span style="font-family:DM Mono,monospace">¥' + p.price.toLocaleString() + '</span>' + (sc ? '<br><span style="font-size:.58rem;color:var(--dg)">¥' + t('cost') + ' ' + p.cost + '</span>' : '') + '</td><td><div class="ac">' + (ac || '<span style="color:var(--t3);font-size:.65rem">' + t('readOnly') + '</span>') + '</div></td></tr>';
-    }).join('');
-  }
-  let pg = '';
-  for (let i = 1; i <= tp; i++) pg += '<button class="pg ' + (i === iPg ? 'on' : '') + '" onclick="iPg=' + i + ';render(\'inv\')">' + i + '</button>';
-  return '<div class="tb"><div class="sbox"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="iS" placeholder="' + t('searchNameSku') + '" oninput="iPg=1;render(\'inv\')" /></div><span class="tbsp"></span>' + (has('addProduct') ? '<button class="btn bp bs aw" onclick="openAddP()">+ ' + t('addNew') + '</button>' : '') + '</div><div style="margin-bottom:.7rem">' + ch + '</div><div class="tw"><div class="ts"><table><thead><tr><th onclick="sB(\'name\')">' + t('name') + '↕</th><th onclick="sB(\'sku\')">' + t('sku') + '↕</th><th class="hide-md">' + t('category') + '</th><th class="hide-sm">' + t('location') + '</th><th onclick="sB(\'stock\')">' + t('stock') + '↕</th><th onclick="sB(\'price\')">' + t('price') + '↕</th><th>' + t('action') + '</th></tr></thead><tbody>' + tb + '</tbody></table></div><div class="tf"><span>' + t('items') + total + ' · ' + iPg + '/' + tp + '</span><div class="pag">' + pg + '</div></div></div>';
-}
-
-function getCatParentId(catId) {
-  const c = DB.cats.find(x => x.id === catId);
-  return c ? (c.parent_id || null) : null;
-}
-function isChildOf(parentId) {
-  if (fCat === 'all') return false;
-  return getCatParentId(Number(fCat)) === parentId;
-}
-function sB(f) {
-  if (sF === f) sD *= -1; else { sF = f; sD = 1; }
-  render('inv');
-}
-
-// Toggle visibility of child category filter chips
-function onInvCat1Change() {
-  var v = document.getElementById('invCat1').value;
-  var sub = document.getElementById('invCat2');
-  if (v === 'all') { if(sub) sub.style.display='none'; fCat='all'; iPg=1; render('inv'); return; }
-  var pid = Number(v);
-  var children = DB.cats.filter(function(c){ return c.parent_id === pid; }).sort(function(a,b){ return a.order - b.order; });
-  if (children.length) {
-    if (!sub) { sub = document.createElement('select'); sub.id='invCat2'; sub.className='inv-sel'; sub.onchange=onInvCat2Change; document.getElementById('invCat1').parentNode.appendChild(sub); }
-    sub.innerHTML = '<option value="' + pid + '">' + t('allSubCats') + '</option>' + children.map(function(c){ return '<option value="' + c.id + '">' + c.icon + ' ' + esc(c.name) + '</option>'; }).join('');
-    sub.style.display = '';
-  } else { if(sub) sub.style.display='none'; }
-  fCat = '' + pid; iPg = 1; render('inv');
-}
-function onInvCat2Change() {
-  fCat = document.getElementById('invCat2').value;
-  iPg = 1; render('inv');
-}
-// ═══════════════════════════════════════
-// PRODUCT CRUD
-// ═══════════════════════════════════════
-function openAddP() {
-  document.getElementById('pmT').textContent = t('saveProduct');
-  document.getElementById('pmId').value = '';
-  document.getElementById('pmN').value = '';
-  document.getElementById('pmNt').value = '';
-  document.getElementById('pmLabel').value = 'normal';
-  document.getElementById('pmL').value = '';
-  document.getElementById('pmS').value = '';
-  document.getElementById('pmP').value = '';
-  document.getElementById('pmC').value = '';
-  pmCats = [];
-  pmSkuManual = false;
-  pmImgData = '';
-  document.getElementById('pmManual').value = '0';
-  document.getElementById('pmCw').style.display = has('viewCost') ? '' : 'none';
-  // Init new fields
-  document.getElementById('pmCatType').value = 'general';
-  document.getElementById('pmSizesArea').style.display = 'none';
-  document.getElementById('pmSizesList').innerHTML = '';
-  document.getElementById('pmHasBag').checked = false;
-  document.getElementById('pmBagPrice').value = '';
-  document.getElementById('pmBagPrice').disabled = true;
-  document.getElementById('pmHasCase').checked = false;
-  document.getElementById('pmCasePrice').value = '';
-  document.getElementById('pmCasePrice').disabled = true;
-  document.getElementById('pmCats').innerHTML = renderCatPills(pmCats);
-  applyCatCascade(pmCats.length ? Number(pmCats[0]) : null);
-  updateSkuPreview();
-  const ib = document.getElementById('pmIB');
-  ib.innerHTML = '<span class="ia">+</span><input type="file" id="pmIF" accept="image/*" onchange="hImg(this,\'pmIB\',\'pmImgData\')" />';
-  oMo('pmo');
-}
-
-function openEditP(id) {
-  const p = prodById(id);
-  if (!p) return;
-  document.getElementById('pmT').textContent = t('edit') + ' ' + t('product');
-  document.getElementById('pmId').value = id;
-  document.getElementById('pmN').value = p.name;
-  pmCats = [deepestCatId(p.catIds || [])].filter(x => x != null);
-  pmSkuManual = !!p.skuManual;
-  document.getElementById('pmManual').value = p.skuManual ? '1' : '0';
-  document.getElementById('pmS').value = p.stock;
-  document.getElementById('pmP').value = p.price;
-  document.getElementById('pmC').value = p.cost;
-  document.getElementById('pmL').value = p.loc || '';
-  document.getElementById('pmNt').value = p.note || '';
-  document.getElementById('pmLabel').value = p.label || 'normal';
-  pmImgData = p.img || '';
-  document.getElementById('pmCw').style.display = has('viewCost') ? '' : 'none';
-  // Populate new fields
-  var catType = p.category_type || 'general';
-  document.getElementById('pmCatType').value = catType;
-  if (catType !== 'general') {
-    toggleSizeFields();
-    var sizeStock = p.size_stock || {};
-    document.getElementById('pmSizesList').querySelectorAll('input[data-size]').forEach(function(inp) {
-      inp.value = sizeStock[inp.dataset.size] || '';
-    });
-  } else {
-    document.getElementById('pmSizesArea').style.display = 'none';
-  }
-  document.getElementById('pmHasBag').checked = !!p.has_bag;
-  document.getElementById('pmBagPrice').value = p.bag_price || '';
-  document.getElementById('pmBagPrice').disabled = !p.has_bag;
-  document.getElementById('pmHasCase').checked = !!p.has_case;
-  document.getElementById('pmCasePrice').value = p.case_price || '';
-  document.getElementById('pmCasePrice').disabled = !p.has_case;
-  document.getElementById('pmCats').innerHTML = renderCatPills(pmCats);
-  applyCatCascade(pmCats.length ? Number(pmCats[0]) : null);
-  updateSkuPreview();
-  const ib = document.getElementById('pmIB');
-  if (p.img) {
-    ib.innerHTML = '<img src="' + safeUrl(p.img) + '" /><span class="ir" onclick="event.stopPropagation();pmImgData=\'\';rmImg(\'pmImgData\',\'pmIB\')">×</span>';
-  } else {
-    ib.innerHTML = '<span class="ia">+</span><input type="file" id="pmIF" accept="image/*" onchange="hImg(this,\'pmIB\',\'pmImgData\')" />';
-  }
-  oMo('pmo');
-}
-
-
-function renderCatPills(selected) {
-  // 与库存管理同一套级联下拉（catChainOf + 逐层 select）
-  // 注意：不在 HTML 里写 selected，渲染后用 applyCatCascade 按 chain 强制 .value，避免深层回显丢失
-  const selId = (selected && selected.length) ? Number(selected[0]) : null;
-  const chain = selId ? catChainOf(selId) : [];
-  const topCats = DB.cats.filter(function(c){ return c.parent_id === null; }).sort(function(a,b){ return a.order - b.order; });
-  let html = '';
-  if (selId) {
-    const c = catById(selId);
-    if (c) {
-      html += '<div class="cascade-selected"><span class="cascade-tag">' + c.icon + ' ' + esc(getCatPath(selId)) + ' <span class="ct-rm" onclick="event.stopPropagation();togglePMCat(0)">✕</span></span></div>';
-    }
-  }
-  html += '<div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">';
-  html += '<select id="pmCat1" class="inv-sel" onchange="onPmCascadeChange(1)">';
-  html += '<option value="">' + t('selectCategoryFirst') + '</option>';
-  topCats.forEach(function(c) {
-    html += '<option value="' + c.id + '">' + c.icon + ' ' + esc(c.name) + '</option>';
-  });
-  html += '</select>';
-  if (selId) {
-    for (let lv = 1; lv <= chain.length; lv++) {
-      const parent = chain[lv - 1];
-      const children = DB.cats.filter(function(c){ return c.parent_id === parent.id; }).sort(function(a,b){ return a.order - b.order; });
-      if (!children.length) break;
-      html += '<select id="pmCat' + (lv + 1) + '" class="inv-sel" onchange="onPmCascadeChange(' + (lv + 1) + ')">';
-      html += '<option value="' + parent.id + '">' + t('allSubCats') + '</option>';
-      children.forEach(function(c) {
-        html += '<option value="' + c.id + '">' + c.icon + ' ' + esc(c.name) + '</option>';
-      });
-      html += '</select>';
-    }
-  }
-  html += '</div>';
-  return html;
-}
-
-function applyCatCascade(selId) {
-  const chain = selId ? catChainOf(selId) : [];
-  for (let i = 0; i < chain.length; i++) {
-    const s = document.getElementById('pmCat' + (i + 1));
-    if (s) s.value = String(chain[i].id);
-  }
-  const last = chain[chain.length - 1];
-  if (last) {
-    const s = document.getElementById('pmCat' + (chain.length + 1));
-    if (s) s.value = String(last.id);
-  }
-}
-
-function refreshPmCats() {
-  const selId = (pmCats && pmCats.length) ? Number(pmCats[0]) : null;
-  const box = document.getElementById('pmCats');
-  if (!box) return;
-  box.innerHTML = renderCatPills(pmCats);
-  applyCatCascade(selId);
-  updateSkuPreview();
-}
-
-
 function getCatCodePath(catId) {
   const parts = [];
   let c = catById(catId);
@@ -2341,890 +1926,80 @@ function getCatPathWithCodes(catId) {
   }
   return names.map((n, i) => n + '[' + codes[i] + ']').join(' > ');
 }
-function getCatPath(catId) {
-  const parts = [];
-  let c = catById(catId);
-  while (c) {
-    parts.unshift(c.name);
-    c = c.parent_id ? catById(c.parent_id) : null;
-  }
-  return parts.join(' > ');
+function productSizeList(p) {
+  if (!p) return [];
+  if (p.sizes && p.sizes.length) return p.sizes.slice();
+  const ss = p.size_stock || {};
+  const keys = Object.keys(ss).filter(function(k) { return ss[k] != null && ss[k] !== ''; });
+  if (keys.length) return keys;
+  const ct = p.category_type || 'general';
+  if (ct === 'clothing') return CLOTHING_SIZES.slice();
+  if (ct === 'shoes') return SHOE_SIZES.slice();
+  return [];
 }
-
-function onPmCascadeChange(level) {
-  const sel = document.getElementById('pmCat' + level);
-  if (!sel) return;
-  const v = sel.value;
-  if (!v) { pmCats = []; }
-  else {
-    const id = Number(v);
-    // 与库存一致：可选到任意层；商品仍只挂叶子（saveProd 用 deepestCatId）
-    pmCats = [id];
-  }
-  pmSkuManual = false;
-  document.getElementById('pmManual').value = '0';
-  refreshPmCats();
-}
-
-function togglePMCat(id) {
-  if (!id) { pmCats = []; }
-  else { pmCats = [id]; }
-  pmSkuManual = false;
-  document.getElementById('pmManual').value = '0';
-  refreshPmCats();
-}
-
-function updateSkuPreview() {
-  const preview = genSku(pmCats, parseInt(document.getElementById('pmId').value) || null);
-  const c = document.getElementById('skuPrev');
-  if (pmSkuManual) {
-    const curId = parseInt(document.getElementById('pmId').value) || null;
-    const curSku = curId ? ((prodById(curId) || {}).sku || '') : '';
-    c.innerHTML = '<span class="spl">SKU:</span><input type="text" id="skuAuto" value="' + esc(curSku || preview) + '" /><span class="spm" onclick="toggleSkuMode()">' + t('switchAuto') + '</span>';
-  } else {
-    c.innerHTML = '<span class="spl">SKU:</span><span class="spv" id="skuAuto">' + (pmCats.length ? esc(preview) : t('selectCategoryFirst')) + '</span><span class="spm" onclick="toggleSkuMode()">' + t('switchManual') + '</span>';
-  }
-}
-
-function toggleSkuMode() {
-  pmSkuManual = !pmSkuManual;
-  document.getElementById('pmManual').value = pmSkuManual ? '1' : '0';
-  updateSkuPreview();
-}
-
-async function saveProd() {
-  const id = document.getElementById('pmId').value;
-  const name = document.getElementById('pmN').value.trim();
-  if (!name) { toast(t('enterNameErr'), 'er'); return; }
-  if (!pmCats.length) { toast(t('selectCatErr'), 'er'); return; }
-  const _leafId = deepestCatId(pmCats);
-  if (_leafId == null || DB.cats.some(c => c.parent_id === _leafId)) {
-    toast(t('selectLeafCat') || t('selectCatErr'), 'er');
-    return;
-  }
-  const sku = pmSkuManual ? (document.getElementById('skuAuto') ? document.getElementById('skuAuto').value : '') : genSku(pmCats, parseInt(id) || null);
-  const stock = parseInt(document.getElementById('pmS').value) || 0;
-  const price = parseFloat(document.getElementById('pmP').value) || 0;
-  const cost = parseFloat(document.getElementById('pmC').value) || 0;
-  const loc = document.getElementById('pmL').value.trim();
-  const note = document.getElementById('pmNt').value.trim();
-  const catType = document.getElementById('pmCatType').value;
-  const sizes = []; const sizeStock = {};
-  if (catType !== 'general') {
-    document.getElementById('pmSizesList').querySelectorAll('input[data-size]').forEach(function(inp) {
-      var v = parseInt(inp.value) || 0;
-      sizes.push(inp.dataset.size);
-      sizeStock[inp.dataset.size] = v;
-    });
-  }
-  const sumStock = catType !== 'general' ? Object.values(sizeStock).reduce(function(a,b){return a+b},0) : stock;
-  const hasBag = document.getElementById('pmHasBag').checked;
-  const bagPrice = hasBag ? (parseFloat(document.getElementById('pmBagPrice').value) || 0) : 0;
-  const hasCase = document.getElementById('pmHasCase').checked;
-  const casePrice = hasCase ? (parseFloat(document.getElementById('pmCasePrice').value) || 0) : 0;
-  const row = { name, sku, sku_manual: pmSkuManual, stock: sumStock, price, cost, location: loc, note, image: pmImgData || '',
-    category_type: catType, sizes: sizes, size_stock: sizeStock, has_bag: hasBag, bag_price: bagPrice, has_case: hasCase, case_price: casePrice, label: document.getElementById('pmLabel').value || 'normal' };
+async function cancelOrd(id) {
+  const o = DB.ords.find(x => x.id === id);
+  if (!o) return;
+  if (!confirm(t('confirmCancelOrd'))) return;
+  if (window._cancelBusy) return;
+  window._cancelBusy = true;
   try {
-    if (id) {
-      await adminApi('update', { table: 'products', patch: row, where: { id: Number(id) } });
-      await adminApi('delete', { table: 'product_categories', where: { product_id: Number(id) } });
-      const _pc = [deepestCatId(pmCats)].filter(x => x != null);
-      if (_pc.length) await adminApi('insert', { table: 'product_categories', rows: _pc.map(cid => ({ product_id: Number(id), category_id: cid })) });
-      toast(t('productUpdated'), 'ok');
-    } else {
-      const data = await adminApi('insert', { table: 'products', row: Object.assign({}, row, { status: 'active' }), single: true, select: true });
-      const idNew = data && data.id;
-      const _pcn = [deepestCatId(pmCats)].filter(x => x != null);
-      if (_pcn.length && idNew) await adminApi('insert', { table: 'product_categories', rows: _pcn.map(cid => ({ product_id: Number(idNew), category_id: cid })) });
-      toast(t('productAdded'), 'ok');
-    }
-    await loadAllData();
-    cMo('pmo');
-    render(curP);
-  } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
-}
-
-async function toggleMallListed(id) {
-  const p = prodById(id);
-  if (!p) return;
-  const next = !p.ml;
-  try {
-    await adminApi('update', { table: 'products', patch: { mall_listed: next }, where: { id: Number(id) } });
-    p.ml = next;
-    toast(next ? t('mallOn') : t('mallOff'), 'ok');
-    render(curP);
-  } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
-}
-async function toggleGalleryListed(id) {
-  const p = prodById(id);
-  if (!p) return;
-  const next = !p.gl;
-  try {
-    await adminApi('update', { table: 'products', patch: { gallery_listed: next }, where: { id: Number(id) } });
-    p.gl = next;
-    toast(next ? t('galleryOn') : t('galleryOff'), 'ok');
-    render(curP);
-  } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
-}
-
-async function delP(id) {
-  const p = prodById(id);
-  if (!p || !confirm(t('confirmDelete', p.name))) return;
-  try {
-    await adminFrom('products').delete().eq('id', id);
-    await loadAllData();
-    toast(t('productDeleted'), 'inf');
-    render(curP);
-  } catch (err) { toast(t('deleteFailed') + ': ' + err.message, 'er'); }
-}
-
-// ═══════════════════════════════════════
-// IO RECORDS
-// ═══════════════════════════════════════
-function rRec(tp) {
-  const isIn = tp === 'in';
-  const recs = isIn ? DB.inb : DB.outb;
-  const can = isIn ? has('inbound') : has('outbound');
-  let tb = '';
-  if (!recs.length) {
-    tb = '<tr><td colspan="6"><div class="empty"><p>' + t('noOps') + '</p></div></td></tr>';
-  } else {
-    tb = recs.map(r => {
-      const p = prodById(r.pid);
-      return '<tr><td style="font-family:DM Mono,monospace;font-size:.7rem;color:var(--t3)">' + esc(r.t) + '</td><td><div class="prow"><div class="pimg">' + (p && p.img ? '<img src="' + safeUrl(p.img) + '" alt="" onerror="this.remove()">' : '') + '</div><div class="pinfo"><strong>' + (p ? esc(p.name) : t('deleted')) + '</strong></div></div></td><td class="hide-sm"><span class="sk">' + (p ? esc(p.sku) : '-') + '</span></td><td><span class="qty-pill ' + (isIn ? 'in' : 'out') + '">' + (isIn ? '+' : '-') + r.qty + '</span></td><td class="hide-md">' + esc(r.op) + '</td><td class="hide-sm">' + esc(r.note || '-') + '</td></tr>';
-    }).join('');
-  }
-  return '<div class="tb"><span class="tbsp"></span>' + (can ? '<button class="btn bp bs aw" onclick="openIO(\'' + tp + '\')">' + (isIn ? t('addInbound') : t('addOutbound')) + '</button>' : '') + '</div><div class="tw"><div class="ts"><table><thead><tr><th>' + t('createdAt') + '</th><th>' + t('product') + '</th><th class="hide-sm">' + t('sku') + '</th><th>' + t('quantity') + '</th><th class="hide-md">' + t('operator') + '</th><th class="hide-sm">' + t('remarks') + '</th></tr></thead><tbody>' + tb + '</tbody></table></div></div>';
-}
-
-function openIO(tp) {
-  document.getElementById('ioT').textContent = tp === 'in' ? t('addInbound') : t('addOutbound');
-  document.getElementById('ioTp').value = tp;
-  document.getElementById('ioPrSearch').value = '';
-  document.getElementById('ioPr').value = '';
-  document.getElementById('ioQ').value = '';
-  document.getElementById('ioN').value = '';
-  // Add size input area
-  var ioSizeArea = document.getElementById('ioSizeArea');
-  if (!ioSizeArea) {
-    var qField = document.getElementById('ioQ').parentNode;
-    var area = document.createElement('div');
-    area.id = 'ioSizeArea';
-    area.style.display = 'none';
-    area.innerHTML = '<label style="display:block;font-size:.65rem;font-weight:500;color:var(--t2);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.06em;font-family:DM Mono,monospace">' + t('enterBySize') + '</label><div id="ioSizeInputs" style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem"></div><div style="font-size:.62rem;color:var(--t3)">' + t('totalQty') + ': <span id="ioSizeTotal">0</span></div>';
-    qField.parentNode.insertBefore(area, qField.nextSibling);
-  }
-  document.getElementById('ioPr').onchange = function() {
-    var pid = parseInt(this.value);
-    var p = DB.prods.find(function(x) { return x.id === pid; });
-    var sizeArea = document.getElementById('ioSizeArea');
-    var qField = document.getElementById('ioQ').parentNode;
-    if (p && p.sizes && p.sizes.length > 0) {
-      sizeArea.style.display = '';
-      qField.style.display = 'none';
-      document.getElementById('ioSizeInputs').innerHTML = p.sizes.map(function(s) {
-        return '<div style="display:flex;align-items:center;gap:.3rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);padding:.25rem .4rem"><span style="font-size:.72rem;font-family:DM Mono,monospace;min-width:28px">' + s + '</span><input type="number" data-iosize="' + s + '" value="" min="0" placeholder="0" style="width:55px;padding:.15rem .3rem;background:var(--s3);border:1px solid var(--bd);border-radius:4px;color:var(--t1);font-size:.75rem;font-family:DM Mono,monospace;text-align:center" oninput="calcIOSizeTotal()"></div>';
-      }).join('');
-    } else {
-      sizeArea.style.display = 'none';
-      qField.style.display = '';
-    }
-  };
-  document.getElementById('ioPrSearch').addEventListener('blur', function(){ setTimeout(function(){ document.getElementById('ioPrDropdown').style.display='none'; }, 200); });
-  oMo('imo');
-}
-function filterIOProducts(q) {
-  var dd = document.getElementById('ioPrDropdown');
-  if (!q || !q.trim()) { dd.style.display = 'none'; return; }
-  var ql = q.toLowerCase().trim();
-  var matches = DB.prods.filter(function(p){ return p.name.toLowerCase().includes(ql) || p.sku.toLowerCase().includes(ql); }).slice(0, 20);
-  if (!matches.length) { dd.innerHTML = '<div style="padding:.5rem;color:var(--t3);font-size:.75rem">' + t('noMatchProduct') + '</div>'; dd.style.display = ''; return; }
-  dd.innerHTML = matches.map(function(p) { return '<div style="padding:.45rem .7rem;cursor:pointer;font-size:.78rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bd)" onmousedown="selectIOProduct(' + p.id + ',this)"><span>' + esc(p.name) + ' <span style="color:var(--t3);font-size:.65rem">' + esc(p.sku) + '</span></span><span style="color:var(--t3);font-size:.65rem">' + t('stock') + ':' + p.stock + '</span></div>'; }).join('');
-  dd.style.display = '';
-}
-function selectIOProduct(pid, name) {
-  document.getElementById('ioPr').value = pid;
-  document.getElementById('ioPrSearch').value = name;
-  document.getElementById('ioPrDropdown').style.display = 'none';
-  var ioPrEl = document.getElementById('ioPr');
-  if (ioPrEl.onchange) ioPrEl.onchange();
-}
-
-
-function calcIOSizeTotal() {
-  var total = 0;
-  document.querySelectorAll('#ioSizeInputs input[data-iosize]').forEach(function(inp) { total += parseInt(inp.value) || 0; });
-  var el = document.getElementById('ioSizeTotal');
-  if (el) el.textContent = total;
-}
-async function doIO() {
-  const tp = document.getElementById('ioTp').value;
-  const pid = parseInt(document.getElementById('ioPr').value);
-  const note = document.getElementById('ioN').value.trim();
-  if (!pid) { toast(t('selectAndEnter'), 'er'); return; }
-  const p = prodById(pid);
-  if (!p) return;
-  // Check if product has sizes
-  var qty = 0;
-  var sizeUpdates = {};
-  var sizeArea = document.getElementById('ioSizeArea');
-  if (p.sizes && p.sizes.length > 0 && sizeArea && sizeArea.style.display !== 'none') {
-    document.querySelectorAll('#ioSizeInputs input[data-iosize]').forEach(function(inp) {
-      var v = parseInt(inp.value) || 0;
-      if (v > 0) { sizeUpdates[inp.dataset.iosize] = v; qty += v; }
-    });
-  } else {
-    qty = parseInt(document.getElementById('ioQ').value);
-  }
-  if (!qty || qty <= 0) { toast(t('selectAndEnter'), 'er'); return; }
-  if (tp === 'out' && qty > p.stock) { toast(t('insufficient', p.stock), 'er'); return; }
-  if (window._ioBusy) return;
-  window._ioBusy = true;
-  try {
-    const sizePayload = Object.keys(sizeUpdates).length > 0 ? sizeUpdates : null;
-    const { data: result, error: ioErr } = await sb.rpc('stock_io', {
-      p_type: tp === 'in' ? 'in' : 'out',
-      p_product_id: pid,
-      p_qty: qty,
-      p_operator: user.u || '',
-      p_note: note,
-      p_size_qty: sizePayload
-    });
-    if (ioErr) throw ioErr;
+    const { data: result, error: ce } = await sb.rpc('app_cancel_order', { p_order_id: id });
+    if (ce) throw ce;
     if (result && result.error) throw new Error(result.error);
+    for (const item of o.items) {
+      const p = prodById(item.pid);
+      if (p) p.stock = Number(p.stock || 0) + item.qty;
+    }
     await loadAllData();
-    cMo('imo');
-    toast(t('opSuccess'), 'ok');
+    toast(t('orderCancelledRestocked'), 'ok');
     render(curP);
   } catch (err) {
     const msg = String(err.message || err);
-    if (msg.indexOf('STOCK_INSUFFICIENT') >= 0) toast(t('insufficient', p.stock), 'er');
+    if (msg.indexOf('ORDER_STATE_INVALID') >= 0) toast(t('opFailed') + ': 已取消或已完成', 'er');
     else toast(t('opFailed') + ': ' + msg, 'er');
-  } finally { window._ioBusy = false; }
+  } finally { window._cancelBusy = false; }
 }
 
 // ═══════════════════════════════════════
-// ANALYTICS
+// PACKING FLOW
 // ═══════════════════════════════════════
-function rAna() {
-  const P = DB.prods;
-  const val = P.reduce((s, p) => s + p.stock * p.price, 0);
-  const avg = P.length ? P.reduce((s, p) => s + p.price, 0) / P.length : 0;
-  const tIn = DB.inb.reduce((s, i) => s + i.qty, 0);
-  const tOut = DB.outb.reduce((s, o) => s + o.qty, 0);
-  const catData = {};
-  P.forEach(p => {
-    (p.catIds || []).forEach(cid => {
-      if (!catData[cid]) catData[cid] = { count: 0, stock: 0, value: 0 };
-      catData[cid].stock += p.stock;
-      catData[cid].value += p.stock * p.price;
-    });
-  });
-  const catCount = {};
-  P.forEach(p => {
-    (p.catIds || []).forEach(cid => { catCount[cid] = (catCount[cid] || 0) + 1; });
-  });
-  Object.keys(catData).forEach(k => { catData[k].count = catCount[k] || 0; });
-  const tSt = P.reduce((s, p) => s + p.stock, 0) || 1;
-  const ch = Object.entries(catData).sort((a, b) => b[1].value - a[1].value).map(([k, d]) => {
-    const c = catById(parseInt(k));
-    if (!c) return '';
-    const pct = ((d.stock / tSt) * 100).toFixed(1);
-    return '<div style="display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--bd)"><div style="width:34px;height:34px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1rem;background:var(--s2);border:1px solid var(--bd)">' + c.icon + '</div><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;margin-bottom:.2rem"><span style="font-size:.75rem;font-weight:500">' + esc(c.name) + ' <span style="font-family:DM Mono,monospace;font-size:.58rem;color:var(--ac)">' + c.code + '</span></span><span style="font-size:.62rem;color:var(--t3)">' + d.count + t('types') + ' · ' + d.stock + t('items') + '</span></div><div style="width:100%;height:5px;background:var(--s3);border-radius:3px;overflow:hidden"><div style="height:100%;width:' + pct + '%;background:var(--ac);border-radius:3px"></div></div></div><span style="font-family:DM Mono,monospace;font-size:.72rem;color:var(--ac);min-width:48px;text-align:right">¥' + (d.value / 1000).toFixed(1) + 'k</span></div>';
-  }).join('');
-  const top5 = [...P].sort((a, b) => (b.stock * b.price) - (a.stock * a.price)).slice(0, 5);
-  const th = top5.map((p, i) => '<div style="display:flex;align-items:center;gap:.5rem;padding:.5rem 0;border-bottom:1px solid var(--bd)"><span style="font-family:Inter,sans-serif;font-weight:700;font-size:.85rem;color:var(--t3);width:20px">' + (i + 1) + '</span><div style="flex:1;min-width:0"><div style="font-size:.75rem;font-weight:500">' + esc(p.name) + '</div><span style="font-size:.6rem;color:var(--t3);font-family:DM Mono,monospace">' + esc(p.sku) + ' · ' + p.stock + t('items') + '</span></div><span style="font-family:DM Mono,monospace;font-weight:500;font-size:.75rem;color:var(--ac)">¥' + (p.stock * p.price).toLocaleString() + '</span></div>').join('');
-  return '<div class="stats"><div class="sc"><div class="sl">' + t('totalValue') + '</div><div class="sv" style="font-size:1.3rem">¥' + val.toLocaleString() + '</div></div><div class="sc"><div class="sl">' + t('avgPrice') + '</div><div class="sv" style="font-size:1.3rem">¥' + avg.toFixed(0) + '</div></div><div class="sc"><div class="sl">' + t('totalInbound') + '</div><div class="sv" style="font-size:1.3rem">' + tIn + t('items') + '</div></div><div class="sc"><div class="sl">' + t('totalOutbound') + '</div><div class="sv" style="font-size:1.3rem">' + tOut + t('items') + '</div></div></div><div class="dg"><div class="pnl"><div class="pnH"><span class="pnT">' + t('categoryDist') + '</span></div><div class="pnB">' + ch + '</div></div><div class="pnl"><div class="pnH"><span class="pnT">' + t('topValue') + '</span></div><div class="pnB">' + th + '</div></div></div>';
-}
 
-// ═══════════════════════════════════════
-// ACCOUNTS
-// ═══════════════════════════════════════
-function rAccts() {
-  let rows = DB.accts.map(a => {
-    const pt = PERMS.filter(pd => a.r === 'wh_admin' || a.perm[pd.k]).map(pd => '<span class="ptag on">' + t(pd.l) + '</span>').join('');
-    const rc = a.r === 'wh_admin' ? 'b-ad' : a.r === 'sales' ? 'b-sl' : 'b-st';
-    const self = a.id === user.id;
-    return '<tr><td><strong>' + esc(a.u) + '</strong></td><td>' + esc(a.n) + '</td><td><span class="badge ' + rc + '">' + t(ROLES[a.r] || a.r) + '</span></td><td><div class="ptags">' + pt + '</div></td><td><span class="badge ' + (a.s === 'active' ? 'b-on' : 'b-off') + '">' + (a.s === 'active' ? t('enabled') : t('disabled')) + '</span></td><td><div class="ac"><button class="bi" title="' + t('permissions') + '" onclick="openPerm(' + a.id + ')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></button><button class="bi" title="' + (a.s === 'active' ? t('disabled') : t('enabled')) + '" onclick="togAcct(' + a.id + ')" style="color:var(--' + (a.s === 'active' ? 'wa' : 'sf') + ')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></button>' + (!self ? '<button class="bi" title="' + t('delete') + '" onclick="delAcct(' + a.id + ')" style="color:var(--dg)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>' : '') + '</div></td></tr>';
-  }).join('');
-  return '<div class="tb"><span class="tbsp"></span><button class="btn bp bs aw" onclick="openAddAcct()">' + t('addUser') + '</button></div><div class="tw"><div class="ts"><table><thead><tr><th>' + t('username') + '</th><th>' + t('displayName') + '</th><th>' + t('role') + '</th><th>' + t('permissions') + '</th><th>' + t('status') + '</th><th>' + t('action') + '</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
-}
-
-function openAddAcct() {
-  document.getElementById('amT').textContent = t('addUser');
-  document.getElementById('amId').value = '';
-  ['amU', 'amN', 'amP'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('amR').value = 'wh_staff';
-  oMo('amo');
-}
-
-async function saveAcct() {
-  const id = document.getElementById('amId').value;
-  const u = document.getElementById('amU').value.trim();
-  const n = document.getElementById('amN').value.trim();
-  const p = document.getElementById('amP').value;
-  const r = document.getElementById('amR').value;
-  if (!u) { toast(t('username'), 'er'); return; }
-  if (!n) { toast(t('displayName'), 'er'); return; }
-  if (!id && !p) { toast(t('enterPwdErr'), 'er'); return; }
-  if (!id && DB.accts.find(a => a.u === u)) { toast(t('usernameExists'), 'er'); return; }
-  const dp = r === 'wh_admin' ? { viewInventory: 1, addProduct: 1, editProduct: 1, deleteProduct: 1, inbound: 1, outbound: 1, viewAnalytics: 1, manageAccounts: 1, manageCategories: 1, viewCost: 1, createOrder: 1, processOrder: 1 } : { viewInventory: 1 };
-  try {
-    const { data, error } = await sb.rpc('app_save_account', {
-      p_id: id ? Number(id) : null,
-      p_username: u,
-      p_password: p || null,
-      p_display_name: n,
-      p_role: r,
-      p_status: 'active',
-      p_perms: dp
-    });
-    if (error) throw error;
-    if (data && data.ok === false) throw new Error(data.error || 'save_failed');
-    await loadAllData();
-    cMo('amo');
-    toast(t('saved'), 'ok');
-    render('accts');
-  } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
-}
-
-async function togAcct(id) {
-  const a = DB.accts.find(x => x.id === id);
-  if (!a || a.id === user.id) { toast(t('selfDisable'), 'er'); return; }
-  const ns = a.s === 'active' ? 'disabled' : 'active';
-  try {
-    await adminFrom('accounts').update({ status: ns }).eq('id', id);
-    await loadAllData();
-    render('accts');
-  } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
-}
-
-async function delAcct(id) {
-  const a = DB.accts.find(x => x.id === id);
-  if (!a || a.id === user.id) { toast(t('selfDelete'), 'er'); return; }
-  if (!confirm(t('confirmDeleteUser', a.u))) return;
-  try {
-    await adminFrom('accounts').delete().eq('id', id);
-    await loadAllData();
-    render('accts');
-  } catch (err) { toast(t('deleteFailed') + ': ' + err.message, 'er'); }
-}
-
-function openPerm(id) {
-  const a = DB.accts.find(x => x.id === id);
-  if (!a) return;
-  document.getElementById('prId').value = id;
-  if (a.r === 'wh_admin') {
-    document.getElementById('prL').innerHTML = '<div style="padding:.8rem;text-align:center;color:var(--t3)">' + t('allPerms') + '</div>';
-  } else {
-    document.getElementById('prL').innerHTML = PERMS.map(pd => '<div class="tw2"><div class="tl"><span>' + t(pd.l) + '</span></div><div class="ts2 ' + (a.perm[pd.k] ? 'on' : '') + '" data-key="' + pd.k + '" onclick="this.classList.toggle(\'on\')">' +  '</div></div>').join('');
-  }
-  oMo('prmo');
-}
-
-async function savePerms() {
-  const id = parseInt(document.getElementById('prId').value);
-  const a = DB.accts.find(x => x.id === id);
-  if (!a || a.r === 'wh_admin') { cMo('prmo'); return; }
-  const newPerm = {};
-  document.querySelectorAll('#prL .ts2').forEach(sw => { newPerm[sw.dataset.key] = sw.classList.contains('on') ? 1 : 0; });
-  try {
-    await adminFrom('accounts').update({ perms: newPerm }).eq('id', id);
-    await loadAllData();
-    cMo('prmo');
-    toast(t('permUpdated'), 'ok');
-    render('accts');
-    buildNav();
-  } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
-}
-
-// ═══════════════════════════════════════
-// CATEGORIES
-// ═══════════════════════════════════════
-function rCats() {
-  // Build tree structure
-  function getChildren(parentId) {
-    return DB.cats.filter(c => c.parent_id === parentId).sort((a, b) => a.order - b.order);
-  }
-  function renderTree(parentId, depth) {
-    const children = getChildren(parentId);
-    if (!children.length) return '';
-    return children.map(c => {
-      const cnt = DB.prods.filter(p => productInCat(p, c.id)).length;
-      const subCats = getChildren(c.id);
-      const hasChildren = subCats.length > 0;
-      const collapsed = catCollapsed[c.id] === true;
-      const indent = depth > 0 ? '<span class="indent" style="width:' + (depth * 24) + 'px"></span><span class="tree-line">' + '│ '.repeat(Math.max(0, depth - 1)) + (depth > 0 ? '├─' : '') + '</span>' : '';
-      const depthBadge = depth > 0 ? '<span class="depth-badge">L' + (depth + 1) + '</span>' : '';
-      const subInfo = subCats.length ? '<span class="sub-count">(' + subCats.length + ' ' + t('subCats') + ')</span>' : '';
-      const isLocked = c.locked;
-      // Toggle arrow for categories with children
-      const toggleArrow = hasChildren
-        ? '<span class="cat-toggle-arrow' + (collapsed ? '' : ' expanded') + '" onclick="event.stopPropagation();toggleCatCollapse(' + c.id + ')" title="' + (collapsed ? t('expandCat') : t('collapseCat')) + '">▸</span>'
-        : '<span class="cat-toggle-arrow" style="visibility:hidden">▸</span>';
-      let row = '<div class="csi' + (hasChildren ? ' has-children' : '') + '" draggable="true" data-id="' + c.id + '" data-parent="' + (c.parent_id || '') + '" data-name="' + esc(c.name.toLowerCase()) + '" ondragstart="catDS(event)" ondragover="catDO(event)" ondrop="catDD(event)">';
-      row += indent;
-      row += toggleArrow;
-      row += '<span class="ci">' + c.icon + '</span>';
-      row += '<span class="cn">' + esc(c.name) + '</span>' + depthBadge;
-      if (isLocked) row += '<span class="badge b-pd" style="font-size:.5rem">🔒</span>';
-      row += '<span class="cc">' + esc(c.code) + '</span>';
-      row += '<span class="ccn">' + cnt + t('items') + '</span>' + subInfo;
-      row += '<div class="vis-toggle ' + (c.visible ? 'on' : '') + '" onclick="toggleCatVis(' + c.id + ',' + c.visible + ')" title="' + (c.visible ? t('catVisible') : t('catHidden')) + '"></div>';
-      row += '<div class="lock-toggle ' + (isLocked ? 'on' : '') + '" onclick="toggleCatLock(' + c.id + ',' + isLocked + ')" title="' + (isLocked ? t('unlockCat') : t('lockCat')) + '"><span class="lock-icon">' + (isLocked ? '🔒' : '🔓') + '</span></div>';
-      row += '<div class="cb2">';
-      row += '<button class="add-sub-btn" onclick="openAddSubCat(' + c.id + ')">+ ' + t('subCats') + '</button>';
-      row += '<button onclick="renameCat(' + c.id + ')" title="' + t('rename') + '"' + (isLocked ? ' style="opacity:.3;cursor:not-allowed"' : '') + '><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>';
-      row += '<button onclick="editCatIcon(' + c.id + ')" title="' + t('icon') + '"' + (isLocked ? ' style="opacity:.3;cursor:not-allowed"' : '') + '><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></button>';
-      row += '<button onclick="editCatCode(' + c.id + ')" title="' + t('skuCode') + '"' + (isLocked ? ' style="opacity:.3;cursor:not-allowed"' : '') + '><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></button>';
-      row += '<button onclick="moveCat(' + c.id + ',-1)" title="' + t('moveUp') + '"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>';
-      row += '<button onclick="moveCat(' + c.id + ',1)" title="' + t('moveDown') + '"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>';
-      row += '<button onclick="openMoveCat(' + c.id + ')" title="' + t('moveTo') + '" style="color:var(--in)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>';
-      row += '<button onclick="delCat(' + c.id + ')" title="' + t('delete') + '" style="color:var(--dg)' + (isLocked ? ';opacity:.3;cursor:not-allowed' : '') + '"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>';
-      row += '</div></div>';
-      // Render children in collapsible wrapper
-      if (hasChildren) {
-        row += '<div class="cat-children' + (collapsed ? ' collapsed' : '') + '" id="cat-children-' + c.id + '">';
-        row += renderTree(c.id, depth + 1);
-        row += '</div>';
-      }
-      return row;
-    }).join('');
-  }
-  const list = renderTree(null, 0);
-
-  // Parent selector for new category (recursive)
-  function buildParentOpts(parentId, depth) {
-    let html = '';
-    DB.cats.filter(c => c.parent_id === parentId).sort((a,b) => a.order - b.order).forEach(c => {
-      const indent = '  '.repeat(depth) + (depth > 0 ? '└ ' : '');
-      html += '<option value="' + c.id + '">' + indent + c.icon + ' ' + esc(c.name) + '</option>';
-      html += buildParentOpts(c.id, depth + 1);
-    });
-    return html;
-  }
-  let parentOpts = '<option value="">── ' + t('topCategory') + '</option>' + buildParentOpts(null, 0);
-
-  return '<div class="tb">'
-    + '<div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem">'
-    + '<span style="font-size:.82rem;color:var(--t2)">' + t('totalCats', DB.cats.length) + '</span>'
-    + '<button class="btn bg bs" onclick="expandAllCats()">' + t('expandAll') + '</button>'
-    + '<button class="btn bg bs" onclick="collapseAllCats()">' + t('collapseAll') + '</button>'
-    + '</div>'
-    + '<input type="text" class="cat-search" id="catSearch" placeholder="' + t('searchCats') + '" oninput="filterCats(this.value)" />'
-    + '<div style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center">'
-    + '<select id="ncP" class="cat-parent-select">' + parentOpts + '</select>'
-    + '<input type="text" id="ncI" placeholder="' + t('catName') + '" style="padding:.4rem .6rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);color:var(--t1);font-size:.78rem;width:130px" />'
-    + '<input type="text" id="ncC" placeholder="' + t('catCode') + '" style="padding:.4rem .6rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);color:var(--t1);font-size:.78rem;width:100px;font-family:DM Mono,monospace" oninput="checkCodeUnique(this.value, this)" />'
-    + '<input type="text" id="ncE" value="📁" style="padding:.4rem .6rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);color:var(--t1);font-size:.85rem;width:50px;text-align:center" maxlength="4" />'
-    + '<button class="btn bp bs aw" onclick="addCat()">' + t('addCat') + '</button>'
-    + '</div></div>'
-    + '<div style="font-size:.6rem;color:var(--t3);font-family:DM Mono,monospace;margin-bottom:.5rem">' + t('skuFor') + ' · ' + t('noDeleteWithProducts') + ' · ' + t('dragSort') + '</div>'
-    + '<div id="catTreeWrap" style="background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);padding:.8rem">' + (list || '<div class="empty"><p>' + t('noCats') + '</p></div>') + '</div>';
-}
-
-async function addCat() {
-  const name = document.getElementById('ncI').value.trim();
-  const code = document.getElementById('ncC').value.trim().toUpperCase();
-  const icon = document.getElementById('ncE').value.trim() || '📁';
-  const parentSel = document.getElementById('ncP');
-  const parentId = parentSel && parentSel.value ? Number(parentSel.value) : null;
-  if (!name) { toast(t('nameRequired'), 'er'); return; }
-  if (!code || code.length < 2 || code.length > 6) { toast(t('codeRequired'), 'er'); return; }
-  if (!/^[A-Za-z0-9]+$/.test(code)) { toast(t('codeLetters'), 'er'); return; }
-  if (DB.cats.some(c => c.code === code && (c.parent_id || null) === parentId)) { toast(t('codeExists'), 'er'); return; }
-  const parent = parentId ? DB.cats.find(c => c.id === parentId) : null;
-  const depth = parent ? (parent.depth || 0) + 1 : 0;
-  const siblings = DB.cats.filter(c => c.parent_id === parentId);
-  const mx = siblings.reduce((m, c) => Math.max(m, c.order), 0);
-  const { error } = await adminFrom('categories').insert({ name, code, icon, order_num: mx + 1, parent_id: parentId, depth, visible: true, locked: false });
-  if (error) { toast(t('saveFailed') + ': ' + error.message, 'er'); return; }
-  await loadAllData();
-  ['ncI', 'ncC'].forEach(id => { document.getElementById(id).value = ''; });
-  document.getElementById('ncE').value = '📁';
-  if (parentSel) parentSel.value = '';
-  toast(t('catAdded'), 'ok');
-  render('cats');
-}
-
-async function openAddSubCat(parentId) {
-  const p = catById(parentId);
-  if (!p) return;
-  if (p.locked) { toast(t('catLocked'), 'er'); return; }
-  const name = prompt(t('inputSubCatName') + p.icon + ' ' + p.name + ')');
-  if (!name || !name.trim()) return;
-  const code = prompt('输入SKU编号（2-6个字母或数字）');
-  if (!code) return;
-  const codeUp = code.trim().toUpperCase();
-  if (codeUp.length < 2 || codeUp.length > 6 || !/^[A-Za-z0-9]+$/.test(codeUp)) { toast(t('codeRequired'), 'er'); return; }
-  if (DB.cats.some(c => c.code === codeUp && (c.parent_id || null) === parentId)) { toast(t('codeExists'), 'er'); return; }
-  const icon = prompt('输入图标（emoji）', '📁') || '📁';
-  const depth = (p.depth || 0) + 1;
-  const siblings = DB.cats.filter(c => c.parent_id === parentId);
-  const mx = siblings.reduce((m, c) => Math.max(m, c.order), 0);
-  const { error } = await adminFrom('categories').insert({ name: name.trim(), code: codeUp, icon, order_num: mx + 1, parent_id: parentId, depth, visible: true, locked: false });
-  if (error) { toast(t('saveFailed') + ': ' + error.message, 'er'); return; }
-  await loadAllData();
-  render('cats');
-  toast(t('catAdded'), 'ok');
-}
-
-async function toggleCatVis(id, current) {
-  try {
-    await adminFrom('categories').update({ visible: !current }).eq('id', id);
-    await loadAllData();
-    render('cats');
-  } catch (err) { toast(t('saveFailed'), 'er'); }
-}
-
-async function toggleCatLock(id, current) {
-  try {
-    await adminFrom('categories').update({ locked: !current }).eq('id', id);
-    await loadAllData();
-    render('cats');
-    toast(current ? t('unlockCat') : t('lockCat'), 'ok');
-  } catch (err) { toast(t('saveFailed'), 'er'); }
-}
-
-async function renameCat(id) {
-  const c = catById(id);
-  if (!c) return;
-  if (c.locked) { toast(t('catLocked'), 'er'); return; }
-  const n = prompt(t('enterNewName'), c.name);
-  if (n && n.trim() && n.trim() !== c.name) {
-    try {
-      await adminFrom('categories').update({ name: n.trim() }).eq('id', id);
-      await loadAllData();
-      render('cats');
-    } catch (err) { toast(t('saveFailed'), 'er'); }
-  }
-}
-
-async function editCatIcon(id) {
-  const c = catById(id);
-  if (!c) return;
-  if (c.locked) { toast(t('catLocked'), 'er'); return; }
-  const n = prompt(t('enterNewIcon'), c.icon);
-  if (n && n.trim()) {
-    try {
-      await adminFrom('categories').update({ icon: n.trim() }).eq('id', id);
-      await loadAllData();
-      render('cats');
-    } catch (err) { toast(t('saveFailed'), 'er'); }
-  }
-}
-
-async function editCatCode(id) {
-  const c = catById(id);
-  if (!c) return;
-  if (c.locked) { toast(t('catLocked'), 'er'); return; }
-  const n = prompt(t('enterNewCode'), c.code);
-  if (!n) return;
-  const code = n.trim().toUpperCase();
-  if (DB.cats.some(x => x.code === code && x.id !== id && (x.parent_id || null) === (c.parent_id || null))) { toast(t('codeExists'), 'er'); return; }
-  try {
-    await adminFrom('categories').update({ code }).eq('id', id);
-    await loadAllData();
-    render('cats');
-  } catch (err) { toast(t('saveFailed'), 'er'); }
-}
-
-async function moveCat(id, d) {
-  const cat = catById(id);
-  if (!cat) return;
-  const siblings = DB.cats.filter(c => c.parent_id === (cat.parent_id || null)).sort((a, b) => a.order - b.order);
-  const i = siblings.findIndex(c => c.id === id);
-  if (i < 0) return;
-  const ti = i + d;
-  if (ti < 0 || ti >= siblings.length) return;
-  try {
-    await adminFrom('categories').update({ order_num: siblings[ti].order }).eq('id', siblings[i].id);
-    await adminFrom('categories').update({ order_num: siblings[i].order }).eq('id', siblings[ti].id);
-    await loadAllData();
-    render('cats');
-  } catch (err) { toast(t('sortFailed'), 'er'); }
-}
-
-// Check if targetId is a descendant of sourceId
-function isDescendant(sourceId, targetId) {
-  function getDescendants(pid) {
-    const children = DB.cats.filter(c => c.parent_id === pid);
-    let ids = [];
-    children.forEach(c => { ids.push(c.id); ids = ids.concat(getDescendants(c.id)); });
-    return ids;
-  }
-  return getDescendants(sourceId).includes(targetId);
-}
-
-async function delCat(id) {
-  const c = catById(id);
-  if (!c) return;
-  if (c.locked) { toast(t('catLocked'), 'er'); return; }
-  if (DB.prods.some(p => productInCat(p, id))) { toast(t('noDeleteWithProducts'), 'er'); return; }
-  const children = DB.cats.filter(x => x.parent_id === id);
-  const msg = children.length
-    ? t('confirmDelete') + '「' + c.name + '」' + t('subCats') + ' (' + children.length + '), ' + t('confirm') + '?'
-    : t('confirmDeleteCat', c.name);
-  if (!confirm(msg)) return;
-  try {
-    // Delete children first
-    if (children.length) {
-      for (const child of children) {
-        await adminFrom('categories').delete().eq('id', child.id);
-      }
-    }
-    await adminFrom('categories').delete().eq('id', id);
-    await loadAllData();
-    render('cats');
-  } catch (err) { toast(t('deleteFailed'), 'er'); }
-}
-
-function catDS(e) { dragCid = parseInt(e.currentTarget.dataset.id); e.currentTarget.classList.add('drag'); }
-function catDO(e) { e.preventDefault(); }
-async function catDD(e) {
-  e.preventDefault();
-  const tgt = parseInt(e.currentTarget.dataset.id);
-  if (!dragCid || dragCid === tgt) return;
-  const a = catById(dragCid);
-  const b = catById(tgt);
-  if (!a || !b) { dragCid = null; return; }
-  // Prevent moving to own descendant
-  if (isDescendant(dragCid, tgt)) { toast(t('cantMoveToDescendant'), 'er'); dragCid = null; return; }
-  // Same parent: swap order
-  if ((a.parent_id || null) === (b.parent_id || null)) {
-    try {
-      await adminFrom('categories').update({ order_num: b.order }).eq('id', a.id);
-      await adminFrom('categories').update({ order_num: a.order }).eq('id', b.id);
-      await loadAllData();
-      render('cats');
-    } catch (err) { toast(t('sortFailed'), 'er'); }
-  } else {
-    // Cross-level move: update parent_id and depth
-    const newDepth = (b.depth || 0);
-    const depthDiff = newDepth - (a.depth || 0) + 1;
-    try {
-      await adminFrom('categories').update({ parent_id: b.id, depth: newDepth + 1 }).eq('id', a.id);
-      // Update all descendants' depth
-      function updateDescendantDepth(pid, dd) {
-        DB.cats.filter(c => c.parent_id === pid).forEach(async c => {
-          const nd = (c.depth || 0) + dd;
-          await adminFrom('categories').update({ depth: nd }).eq('id', c.id);
-          updateDescendantDepth(c.id, dd);
-        });
-      }
-      updateDescendantDepth(a.id, depthDiff);
-      await loadAllData();
-      render('cats');
-      toast(t('catMoved'), 'ok');
-    } catch (err) { toast(t('sortFailed'), 'er'); }
-  }
-  dragCid = null;
-}
-
-// Open move-to dialog
-function openMoveCat(id) {
-  const c = catById(id);
-  if (!c) return;
-  function buildMoveOpts(excludeId, parentId, depth) {
-    let html = '';
-    DB.cats.filter(x => x.parent_id === parentId && x.id !== excludeId).sort((a,b) => a.order - b.order).forEach(x => {
-      if (isDescendant(id, x.id)) return; // skip descendants
-      const indent = '  '.repeat(depth) + (depth > 0 ? '└ ' : '');
-      html += '<option value="' + x.id + '">' + indent + x.icon + ' ' + esc(x.name) + ' [' + x.code + ']</option>';
-      html += buildMoveOpts(excludeId, x.id, depth + 1);
-    });
-    return html;
-  }
-  const opts = '<option value="">── ' + t('topCategory') + '</option>' + buildMoveOpts(id, null, 0);
-  document.getElementById('odT').textContent = t('moveTo') + ': ' + c.icon + ' ' + esc(c.name);
-  document.getElementById('odB').innerHTML = '<div class="fgm"><label>' + t('selectTarget') + '</label><select id="mvTarget" class="cat-parent-select" style="width:100%">' + opts + '</select></div>';
-  document.getElementById('odF').innerHTML = '<button class="btn bg bs" onclick="cMo(\'odmo\')">' + t('cancel') + '</button><button class="btn bp bs aw" onclick="confirmMoveCat(' + id + ')">' + t('confirm') + '</button>';
-  oMo('odmo');
-}
-
-async function confirmMoveCat(id) {
-  const c = catById(id);
-  if (!c) return;
-  const targetSel = document.getElementById('mvTarget');
-  const targetId = targetSel && targetSel.value ? parseInt(targetSel.value) : null;
-  if (targetId === (c.parent_id || null)) { cMo('odmo'); return; }
-  if (targetId && isDescendant(id, targetId)) { toast(t('cantMoveToDescendant'), 'er'); return; }
-  const newParent = targetId ? catById(targetId) : null;
-  const newDepth = newParent ? (newParent.depth || 0) + 1 : 0;
-  const depthDiff = newDepth - (c.depth || 0);
-  try {
-    const siblings = DB.cats.filter(x => x.parent_id === targetId && x.id !== id);
-    const mx = siblings.reduce((m, x) => Math.max(m, x.order), 0);
-    await adminFrom('categories').update({ parent_id: targetId, depth: newDepth, order_num: mx + 1 }).eq('id', id);
-    // Update descendants depth
-    async function updateDescDepth(pid, dd) {
-      const children = DB.cats.filter(x => x.parent_id === pid);
-      for (const ch of children) {
-        const nd = (ch.depth || 0) + dd;
-        await adminFrom('categories').update({ depth: nd }).eq('id', ch.id);
-        await updateDescDepth(ch.id, dd);
-      }
-    }
-    await updateDescDepth(id, depthDiff);
-    await loadAllData();
-    cMo('odmo');
-    toast(t('catMoved'), 'ok');
-    render('cats');
-  } catch (err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
-}
-
-// Expand / Collapse all
-function toggleCatCollapse(catId) {
-  catCollapsed[catId] = !catCollapsed[catId];
-  const el = document.getElementById('cat-children-' + catId);
-  const arrow = el ? el.previousElementSibling.querySelector('.cat-toggle-arrow') : null;
-  if (el) el.classList.toggle('collapsed');
-  if (arrow) arrow.classList.toggle('expanded');
-}
-function expandAllCats() {
-  catCollapsed = {};
-  render('cats');
-}
-function collapseAllCats() {
-  DB.cats.forEach(c => { catCollapsed[c.id] = true; });
-  render('cats');
-}
-
-// Search / filter categories
-function filterCats(q) {
-  q = (q || '').toLowerCase().trim();
-  document.querySelectorAll('#catTreeWrap .csi').forEach(el => {
-    const name = el.dataset.name || '';
-    if (!q) { el.style.display = ''; return; }
-    el.style.display = name.includes(q) ? '' : 'none';
-  });
-}
-
-// Real-time code uniqueness check
-function checkCodeUnique(code, inp) {
-  code = (code || '').trim().toUpperCase();
-  if (code.length < 2) { inp.style.borderColor = ''; return; }
-  const exists = DB.cats.some(c => c.code === code);
-  inp.style.borderColor = exists ? 'var(--dg)' : 'var(--sf)';
-}
-
-// ═══════════════════════════════════════════════
-// PART 3: 仓库订单 + 打包 + 审批 + 销售 + 初始化
-// ═══════════════════════════════════════════════
-
-// ═══════════════════════════════════════
-// WAREHOUSE ORDERS
-// ═══════════════════════════════════════
-function rWhOrd() {
-  const ords = [...DB.ords].filter(o => o.st !== 'draft').sort((a, b) => b.cr.localeCompare(a.cr));
-  let tb = '';
-  if (!ords.length) {
-    tb = '<tr><td colspan="7"><div class="empty"><p>' + t('noOrders') + '</p></div></td></tr>';
-  } else {
-    tb = ords.map(o => {
-      const its = o.items.map(i => {
-        const p = prodById(i.pid);
-        if (!p) return t('deleted');
-        var label = p.name;
-        if (p.sizes && p.sizes.length > 0) label += ' (' + t('enterBySize') + ')';
-        return label + '×' + i.qty;
-      }).join(', ');
-      const sc = OSTAT[o.st] || OSTAT.draft;
-      const pk = PICKUPS[o.pk] || {};
-      const paySc = PSTAT[o.payS] || {};
-      const hasBill = !!o.billUploadedAt;
-      const billOverdue = o.payS === 'pending_bill' && o.billDeadline && new Date(o.billDeadline) < new Date();
-
-      // Payment status display with bill upload indicator
-      let payLabel = t(paySc.l || 'pendingConfirm');
-      let payColor = paySc.c || 'b-pd';
-      if (o.payS === 'pending_bill') {
-        if (hasBill) { payLabel = t('billUploaded'); payColor = 'b-st'; }
-        else if (billOverdue) { payLabel = t('billTimeout'); payColor = 'b-cn'; }
-        else { payLabel = t('billPending'); payColor = 'b-pd'; }
-      }
-
-      let ac = '<button class="bi" title="' + t('view') + '" onclick="viewOrd(' + o.id + ')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>';
-
-      // Start picking - any pending order can start picking
-      if (o.st === 'pending' && has('processOrder')) {
-        ac += '<button class="bi" title="' + t('startPicking') + '" onclick="updOrdStatus(' + o.id + ',\'picking\')" style="color:var(--in)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>';
-        // Cancel button
-        ac += '<button class="bi" title="' + t('cancelOrder') + '" onclick="cancelOrd(' + o.id + ')" style="color:var(--dg)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></button>';
-      }
-      // Admin confirm for pending_bill without bill
-      if (o.st === 'pending' && o.payS === 'pending_bill' && !hasBill && has('processOrder')) {
-        ac += '<button class="bi" title="' + t('confirmEarlyShip') + '" onclick="adminConfirmShip(' + o.id + ')" style="color:var(--wa)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></button>';
-      }
-
-      if (o.st === 'picking' && has('processOrder')) {
-        ac += '<button class="bi" title="' + t('packShip') + '" onclick="openPack(' + o.id + ')" style="color:var(--sf)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></button>';
-        ac += '<button class="bi" title="Print" onclick="printOrd(' + o.id + ')" style="color:var(--in)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></button>';
-        // Ship button (only if packing done and shipping info available)
-        if (o.pacI) {
-          const canShip = (o.pk === 'pickup') || (o.pk === 'onibus' && o.onibusName && o.onibusImg) || ((o.pk === 'motoboy' || o.pk === 'correios') && o.shipAddr) || o.adminConfirmedShip;
-          if (canShip) {
-            ac += '<button class="bi" title="' + t('confirmShip') + '" onclick="updOrdStatus(' + o.id + ',\'done\')" style="color:var(--sf)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>';
-          } else {
-            // Packed but can't ship - show warning indicator
-            ac += '<button class="bi" title="' + t('missingShipInfo') + '" style="color:var(--wa);opacity:.5;cursor:not-allowed">' +  '<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></button>';
-          }
-        }
-      }
-      if (o.st === 'done' && o.payS === 'pending' && has('processOrder')) {
-        ac += '<button class="bi" title="' + t('confirmPayment') + '" onclick="openPayConf(' + o.id + ')" style="color:var(--wa)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></button>';
-      }
-      // Edit price for pending_bill orders without bill
-      if (o.payS === 'pending_bill' && !hasBill && has('processOrder')) {
-        ac += '<button class="bi" title="' + t('editPrice') + '" onclick="openEditOrdPrice(' + o.id + ')" style="color:var(--wa)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>';
-      }
-
-      // Onibus indicator
-      const pkExtra = o.pk === 'onibus' ? ' <span style="font-size:.6rem;color:var(--t3)">(' + esc(o.onibusName || '-') + ')</span>' : '';
-
-      return '<tr><td><strong>' + esc(o.no) + '</strong></td><td style="max-width:180px;white-space:normal;font-size:.72rem">' + esc(its) + '</td><td>' + (pk.i || '') + ' ' + t(OSTAT[o.st]?.l || o.st) + pkExtra + '</td><td><span class="badge ' + sc.c + '">' + t(sc.l) + '</span></td><td><span class="badge ' + payColor + '">' + payLabel + '</span></td><td style="font-family:DM Mono,monospace;font-size:.68rem;color:var(--t3)">' + esc(o.cr) + '</td><td><div class="ac">' + ac + '</div></td></tr>';
-    }).join('');
-  }
-  return '<div class="tw"><div class="ts"><table><thead><tr><th>' + t('orderNo') + '</th><th>' + t('items') + '</th><th>' + t('pickup') + '</th><th>' + t('status') + '</th><th>' + t('payment') + '</th><th>' + t('createdAt') + '</th><th>' + t('action') + '</th></tr></thead><tbody>' + tb + '</tbody></table></div></div>';
-}
-
-// Admin confirm early shipment for orders without bill
-async function adminConfirmShip(id) {
-  if (!confirm(t('confirmEarlyShip'))) return;
-  try {
-    await adminFrom('orders').update({ admin_confirmed_ship: true, admin_ship_confirmed_by: user.u }).eq('id', id);
-    await loadAllData();
-    toast(t('confirmEarlyShipDone'), 'ok');
-    render(curP);
-  } catch (err) { toast(t('opFailed') + ': ' + err.message, 'er'); }
-}
-
-// Edit shipping info from order detail
-function editOrdShipInfo(id) {
+function openChangeReq(id) {
   const o = DB.ords.find(x => x.id === id);
   if (!o) return;
-  if (o.pk === 'onibus') {
-    const name = prompt('Ônibus 客户姓名：', o.onibusName || '');
-    if (name !== null) {
-      adminFrom('orders').update({ onibus_name: name.trim() }).eq('id', id).then(() => {
-        // If schedule image not set, prompt upload
-        if (!o.onibusImg) {
-          toast(t('busImgRequired'), 'inf');
-        }
-        loadAllData().then(() => viewOrd(id));
-      });
-    }
-  } else if (o.pk === 'motoboy' || o.pk === 'correios') {
-    const addr = prompt('收货地址：', o.shipAddr || '');
-    if (addr !== null) {
-      adminFrom('orders').update({ shipping_address: addr.trim() }).eq('id', id).then(() => {
-        loadAllData().then(() => viewOrd(id));
-      });
-    }
-  } else {
-    toast(t('noExtraShipInfo'), 'inf');
-  }
+  document.getElementById('chOid').value = id;
+  const pk = PICKUPS[o.pk] || {};
+  document.getElementById('chOld').value = (pk.i || '') + ' ' + (pk.l || o.pk);
+  document.getElementById('chCost').value = '';
+  chImg = '';
+  const ib = document.getElementById('chIB');
+  ib.innerHTML = '<span class="ia">+</span><input type="file" id="chIF" accept="image/*" onchange="hImg(this,\'chIB\',\'chImg\')" />';
+  oMo('chmo');
 }
+
+
+async function submitChange() {
+  const oid = parseInt(document.getElementById('chOid').value);
+  const o = DB.ords.find(x => x.id === oid);
+  if (!o) return;
+  const newM = document.getElementById('chNew').value;
+  const cost = parseFloat(document.getElementById('chCost').value) || 0;
+  if (newM === o.pk) { toast(t('sameMethodErr'), 'er'); return; }
+  if (!chImg) { toast(t('uploadBillErr'), 'er'); return; }
+  try {
+    await adminFrom('order_changes').insert({
+      order_id: oid, old_method: o.pk, new_method: newM,
+      shipping_cost: cost, bill_image: chImg, status: 'pending', requested_by: user.u
+    });
+    cMo('chmo');
+    toast(t('changeSubmitted'), 'ok');
+  } catch (err) { toast(t('submitFailed') + ': ' + err.message, 'er'); }
+}
+
+// ═══════════════════════════════════════
+// PAYMENT CONFIRMATION
+// ═══════════════════════════════════════
 
 function viewOrd(id) {
   const o = DB.ords.find(x => x.id === id);
@@ -3284,292 +2059,11 @@ function viewOrd(id) {
     + '<div class="odS"><div class="odL">' + t('items') + '</div><div class="tw"><table><thead><tr><th>' + t('name') + '</th><th class="hide-sm">' + t('location') + '</th><th>' + t('quantity') + '</th><th>' + t('price') + '</th><th>Subtotal</th></tr></thead><tbody>' + its + '</tbody></table></div></div>';
 
   let ft = '<button class="btn bg bs" onclick="cMo(\'odmo\')">' + t('close') + '</button>';
-  if (o.st === 'picking' && has('processOrder')) {
-    ft += '<button class="btn bp bs aw" onclick="openPack(' + o.id + ')">📦 ' + t('packShip') + '</button>';
-    // Edit shipping info button
-    ft += '<button class="btn bg bs" onclick="editOrdShipInfo(' + o.id + ')">📝 ' + t('editShipInfo') + '</button>';
-  }
-  if ((o.st === 'pending' || o.st === 'picking') && has('processOrder')) {
+  if (o.st === 'pending' || o.st === 'picking') {
     ft += '<button class="btn bs" style="background:var(--dg);color:#fff" onclick="cancelOrd(' + o.id + ')">' + t('cancelOrder') + '</button>';
   }
   document.getElementById('odF').innerHTML = ft;
   oMo('odmo');
-}
-
-function updOrdStatus(id, st) {
-  const o = DB.ords.find(x => x.id === id);
-  if (!o) return;
-  // Validate shipping info when completing order
-  if (st === 'done') {
-    const pk = o.pk;
-    let canShip = false;
-    if (pk === 'pickup') { canShip = true; }
-    else if (pk === 'onibus') { canShip = !!(o.onibusName && o.onibusImg); }
-    else { canShip = !!o.shipAddr; } // motoboy, correios need address
-    if (!canShip && !o.adminConfirmedShip) {
-      const msg = pk === 'onibus'
-        ? t('missingScheduleOrAddr')
-        : t('missingAddrOrAdmin');
-      toast(msg, 'er'); return;
-    }
-  }
-  adminFrom('orders').update({ status: st, processed_by: user.u }).eq('id', id).then(() => {
-    loadAllData().then(() => { toast(t('opSuccess'), 'ok'); render(curP); });
-  }).catch(err => toast(t('opFailed') + ': ' + err.message, 'er'));
-}
-
-// Cancel order and restore stock (atomic RPC)
-async function cancelOrd(id) {
-  const o = DB.ords.find(x => x.id === id);
-  if (!o) return;
-  if (!confirm(t('confirmCancelOrd'))) return;
-  if (window._cancelBusy) return;
-  window._cancelBusy = true;
-  try {
-    const { data: result, error: ce } = await sb.rpc('app_cancel_order', { p_order_id: id });
-    if (ce) throw ce;
-    if (result && result.error) throw new Error(result.error);
-    for (const item of o.items) {
-      const p = prodById(item.pid);
-      if (p) p.stock = Number(p.stock || 0) + item.qty;
-    }
-    await loadAllData();
-    toast(t('orderCancelledRestocked'), 'ok');
-    render(curP);
-  } catch (err) {
-    const msg = String(err.message || err);
-    if (msg.indexOf('ORDER_STATE_INVALID') >= 0) toast(t('opFailed') + ': 已取消或已完成', 'er');
-    else toast(t('opFailed') + ': ' + msg, 'er');
-  } finally { window._cancelBusy = false; }
-}
-
-// ═══════════════════════════════════════
-// PACKING FLOW
-// ═══════════════════════════════════════
-function openPack(id) {
-  const o = DB.ords.find(x => x.id === id);
-  if (!o) return;
-  document.getElementById('pkOid').value = id;
-  pkPacImg = '';
-  pkSupImg = '';
-  const pk = PICKUPS[o.pk] || {};
-  // Onibus: supplementary = package surface photo
-  let supDesc;
-  if (o.pk === 'onibus') supDesc = t('packageSurface') + '（Ônibus）';
-  else if (o.pk === 'pickup') supDesc = t('bagLabel');
-  else supDesc = t('waybill');
-  document.getElementById('pkSupDesc').textContent = supDesc;
-  const its = o.items.map(i => { const p = prodById(i.pid); return p ? p.name + '×' + i.qty : t('deleted'); }).join(', ');
-  let infoHtml = '<div style="font-size:.78rem"><strong>' + t('orderNo') + ':</strong> ' + esc(o.no) + '<br><strong>' + t('items') + ':</strong> ' + esc(its) + '<br><strong>' + t('pickup') + ':</strong> ' + (pk.i || '') + ' ' + (pk.l || o.pk);
-  if (o.pk === 'onibus') {
-    infoHtml += '<br><strong>' + t('onibusCustomerName') + ':</strong> ' + esc(o.onibName || o.onibusName || '-');
-    if (o.onibusImg) infoHtml += '<br><strong>' + t('scheduleImage') + ':</strong> <a href="' + o.onibusImg + '" target="_blank">' + t('viewSchedule') + '</a>';
-    else infoHtml += '<br><span style="color:var(--wa)">⚠️ ' + t('scheduleImage') + ' ' + t('pendingUpload') + '</span>';
-  }
-  if ((o.pk === 'motoboy' || o.pk === 'correios') && !o.shipAddr) {
-    infoHtml += '<br><span style="color:var(--wa)">⚠️ ' + t('shippingAddr') + ' ' + t('pendingUpload') + '</span>';
-  }
-  infoHtml += '</div>';
-  document.getElementById('pkInfo').innerHTML = infoHtml;
-  const pIB = document.getElementById('pkPacIB');
-  pIB.innerHTML = '<span class="ia">+</span><input type="file" id="pkPacIF" accept="image/*" onchange="hImg(this,\'pkPacIB\',\'pkPacImg\')" />';
-  const sIB = document.getElementById('pkSupIB');
-  sIB.innerHTML = '<span class="ia">+</span><input type="file" id="pkSupIF" accept="image/*" onchange="hImg(this,\'pkSupIB\',\'pkSupImg\')" />';
-  document.getElementById('pkNote').value = '';
-  oMo('pkmo');
-}
-
-async function confirmPack() {
-  const id = parseInt(document.getElementById('pkOid').value);
-  const o = DB.ords.find(x => x.id === id);
-  if (!o) return;
-  if (!pkPacImg) { toast(t('uploadPackingErr'), 'er'); return; }
-  if (!pkSupImg) { toast(t('uploadSuppErr'), 'er'); return; }
-  try {
-    let supType = 'waybill';
-    if (o.pk === 'pickup') supType = 'label';
-    else if (o.pk === 'onibus') supType = 'package_surface';
-    await adminFrom('orders').update({
-      processed_by: user.u,
-      packing_image: pkPacImg, supplementary_image: pkSupImg, supplementary_type: supType
-    }).eq('id', id);
-    // Stock already locked at order creation
-    // Status stays 'picking' - ship separately after validating shipping info
-    await loadAllData();
-    cMo('pkmo');
-    toast(t('packDoneReadyShip'), 'ok');
-    render(curP);
-  } catch (err) { toast(t('opFailed') + ': ' + err.message, 'er'); }
-}
-
-// ═══════════════════════════════════════
-// SHIPPING METHOD CHANGE
-// ═══════════════════════════════════════
-function openChangeReq(id) {
-  const o = DB.ords.find(x => x.id === id);
-  if (!o) return;
-  document.getElementById('chOid').value = id;
-  const pk = PICKUPS[o.pk] || {};
-  document.getElementById('chOld').value = (pk.i || '') + ' ' + (pk.l || o.pk);
-  document.getElementById('chCost').value = '';
-  chImg = '';
-  const ib = document.getElementById('chIB');
-  ib.innerHTML = '<span class="ia">+</span><input type="file" id="chIF" accept="image/*" onchange="hImg(this,\'chIB\',\'chImg\')" />';
-  oMo('chmo');
-}
-
-async function submitChange() {
-  const oid = parseInt(document.getElementById('chOid').value);
-  const o = DB.ords.find(x => x.id === oid);
-  if (!o) return;
-  const newM = document.getElementById('chNew').value;
-  const cost = parseFloat(document.getElementById('chCost').value) || 0;
-  if (newM === o.pk) { toast(t('sameMethodErr'), 'er'); return; }
-  if (!chImg) { toast(t('uploadBillErr'), 'er'); return; }
-  try {
-    await adminFrom('order_changes').insert({
-      order_id: oid, old_method: o.pk, new_method: newM,
-      shipping_cost: cost, bill_image: chImg, status: 'pending', requested_by: user.u
-    });
-    cMo('chmo');
-    toast(t('changeSubmitted'), 'ok');
-  } catch (err) { toast(t('submitFailed') + ': ' + err.message, 'er'); }
-}
-
-// ═══════════════════════════════════════
-// PAYMENT CONFIRMATION
-// ═══════════════════════════════════════
-function openPayConf(id) {
-  const o = DB.ords.find(x => x.id === id);
-  if (!o) return;
-  document.getElementById('payOid').value = id;
-  const total = o.items.reduce((s, i) => { const p = prodById(i.pid); return s + (p ? p.price * i.qty : 0); }, 0);
-  let info = '<div style="font-size:.78rem"><strong>' + t('orderNo') + ':</strong> ' + esc(o.no) + '<br><strong>' + t('orderAmount') + ':</strong> ¥' + total.toLocaleString() + '<br><strong>' + t('paymentMethod') + ':</strong> ' + (o.payM === 'credit' ? t('creditPay') : t('cashPay')) + '<br>';
-  if (o.payM === 'credit') {
-    const cust = cusById(o.custId);
-    if (cust) {
-      const avail = cust.creditLimit - cust.creditUsed;
-      info += '<strong>' + t('customer') + ':</strong> ' + esc(cust.name) + '<br><strong>' + t('creditAvail') + ':</strong> ¥' + avail.toLocaleString() + '<br>';
-      if (avail < total) info += '<span style="color:var(--dg)">' + t('insufficientCredit', (total - avail).toLocaleString()) + '</span><br>';
-    }
-  }
-  if (o.payI) info += '<div style="margin-top:.5rem"><img src="' + o.payI + '" style="max-width:200px;border-radius:var(--r);border:1px solid var(--bd)" /></div>';
-  else info += '<div style="margin-top:.3rem;color:var(--wa)">' + t('skipBill') + '</div>';
-  info += '</div>';
-  document.getElementById('payInfo').innerHTML = info;
-  oMo('paymo');
-}
-
-async function confirmPay() {
-  const id = parseInt(document.getElementById('payOid').value);
-  try {
-    await adminFrom('orders').update({ payment_status: 'confirmed' }).eq('id', id);
-    await loadAllData();
-    cMo('paymo');
-    toast(t('confirmed'), 'ok');
-    render(curP);
-  } catch (err) { toast(t('opFailed') + ': ' + err.message, 'er'); }
-}
-
-async function rejectPay() {
-  const id = parseInt(document.getElementById('payOid').value);
-  try {
-    await adminFrom('orders').update({ payment_status: 'rejected' }).eq('id', id);
-    await loadAllData();
-    cMo('paymo');
-    toast(t('rejected'), 'inf');
-    render(curP);
-  } catch (err) { toast(t('opFailed') + ': ' + err.message, 'er'); }
-}
-
-// ═══════════════════════════════════════
-// EDIT ORDER PRICE (for pending_bill orders)
-// ═══════════════════════════════════════
-function openEditOrdPrice(id) {
-  const o = DB.ords.find(x => x.id === id);
-  if (!o) return;
-  if (o.payS !== 'pending_bill') { toast(t('onlyPendingBill'), 'er'); return; }
-
-  let itemsHtml = '';
-  o.items.forEach((item, idx) => {
-    const p = prodById(item.pid);
-    const name = p ? p.name : t('deletedProduct');
-    const origPrice = item.original_price || item.price || 0;
-    const curPrice = item.price || origPrice;
-    itemsHtml += '<div style="display:flex;align-items:center;gap:.5rem;padding:.5rem .6rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:.4rem">'
-      + '<span style="flex:1;font-size:.82rem;font-weight:500">' + esc(name) + ' × ' + item.qty + '</span>'
-      + '<span style="font-size:.7rem;color:var(--t3);text-decoration:line-through">¥' + origPrice.toFixed(2) + '</span>'
-      + '<span style="font-size:.65rem;color:var(--t2)">→</span>'
-      + '<input type="number" id="ep_' + idx + '" value="' + curPrice.toFixed(2) + '" min="0" step="0.01" style="width:80px;padding:.3rem .4rem;background:var(--s3);border:1px solid var(--bd);border-radius:4px;color:var(--ac);font-family:DM Mono,monospace;font-size:.82rem;text-align:right" />'
-      + '</div>';
-  });
-
-  const cust = cusById(o.custId);
-  const total = o.items.reduce((s, i) => s + (i.price || 0) * i.qty, 0);
-
-  document.getElementById('odT').textContent = t('orderPriceTitle') + o.no;
-  document.getElementById('odB').innerHTML = '<div style="margin-bottom:.8rem">'
-    + '<div style="font-size:.78rem;color:var(--t2);margin-bottom:.3rem">' + t('customer') + ': ' + esc(cust ? cust.name : '-') + '</div>'
-    + '<div style="font-size:.78rem;color:var(--t2);margin-bottom:.3rem">' + t('origTotal') + ': <span style="text-decoration:line-through">¥' + (o.origTotal || total).toFixed(2) + '</span></div>'
-    + '</div>'
-    + '<div style="font-size:.72rem;color:var(--t3);margin-bottom:.5rem">' + t('priceAdjustNote') + '</div>'
-    + itemsHtml
-    + '<div style="text-align:right;font-size:.88rem;font-weight:600;margin-top:.5rem">' + t('newTotal') + ': ¥<span id="ep_total">' + total.toFixed(2) + '</span></div>';
-
-  // Live total update
-  o.items.forEach((item, idx) => {
-    const inp = document.getElementById('ep_' + idx);
-    if (inp) inp.addEventListener('input', () => {
-      let newTotal = 0;
-      o.items.forEach((it, i) => {
-        const el = document.getElementById('ep_' + i);
-        const v = el ? parseFloat(el.value) || 0 : it.price;
-        newTotal += v * it.qty;
-      });
-      document.getElementById('ep_total').textContent = newTotal.toFixed(2);
-    });
-  });
-
-  document.getElementById('odF').innerHTML = '<button class="btn bg bs" onclick="cMo(\'odmo\')">' + t('cancel') + '</button><button class="btn bp bs aw" onclick="saveOrdPrice(' + id + ')">' + t('savePrice') + '</button>';
-  oMo('odmo');
-}
-
-async function saveOrdPrice(orderId) {
-  const o = DB.ords.find(x => x.id === orderId);
-  if (!o) return;
-  try {
-    let newTotal = 0;
-    const updates = [];
-    o.items.forEach((item, idx) => {
-      const el = document.getElementById('ep_' + idx);
-      const newPrice = el ? parseFloat(el.value) || 0 : item.price;
-      newTotal += newPrice * item.qty;
-      if (newPrice !== item.price) {
-        updates.push({ id: item.pid, price: newPrice, subtotal: newPrice * item.qty });
-      }
-    });
-    // Update order total and mark as price_modified
-    await adminFrom('orders').update({
-      shipping_cost: 0,
-      price_modified: true
-    }).eq('id', orderId);
-    // Update each order item price
-    for (const item of o.items) {
-      const el = document.getElementById('ep_' + o.items.indexOf(item));
-      const newPrice = el ? parseFloat(el.value) || 0 : item.price;
-      if (newPrice !== item.price) {
-        // Find the order_item record to update
-        const { data: oiRecords } = await sb.from('order_items').select('id').eq('order_id', orderId).eq('product_id', item.pid);
-        if (oiRecords && oiRecords.length) {
-          await adminFrom('order_items').update({ unit_price: newPrice }).eq('id', oiRecords[0].id);
-        }
-      }
-    }
-    await loadAllData();
-    cMo('odmo');
-    toast(t('priceUpdated'), 'ok');
-    render(curP);
-  } catch (err) { toast(t('opFailed') + ': ' + err.message, 'er'); }
 }
 
 function printOrd(id) {
@@ -3585,209 +2079,6 @@ function printOrd(id) {
 
 // ═══════════════════════════════════════
 // APPROVAL CENTER
-// ═══════════════════════════════════════
-function rPaySettings() {
-  return '<div class="pnl"><div class="pnH"><span class="pnT">💳 ' + t('payAccountSettings') + '</span><span style="font-size:.65rem;color:var(--t3)">' + t('paySettingsInfo') + '</span></div><div class="pnB" id="paySettingsArea"><div class="spinner"></div></div></div>';
-}
-
-async function loadPaySettings() {
-  try {
-    const { data } = await sb.from('site_settings').select('*').order('key');
-    if (!data) return;
-    const area = document.getElementById('paySettingsArea');
-    if (!area) return;
-    const fields = [
-      { key: 'pay_pix', label: '🔑 ' + t('pixAccount'), ph: t('pixPH') },
-      { key: 'pay_bank_name', label: '🏦 ' + t('bankName'), ph: t('bankNamePH') },
-      { key: 'pay_bank_account', label: '💳 ' + t('bankAccount'), ph: t('bankAccountPH') },
-      { key: 'pay_bank_holder', label: '👤 ' + t('accountHolder'), ph: t('accountHolderPH') },
-      { key: 'pay_wechat', label: '💬 ' + t('wechatPay'), ph: t('wechatPH') },
-      { key: 'pay_alipay', label: '💰 ' + t('alipayPay'), ph: t('alipayPH') },
-      { key: 'pay_note', label: '📝 ' + t('paymentNote'), ph: t('paymentNotePH') }
-    ];
-    const map = {};
-    data.forEach(r => { map[r.key] = r.value || ''; });
-    let html = '';
-    fields.forEach(f => {
-      html += '<div class="fgm"><label>' + f.label + '</label><input type="text" id="ps_' + f.key + '" value="' + esc(map[f.key] || '') + '" placeholder="' + f.ph + '"></div>';
-    });
-    html += '<div style="display:flex;justify-content:flex-end;gap:.5rem;margin-top:1rem"><button class="btn bp bs aw" onclick="savePaySettings()">💾 ' + t('saveSettings') + '</button></div>';
-    area.innerHTML = html;
-  } catch(e) { console.error('Load pay settings error:', e); }
-}
-
-async function savePaySettings() {
-  const keys = ['pay_pix','pay_bank_name','pay_bank_account','pay_bank_holder','pay_wechat','pay_alipay','pay_note'];
-  try {
-    for (const key of keys) {
-      const el = document.getElementById('ps_' + key);
-      if (!el) continue;
-      const val = el.value.trim();
-      const { data: existing } = await sb.from('site_settings').select('key').eq('key', key).limit(1);
-      if (existing && existing.length) {
-        await adminFrom('site_settings').update({ value: val, updated_at: new Date().toISOString() }).eq('key', key);
-      } else {
-        await adminFrom('site_settings').insert({ key, value: val, label: key });
-      }
-    }
-    toast(t('payAccountSaved'), 'ok');
-  } catch(e) { toast(t('saveFailed') + '：' + e.message, 'er'); }
-}
-
-// ═══════════════════════════════════════
-// MEMBER LEVELS
-// ═══════════════════════════════════════
-function rMemberLevels() {
-  const levels = [
-    { key: 'retail', name: t('retailCustomer'), icon: '👤', desc: t('retailDesc'), color: 'var(--t2)' },
-    { key: 'small_wholesale', name: t('smallWholesale'), icon: '🏪', desc: t('smallWholesaleDesc'), color: 'var(--in)' },
-    { key: 'large_wholesale', name: t('largeWholesale'), icon: '🏭', desc: t('largeWholesaleDesc'), color: 'var(--ac)' }
-  ];
-  // Load from DB if member_levels table exists, otherwise use defaults
-  var savedLevels = DB.memberLevels || {};
-  let rows = levels.map(lv => {
-    var saved = savedLevels[lv.key] || {};
-    var name = saved.name || lv.name;
-    var icon = saved.icon || lv.icon;
-    var desc = saved.desc || lv.desc;
-    var discount = saved.discount || 0;
-    var enabled = saved.enabled !== false;
-    return '<div class="pnl" style="margin-bottom:.6rem"><div class="pnB" style="display:flex;align-items:center;gap:1rem">'
-      + '<div style="font-size:2rem;flex-shrink:0">' + icon + '</div>'
-      + '<div style="flex:1;min-width:0">'
-      + '<div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.2rem"><strong style="font-size:.9rem;color:' + lv.color + '">' + esc(name) + '</strong><span class="badge ' + (enabled ? 'b-on' : 'b-off') + '">' + (enabled ? t('enabled') : t('disabled')) + '</span>'
-      + '<span style="font-size:.6rem;color:var(--t3);font-family:DM Mono,monospace">[' + lv.key + ']</span></div>'
-      + '<div style="font-size:.72rem;color:var(--t2)">' + esc(desc) + '</div>'
-      + '</div>'
-      + '<button class="btn bg bs" onclick="editMemberLevel(\'' + lv.key + '\')">' + t('edit') + '</button>'
-      + '</div></div>';
-  }).join('');
-  return '<div class="tb" style="margin-bottom:.8rem"><span style="font-size:.82rem;color:var(--t2)">' + t('manageMemberLevels') + '</span></div>'
-    + rows
-    + '<div style="margin-top:1rem;padding:.8rem;background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);font-size:.72rem;color:var(--t2)">'
-    + '💡 <b>' + t('levelDesc') + '：</b><br>'
-    + '• <b>' + t('retailCustomer') + '</b>：' + t('retailOnly') + '<br>'
-    + '• <b>' + t('smallWholesale') + '</b>：' + t('smallWholesaleOnly') + '<br>'
-    + '• <b>' + t('largeWholesale') + '</b>：' + t('largeWholesaleOnly') + '<br>'
-    + '<br>💡 ' + t('memberLevelsAdminNote')
-    + '</div>';
-}
-
-function editMemberLevel(key) {
-  var savedLevels = DB.memberLevels || {};
-  var saved = savedLevels[key] || {};
-  var defaults = { retail:{name:t('retailCustomer'),icon:'👤',desc:t('retailDesc'),discount:0,enabled:true}, small_wholesale:{name:t('smallWholesale'),icon:'🏪',desc:t('smallWholesaleDesc'),discount:5,enabled:true}, large_wholesale:{name:t('largeWholesale'),icon:'🏭',desc:t('largeWholesaleDesc'),discount:10,enabled:true} };
-  var def = defaults[key] || {};
-  var name = saved.name || def.name || key;
-  var icon = saved.icon || def.icon || '👤';
-  var desc = saved.desc || def.desc || '';
-  var discount = saved.discount != null ? saved.discount : (def.discount || 0);
-  var enabled = saved.enabled !== false;
-
-  document.getElementById('odT').textContent = t('editMemberLevel');
-  document.getElementById('odB').innerHTML =
-    '<input type="hidden" id="mlKey" value="' + key + '" />'
-    + '<div class="fgm"><label>' + t('levelName') + '</label><input type="text" id="mlName" value="' + esc(name) + '" /></div>'
-    + '<div class="fgm"><label>' + t('icon') + '</label><input type="text" id="mlIcon" value="' + esc(icon) + '" style="width:60px;text-align:center" /></div>'
-    + '<div class="fgm"><label>' + t('remarks') + '</label><textarea id="mlDesc" style="min-height:40px">' + esc(desc) + '</textarea></div>'
-    + '<div class="fgm"><label>' + t('levelDiscount') + '</label><input type="number" id="mlDiscount" value="' + discount + '" min="0" max="100" step="1" style="width:80px" /><span style="font-size:.6rem;color:var(--t3);margin-left:.3rem">0 = ' + t('noDiscount') + '</span></div>'
-    + '<div class="fgm"><label>' + t('status') + '</label><div class="ts2 ' + (enabled ? 'on' : '') + '" id="mlEnabled" onclick="this.classList.toggle(\'on\')"></div></div>';
-  document.getElementById('odF').innerHTML = '<button class="btn bg bs" onclick="cMo(\'odmo\')">' + t('cancel') + '</button><button class="btn bp bs aw" onclick="saveMemberLevel()">' + t('save') + '</button>';
-  oMo('odmo');
-}
-
-async function saveMemberLevel() {
-  var key = document.getElementById('mlKey').value;
-  var data = {
-    key: key,
-    name: document.getElementById('mlName').value.trim() || key,
-    icon: document.getElementById('mlIcon').value.trim() || '👤',
-    desc: document.getElementById('mlDesc').value.trim(),
-    discount: parseFloat(document.getElementById('mlDiscount').value) || 0,
-    enabled: document.getElementById('mlEnabled').classList.contains('on')
-  };
-  try {
-    // Try to save to member_levels table
-    var existing = DB.memberLevels || {};
-    existing[key] = data;
-    DB.memberLevels = existing;
-    // Attempt DB save (table may not exist yet)
-    try {
-      var { data: rows } = await sb.from('member_levels').select('id').eq('level_key', key).limit(1);
-      if (rows && rows.length) {
-        await adminFrom('member_levels').update({ name: data.name, icon: data.icon, description: data.desc, discount: data.discount, enabled: data.enabled }).eq('level_key', key);
-      } else {
-        await adminFrom('member_levels').insert({ level_key: key, name: data.name, icon: data.icon, description: data.desc, discount: data.discount, enabled: data.enabled });
-      }
-    } catch(e) {
-      console.warn('member_levels table not available, saved locally:', e.message);
-    }
-    cMo('odmo');
-    toast(t('memberLevelSaved'), 'ok');
-    render('memberLevels');
-  } catch(err) { toast(t('saveFailed') + ': ' + err.message, 'er'); }
-}
-
-function rApprovals() {
-  const pCus = DB.cus.filter(c => String(c.status || '').toLowerCase() === 'pending');
-  const pChgs = DB.chgs.filter(c => c.st === 'pending');
-  const pPays = DB.ords.filter(o => o.st === 'done' && o.payS === 'pending' && o.payU === 'no');
-
-  let cusHtml = '';
-  if (pCus.length) {
-    cusHtml = pCus.map(c =>
-      '<div style="display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--bd)"><div style="flex:1"><strong>' + esc(c.name) + '</strong><span style="font-size:.62rem;color:var(--t3);margin-left:.5rem">' + esc(c.phone) + '</span><br><span style="font-size:.68rem;color:var(--t2)">' + t('applyCredit') + ': ¥' + c.creditLimit.toLocaleString() + ' · ' + t('creator') + ': ' + esc(c.by) + '</span></div><button class="btn bs aw" style="background:var(--sf);color:#fff" onclick="reviewCus(' + c.id + ',\'approved\')">' + t('approve') + '</button><button class="btn bs aw" style="background:var(--dg);color:#fff" onclick="reviewCus(' + c.id + ',\'rejected\')">' + t('rejectBtn') + '</button></div>'
-    ).join('');
-  } else { cusHtml = '<div class="empty"><p>' + t('noPendingCus') + '</p></div>'; }
-
-  let chgHtml = '';
-  if (pChgs.length) {
-    chgHtml = pChgs.map(ch => {
-      const o = DB.ords.find(x => x.id === ch.oid);
-      const oldPk = PICKUPS[ch.oldM] || {};
-      const newPk = PICKUPS[ch.newM] || {};
-      return '<div style="padding:.5rem 0;border-bottom:1px solid var(--bd)"><div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.3rem"><strong>' + (o ? esc(o.no) : '#' + ch.oid) + '</strong><span style="font-size:.68rem;color:var(--t2)">' + esc(ch.by) + '</span></div><div style="font-size:.72rem;color:var(--t2);margin-bottom:.3rem">' + (oldPk.i || '') + ' ' + esc(oldPk.l || ch.oldM) + ' → ' + (newPk.i || '') + ' ' + esc(newPk.l || ch.newM) + ' · ' + t('shippingCost') + ': ¥' + ch.cost + '</div>' + (ch.billI ? '<img src="' + ch.billI + '" style="max-width:120px;border-radius:4px;border:1px solid var(--bd);margin-bottom:.3rem" />' : '') + '<div><button class="btn bs aw" style="background:var(--sf);color:#fff" onclick="reviewChange(' + ch.id + ',\'approved\',\'' + ch.newM + '\',' + ch.cost + ',' + ch.oid + ')">' + t('approve') + '</button> <button class="btn bs aw" style="background:var(--dg);color:#fff" onclick="reviewChange(' + ch.id + ',\'rejected\',\'\',0,' + ch.oid + ')">' + t('rejectBtn') + '</button></div></div>';
-    }).join('');
-  } else { chgHtml = '<div class="empty"><p>' + t('noPendingChg') + '</p></div>'; }
-
-  let payHtml = '';
-  if (pPays.length) {
-    payHtml = pPays.map(o => {
-      const total = o.items.reduce((s, i) => { const p = prodById(i.pid); return s + (p ? p.price * i.qty : 0); }, 0);
-      return '<div style="display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--bd)"><div style="flex:1"><strong>' + esc(o.no) + '</strong><span style="font-size:.68rem;color:var(--t2)"> ¥' + total.toLocaleString() + '</span></div><button class="btn bs aw" style="background:var(--sf);color:#fff" onclick="openPayConf(' + o.id + ')">' + t('confirmPayBtn') + '</button></div>';
-    }).join('');
-  } else { payHtml = '<div class="empty"><p>' + t('noPendingPay') + '</p></div>'; }
-
-  return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem">'
-    + '<div class="pnl"><div class="pnH"><span class="pnT">👤 ' + t('customerReview') + '</span><span class="badge b-pd">' + pCus.length + '</span></div><div class="pnB">' + cusHtml + '</div></div>'
-    + '<div class="pnl"><div class="pnH"><span class="pnT">💰 ' + t('paymentConfirm') + '</span><span class="badge b-pd">' + pPays.length + '</span></div><div class="pnB">' + payHtml + '</div></div>'
-    + '<div class="pnl"><div class="pnH"><span class="pnT">🚚 ' + t('changeReview') + '</span><span class="badge b-pd">' + pChgs.length + '</span></div><div class="pnB">' + chgHtml + '</div></div>'
-    + '</div>';
-}
-
-async function reviewCus(id, status) {
-  try {
-    await adminFrom('customers').update({ status, approved_by: user.u }).eq('id', id);
-    await loadAllData();
-    toast(t('reviewDone'), 'ok');
-    render('approvals');
-  } catch (err) { toast(t('opFailed') + ': ' + err.message, 'er'); }
-}
-
-async function reviewChange(id, status, newM, cost, oid) {
-  try {
-    await adminFrom('order_changes').update({ status, reviewed_by: user.u }).eq('id', id);
-    if (status === 'approved') {
-      await adminFrom('orders').update({ pickup_method: newM, shipping_cost: cost }).eq('id', oid);
-    }
-    await loadAllData();
-    toast(t('reviewDone'), 'ok');
-    render('approvals');
-  } catch (err) { toast(t('opFailed') + ': ' + err.message, 'er'); }
-}
-
-// ═══════════════════════════════════════
-// SALES WORKSPACE
 // ═══════════════════════════════════════
 function rSW() {
   const P = DB.prods;
