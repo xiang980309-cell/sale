@@ -1035,6 +1035,19 @@ input[id^="lp_"]{
   pointer-events:none
 }
 /* end fix header */
+
+/* 预填可编辑框：字色变浅，聚焦编辑时恢复 */
+input.pre-val, textarea.pre-val { color: var(--txt3, #8b94a4); }
+input.pre-val:focus, textarea.pre-val:focus { color: var(--txt, #121826); }
+.form-group input:not(:placeholder-shown),
+.form-group textarea:not(:placeholder-shown),
+.fgm input:not([type=checkbox]):not([type=radio]):not(:placeholder-shown),
+.fgm textarea:not(:placeholder-shown) { color: var(--txt3, #8b94a4); }
+.form-group input:not(:placeholder-shown):focus,
+.form-group textarea:not(:placeholder-shown):focus,
+.fgm input:not([type=checkbox]):not([type=radio]):not(:placeholder-shown):focus,
+.fgm textarea:not(:placeholder-shown):focus { color: var(--txt, #121826); }
+
 </style>
 </head>
 <body>
@@ -1872,6 +1885,26 @@ function goPage(p, el) {
   document.getElementById('sov').classList.remove('show');
 }
 function togSB() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sov').classList.toggle('show'); }
+
+function markPreVal(root) {
+  try {
+    const nodes = (root || document).querySelectorAll('input, textarea');
+    nodes.forEach(function(el) {
+      const ty = String(el.type || '').toLowerCase();
+      if (ty === 'checkbox' || ty === 'radio' || ty === 'file' || ty === 'hidden' || ty === 'button' || ty === 'submit') return;
+      if (el.value && String(el.value).trim()) el.classList.add('pre-val');
+    });
+  } catch (_) {}
+}
+document.addEventListener('focusin', function(e) {
+  const el = e.target;
+  if (el && el.classList) el.classList.remove('pre-val');
+});
+document.addEventListener('focusout', function(e) {
+  const el = e.target;
+  if (el && el.classList && el.value && String(el.value).trim()) el.classList.add('pre-val');
+});
+
 function render(p) {
   const c = document.getElementById('mc');
   switch(p) {
