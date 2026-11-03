@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#34d399">
 <title>CloudStock · 销售端</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,8 +21,8 @@
   --s4:#253044;
   --bd:rgba(255,255,255,.07);
   --bl:rgba(255,255,255,.14);
-  --ac:#7c8cff;
-  --ag:rgba(124,140,255,.16);
+  --ac:#34d399;
+  --ag:rgba(52,211,153,.16);
   --dg:#f07178;
   --dgg:rgba(240,113,120,.14);
   --sf:#3dd68c;
@@ -284,7 +285,7 @@ tbody tr{border-bottom:1px solid var(--bd);transition:background var(--tr)}tbody
 /* === RESPONSIVE === */
 /*@media(max-width:1200px){.stats{display:grid;grid-template-columns:repeat(4,1fr);width:100%}.dg{grid-template-columns:1fr}.fr{grid-template-columns:1fr}.qg{grid-template-columns:repeat(2,1fr)}}*/
 @media(max-width:992px){.app{display:flex}.sb{transform:translateX(-100%);width:270px}.sb.open{transform:translateX(0)}.mn{margin-left:0}.bm{display:flex}.top{padding:.6rem .9rem}.sbox{width:100%;flex:1}.cnt{padding:1rem .6rem 2rem}.stats{display:grid;grid-template-columns:repeat(2,1fr)!important;gap:.5rem;width:100%}.sc .sv{font-size:1.3rem}.mdl{max-width:95vw}.mdl.wide{max-width:95vw}.mdl.xw{max-width:95vw}.tb{gap:.4rem}.sbox{max-width:100%}.fch{max-width:100%;overflow-x:auto;padding-bottom:.3rem}.fc{flex-shrink:0}.dg{grid-template-columns:1fr!important}.pnl{width:100%}}
-@media(max-width:600px){.cnt{padding:.8rem .4rem 1.5rem}.stats{grid-template-columns:1fr 1fr!important;gap:.35rem}.sc{padding:.6rem .7rem}.sc .sv{font-size:1.1rem}.tw{overflow-x:auto}.tb{gap:.3rem}.top{padding:.5rem .6rem;gap:.3rem}.sbox input{font-size:.72rem;padding:.35rem .7rem}.btn.bp.bs{font-size:.72rem;padding:.35rem .6rem}.csi{gap:.3rem;padding:.4rem .5rem;flex-wrap:wrap}.csi .cb2{gap:.1rem}.pnH{padding:.5rem .7rem}.pnT{font-size:.75rem}.pnl{width:100%}.hide-sm{display:none!important}}
+@media(max-width:600px){.cnt{padding:.8rem .4rem 1.5rem}.stats{grid-template-columns:1fr 1fr!important;gap:.35rem}.sc{padding:.6rem .7rem}.sc .sv{font-size:1.1rem}.tw{overflow-x:auto}.tb{gap:.3rem}.top{padding:.5rem .6rem;gap:.3rem}.sbox input{font-size:.72rem;padding:.35rem .7rem}.btn.bp.bs{font-size:.75rem;padding:.5rem .75rem}.csi{gap:.3rem;padding:.4rem .5rem;flex-wrap:wrap}.csi .cb2{gap:.1rem}.pnH{padding:.5rem .7rem}.pnT{font-size:.75rem}.pnl{width:100%}.hide-sm{display:none!important}}
 /*@media(max-width:600px){.stats{grid-template-columns:1fr 1fr;gap:.4rem}.sc{padding:.75rem .85rem}.sc .sv{font-size:1.1rem}.pkg{grid-template-columns:1fr 1fr 1fr}}*/
 
 /* === MODERNIZATION LAYER === */
@@ -1048,6 +1049,12 @@ input.pre-val:focus, textarea.pre-val:focus { color: var(--txt, #121826); }
 .fgm input:not([type=checkbox]):not([type=radio]):not(:placeholder-shown):focus,
 .fgm textarea:not(:placeholder-shown):focus { color: var(--txt, #121826); }
 
+
+/* UI polish: focus + motion */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[role=button]:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.btn,.btn-add-cart,.home-tab,.order-tab,.cat-row-main,.uc-menu-item{cursor:pointer;transition:all .2s ease}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
 </style>
 </head>
 <body>
@@ -1101,10 +1108,10 @@ input.pre-val:focus, textarea.pre-val:focus { color: var(--txt, #121826); }
 <div class="mo" id="odmo"><div class="mdl xw"><div class="mh"><span class="mt" id="odT">订单详情</span><button class="mx" onclick="cMo('odmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb" id="odB"></div><div class="mf" id="odF"></div></div></div>
 
 <!-- Customer Modal -->
-<div class="mo" id="cusmo"><div class="mdl"><div class="mh"><span class="mt" id="cusT">新建客户</span><button class="mx" onclick="cMo('cusmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="cusId" /><div class="fgm"><label data-t="customerName">客户姓名 *</label><input type="text" id="cusNm" data-t-ph="enterCustomerName" placeholder="客户名称" /></div><div class="fgm"><label data-t="phone">联系电话</label><input type="text" id="cusPh" data-t-ph="phonePH" placeholder="电话号码" /></div><div class="fgm"><label data-t="motoAddr">🏍️ Motoboy 地址</label><textarea id="cusMA" data-t-ph="motoAddrPH" placeholder="同城配送地址..." style="min-height:40px"></textarea></div><div class="fgm"><label data-t="corrAddr">📮 Correios 地址</label><textarea id="cusCA" data-t-ph="corrAddrPH" placeholder="邮寄地址 (含CEP)..." style="min-height:40px"></textarea></div><div class="fgm"><label data-t="applyCredit">申请信用额度 (¥)</label><input type="text" inputmode="decimal" id="cusCL" placeholder="0.00" /><div style="font-size:.6rem;color:var(--t3);margin-top:.2rem" data-t="needApproval">需管理员审核通过后生效</div></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('cusmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="saveCus()" data-t="submit">提交</button></div></div></div>
+<div class="mo" id="cusmo"><div class="mdl"><div class="mh"><span class="mt" id="cusT">新建客户</span><button class="mx" onclick="cMo('cusmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="cusId" /><div class="fgm"><label data-t="customerName">客户姓名 *</label><input type="text" id="cusNm" data-t-ph="enterCustomerName" placeholder="客户名称" /></div><div class="fgm"><label data-t="phone">联系电话</label><input type="text" id="cusPh" data-t-ph="phonePH" placeholder="电话号码" /></div><div class="fgm"><label data-t="motoAddr">Motoboy 地址</label><textarea id="cusMA" data-t-ph="motoAddrPH" placeholder="同城配送地址..." style="min-height:40px"></textarea></div><div class="fgm"><label data-t="corrAddr">Correios 地址</label><textarea id="cusCA" data-t-ph="corrAddrPH" placeholder="邮寄地址 (含CEP)..." style="min-height:40px"></textarea></div><div class="fgm"><label data-t="applyCredit">申请信用额度 (¥)</label><input type="text" inputmode="decimal" id="cusCL" placeholder="0.00" /><div style="font-size:.6rem;color:var(--t3);margin-top:.2rem" data-t="needApproval">需管理员审核通过后生效</div></div></div><div class="mf"><button class="btn bg bs" onclick="cMo('cusmo')" data-t="cancel">取消</button><button class="btn bp bs aw" onclick="saveCus()" data-t="submit">提交</button></div></div></div>
 
 <!-- Customer Detail Modal -->
-<div class="mo" id="cusDmo"><div class="mdl"><div class="mh"><span class="mt" id="cusDT">客户详情</span><button class="mx" onclick="cMo('cusDmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="cusDId" /><div class="fgm"><label data-t="customerName">客户姓名</label><input type="text" id="cusDNm" /></div><div class="fgm"><label data-t="phone">联系电话</label><input type="text" id="cusDPh" /></div><div class="fgm"><label data-t="motoAddr">🏍️ Motoboy 地址</label><textarea id="cusDMA" style="min-height:40px"></textarea></div><div class="fgm"><label data-t="corrAddr">📮 Correios 地址</label><textarea id="cusDCA" style="min-height:40px"></textarea></div><div class="fgm"><label data-t="creditLimit">信用额度 (¥)</label><input type="text" inputmode="decimal" id="cusDCL" /><div style="font-size:.6rem;color:var(--t3);margin-top:.2rem" data-t="needAdminApprove2">修改需管理员审核通过后生效</div></div><div id="cusDReq"></div></div><div class="mf" id="cusDFoot"></div></div></div>
+<div class="mo" id="cusDmo"><div class="mdl"><div class="mh"><span class="mt" id="cusDT">客户详情</span><button class="mx" onclick="cMo('cusDmo')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="mb"><input type="hidden" id="cusDId" /><div class="fgm"><label data-t="customerName">客户姓名</label><input type="text" id="cusDNm" /></div><div class="fgm"><label data-t="phone">联系电话</label><input type="text" id="cusDPh" /></div><div class="fgm"><label data-t="motoAddr">Motoboy 地址</label><textarea id="cusDMA" style="min-height:40px"></textarea></div><div class="fgm"><label data-t="corrAddr">Correios 地址</label><textarea id="cusDCA" style="min-height:40px"></textarea></div><div class="fgm"><label data-t="creditLimit">信用额度 (¥)</label><input type="text" inputmode="decimal" id="cusDCL" /><div style="font-size:.6rem;color:var(--t3);margin-top:.2rem" data-t="needAdminApprove2">修改需管理员审核通过后生效</div></div><div id="cusDReq"></div></div><div class="mf" id="cusDFoot"></div></div></div>
 
 <!-- Change Request Modal -->
 <!-- Packing Modal -->
@@ -1198,7 +1205,7 @@ const T = {
     approve:'✓ 通过', rejectBtn:'✗ 拒绝', reviewDone:'审核完成',
     selectCustomer:'客户 (可选)', selectItems:'选择商品 *', pickupMethod:'取货方式 *',
     paymentMethod:'付款方式 *', cashPay:'现付', creditPay:'信用额度', creditDesc:'额度扣款',
-    uploadBillOpt:'📷 上传账单', skipBill:'跳过（需管理员确认）', enterAddr:'发货地址 *',
+    uploadBillOpt:'上传账单', skipBill:'跳过（需管理员确认）', enterAddr:'发货地址 *',
     addrPH:'输入地址...', autoCalcNote:'后期将接入 Correios/Motoboy API 自动计算运费',
     attachments:'附件 (可选)', orderImage:'订单图片', billImage:'账单图片',
     saveDraft:'💾 保存草稿', submitOrder:'✓ 提交订单',
@@ -1207,7 +1214,7 @@ const T = {
     draftSaved:'已保存草稿', orderSubmitted:'订单已提交！', submitFailed:'提交失败',
     editDraft:'编辑', deleteDraft:'删除', confirmDeleteDraft:'确定删除草稿？',
     addCustomer:'新建客户', customerName:'客户姓名 *', phone:'联系电话',
-    motoAddr:'🏍️ Motoboy 地址', corrAddr:'📮 Correios 地址',
+    motoAddr:'Motoboy 地址', corrAddr:'Correios 地址',
     applyCredit:'申请信用额度 (¥)', needApproval:'需管理员审核通过后生效',
     enterCustomerName:'客户名称', phonePH:'电话号码', motoAddrPH:'同城配送地址...', corrAddrPH:'邮寄地址 (含CEP)...',
     customerCreated:'客户已创建，等待管理员审核', noCustomers:'暂无客户',
@@ -1343,7 +1350,7 @@ const T = {
     approve:'✓ Aprovar', rejectBtn:'✗ Rejeitar', reviewDone:'Revisão concluída',
     selectCustomer:'Cliente (opcional)', selectItems:'Selecionar Itens *', pickupMethod:'Método de Retirada *',
     paymentMethod:'Forma de Pagamento *', cashPay:'À Vista', creditPay:'Crédito', creditDesc:'Prazo',
-    uploadBillOpt:'📷 Enviar Comprovante', skipBill:'Pular (confirmação do admin)', enterAddr:'Endereço de Envio *',
+    uploadBillOpt:'Enviar Comprovante', skipBill:'Pular (confirmação do admin)', enterAddr:'Endereço de Envio *',
     addrPH:'Digite o endereço...', autoCalcNote:'Integração futura com API Correios/Motoboy para cálculo automático de frete',
     attachments:'Anexos (opcional)', orderImage:'Foto do Pedido', billImage:'Comprovante',
     saveDraft:'💾 Salvar Rascunho', submitOrder:'✓ Enviar Pedido',
@@ -1352,7 +1359,7 @@ const T = {
     draftSaved:'Rascunho salvo', orderSubmitted:'Pedido enviado!', submitFailed:'Falha ao enviar',
     editDraft:'Editar', deleteDraft:'Excluir', confirmDeleteDraft:'Excluir rascunho?',
     addCustomer:'Novo Cliente', customerName:'Nome do Cliente *', phone:'Telefone',
-    motoAddr:'🏍️ Endereço Motoboy', corrAddr:'📮 Endereço Correios',
+    motoAddr:'Endereço Motoboy', corrAddr:'Endereço Correios',
     applyCredit:'Limite de Crédito (¥)', needApproval:'Requer aprovação do administrador',
     enterCustomerName:'Nome do cliente', phonePH:'Número de telefone', motoAddrPH:'Endereço de entrega...', corrAddrPH:'Endereço postal (com CEP)...',
     customerCreated:'Cliente criado, aguardando aprovação', noCustomers:'Sem clientes',
@@ -1458,7 +1465,7 @@ function toggleLang() {
 // ═══════════════════════════════════════
 // JS-3: CONSTANTS
 // ═══════════════════════════════════════
-const PICKUPS = {motoboy:{l:'Motoboy',i:'🏍️',d:'同城配送'},correios:{l:'Correios',i:'📮',d:'邮政快递'},pickup:{l:'到店自取',i:'🏪',d:'客户上门'},onibus:{l:'Ônibus',i:'🚌',d:'班车托运'}};
+const PICKUPS = {motoboy:{l:'Motoboy',i:'',d:'同城配送'},correios:{l:'Correios',i:'',d:'邮政快递'},pickup:{l:'到店自取',i:'',d:'客户上门'},onibus:{l:'Ônibus',i:'',d:'班车托运'}};
 // === 管理员设定项（默认值；可用 localStorage 'cs4cfg' 覆盖） ===
 const CFG = { billDeadlineHours: 2, releaseTime: '23:00', motoboyFee: 15, onibusBig: 50, onibusSmall: 30, correiosBase: 15, correiosPerKg: 6, correiosItemKg: 0.5, motoboyAddr: '', correiosAddr: '' };
 try { const _cfg = JSON.parse(localStorage.getItem('cs4cfg') || '{}'); Object.assign(CFG, _cfg); } catch (e) {}
@@ -1931,7 +1938,7 @@ function rDash() {
   const lhh = lhi.length ? lhi.map(p => {
     const pct = Math.min(p.stock / 50 * 100, 100);
     const l = p.stock === 0 ? 'c' : p.stock <= 5 ? 'c' : 'w';
-    const icon = (catById((p.catIds || [])[0]) || {icon: '📦'}).icon;
+    const icon = (catById((p.catIds || [])[0]) || {icon: ''}).icon;
     return '<div class="lsi"><div class="licon">' + icon + '</div><div class="li"><div class="ln">' + esc(p.name) + '</div><div class="ld">' + esc(p.sku) + ' · ' + t('remaining') + ' ' + p.stock + '</div></div><div class="lb"><div class="lf ' + l + '" style="width:' + pct + '%"></div></div></div>';
   }).join('') : '<div class="empty"><p>' + t('stockOk') + '</p></div>';
   return '<div class="stats"><div class="sc"><div class="sl">' + t('productTypes') + '</div><div class="sv">' + P.length + '</div><div class="sch up">' + t('running') + '</div></div><div class="sc"><div class="sl">' + t('totalStock') + '</div><div class="sv">' + total.toLocaleString() + '</div><div class="sch up">' + P.filter(p => p.stock > 10).length + ' ' + t('sufficient') + '</div></div><div class="sc"><div class="sl">' + t('pendingOrders') + '</div><div class="sv" style="color:' + (pend ? 'var(--wa)' : 'var(--sf)') + '">' + pend + '</div><div class="sch ' + (pend ? 'down' : 'up') + '">' + t('needProcess') + '</div></div><div class="sc"><div class="sl">' + t('alertProducts') + '</div><div class="sv" style="color:' + (low + out ? 'var(--dg)' : 'var(--sf)') + '">' + (low + out) + '</div><div class="sch ' + (low + out ? 'down' : 'up') + '">' + low + t('lowStock') + '·' + out + t('outOfStock') + '</div></div></div><div class="dg"><div class="pnl"><div class="pnH"><span class="pnT">' + t('recentOps') + '</span></div><div class="pnB">' + ah + '</div></div><div class="pnl"><div class="pnH"><span class="pnT">' + t('lowStockAlert') + '</span><span style="font-size:.62rem;color:var(--dg)">' + lhi.length + t('item') + '</span></div><div class="pnB">' + lhh + '</div></div></div>';
@@ -2106,7 +2113,7 @@ function printOrd(id) {
     const p = prodById(i.pid);
     return '<tr><td>' + (p ? p.name : t('deleted')) + '</td><td>' + (p ? p.sku : '-') + '</td><td>' + (p ? p.loc : '-') + '</td><td><strong>' + i.qty + '</strong></td></tr>';
   }).join('');
-  document.getElementById('pa').innerHTML = '<h2>📦 ' + t('printPickList') + '</h2><div style="font-size:14px;color:#666;margin-bottom:10px">' + esc(o.no) + '</div><table><thead><tr><th>' + t('name') + '</th><th>' + t('sku') + '</th><th>' + t('location') + '</th><th>' + t('quantity') + '</th></tr></thead><tbody>' + its + '</tbody></table><div style="margin-top:20px;font-size:12px;color:#999">' + new Date().toLocaleString() + ' · CloudStock</div>';
+  document.getElementById('pa').innerHTML = '<h2>t('printPickList') + '</h2><div style="font-size:14px;color:#666;margin-bottom:10px">' + esc(o.no) + '</div><table><thead><tr><th>' + t('name') + '</th><th>' + t('sku') + '</th><th>' + t('location') + '</th><th>' + t('quantity') + '</th></tr></thead><tbody>' + its + '</tbody></table><div style="margin-top:20px;font-size:12px;color:#999">' + new Date().toLocaleString() + ' · CloudStock</div>';
   window.print();
 }
 
@@ -2150,7 +2157,7 @@ function rNewOrd() {
     + '<div style="background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);padding:1.2rem;margin-bottom:1rem"><div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);font-family:DM Mono,monospace;margin-bottom:.6rem;font-weight:500">' + t('pickupMethod') + '</div><div class="pkg">' + Object.entries(PICKUPS).map(([k, v]) => '<div class="pk" data-pk="' + k + '" onclick="selPk(\'' + k + '\')"><div class="pkI">' + v.i + '</div><div class="pkN">' + v.l + '</div><div class="pkD">' + v.d + '</div></div>').join('') + '</div>'
     // Address + Onibus fields
     + '<div id="shipFromInfo" style="display:none;margin-top:.75rem;padding:.55rem .8rem;background:var(--s2);border:1px dashed var(--bd);border-radius:var(--r);font-size:.72rem;color:var(--t2)"></div><div id="addrSec" style="display:none;margin-top:.8rem"><div class="fgm"><label>' + t('enterAddr') + '</label><textarea id="ordAddr" placeholder="' + t('addrPH') + '" oninput="dShipAddr=this.value" style="min-height:40px">' + esc(dShipAddr) + '</textarea></div><div style="font-size:.6rem;color:var(--t3);font-family:DM Mono,monospace">' + t('autoCalcNote') + '</div></div>'
-    + '<div id="onibusSec" style="display:none;margin-top:.8rem"><div style="margin-bottom:.65rem"><div class="fgm"><label>包裹大小 *</label><div class="pkg" style="grid-template-columns:1fr 1fr;gap:.5rem"><div class="pk" data-op="big" onclick="selOnibusPkg(this.dataset.op)"><div class="pkN">大包裹</div></div><div class="pk" data-op="small" onclick="selOnibusPkg(this.dataset.op)"><div class="pkN">小包裹</div></div></div></div></div><div class="fgm"><label>🚌 ' + t('onibusCustomerName') + ' *</label><input type="text" id="ordOnibusName" placeholder="' + t('onibusPlaceholder') + '" oninput="dOnibName=this.value" value="' + esc(dOnibName) + '" /></div><div class="fgm"><label>📷 ' + t('scheduleOptional') + '</label><div class="iu"><div class="ib" id="onIB" onclick="document.getElementById(\'onIF\').click()"><span class="ia">+</span><input type="file" id="onIF" accept="image/*" onchange="hImg(this,\'onIB\',\'dOnibusImg\')" /></div></div></div></div></div>'
+    + '<div id="onibusSec" style="display:none;margin-top:.8rem"><div style="margin-bottom:.65rem"><div class="fgm"><label>包裹大小 *</label><div class="pkg" style="grid-template-columns:1fr 1fr;gap:.5rem"><div class="pk" data-op="big" onclick="selOnibusPkg(this.dataset.op)"><div class="pkN">大包裹</div></div><div class="pk" data-op="small" onclick="selOnibusPkg(this.dataset.op)"><div class="pkN">小包裹</div></div></div></div></div><div class="fgm"><label>' + t('onibusCustomerName') + ' *</label><input type="text" id="ordOnibusName" placeholder="' + t('onibusPlaceholder') + '" oninput="dOnibName=this.value" value="' + esc(dOnibName) + '" /></div><div class="fgm"><label>' + t('scheduleOptional') + '</label><div class="iu"><div class="ib" id="onIB" onclick="document.getElementById(\'onIF\').click()"><span class="ia">+</span><input type="file" id="onIF" accept="image/*" onchange="hImg(this,\'onIB\',\'dOnibusImg\')" /></div></div></div></div></div>'
     // Payment
     + '<div style="background:var(--s1);border:1px solid var(--bd);border-radius:var(--rl);padding:1.2rem;margin-bottom:1rem"><div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);font-family:DM Mono,monospace;margin-bottom:.6rem;font-weight:500">' + t('paymentMethod') + '</div><div class="pkg" style="grid-template-columns:1fr 1fr"><div class="pk on" data-pay="cash" onclick="selPay(\'cash\')"><div class="pkI">💵</div><div class="pkN">' + t('cashPay') + '</div></div><div class="pk" data-pay="credit" onclick="selPay(\'credit\')"><div class="pkI">💳</div><div class="pkN">' + t('creditPay') + '</div><div class="pkD">' + t('creditDesc') + '</div></div></div>'
     + '<div id="payOpt" style="margin-top:.8rem"><div style="font-size:.72rem;color:var(--t2);margin-bottom:.4rem">' + t('cashPay') + '</div><div style="display:flex;gap:.5rem;margin-bottom:.5rem"><button class="btn bs bp" onclick="selPayUpload(\'yes\')">' + t('uploadBillOpt') + '</button><button class="btn bs bg" onclick="selPayUpload(\'no\')">' + t('skipBill') + '</button></div><div id="payImgSec"><div class="iu"><div class="ib" id="payIB" onclick="document.getElementById(\'payIF\').click()"><span class="ia">+</span><input type="file" id="payIF" accept="image/*" onchange="hImg(this,\'payIB\',\'dPayImg\')" /></div></div></div></div>'
@@ -2191,7 +2198,7 @@ function onCusChange() {
   info.innerHTML = '<strong>' + esc(c.name) + '</strong> · ' + esc(c.phone)
     + ' <span class="badge ' + stC.c + '">' + t(stC.l || c.status) + '</span><br>'
     + t('creditLimit') + ': ¥' + c.creditLimit.toLocaleString() + ' · ' + t('creditUsed') + ': ¥' + c.creditUsed.toLocaleString() + ' · <span style="color:' + (avail > 0 ? 'var(--sf)' : 'var(--dg)') + '">' + t('available') + ': ¥' + avail.toLocaleString() + '</span>'
-    + ((c.motoAddr || c.corrAddr) ? '<br><span style="color:var(--t3)">🏍️ ' + esc(c.motoAddr || '-') + ' · 📮 ' + esc(c.corrAddr || '-') + '</span>' : '');
+    + ((c.motoAddr || c.corrAddr) ? '<br><span style="color:var(--t3)">' + esc(c.motoAddr || '-') + ' · ' + esc(c.corrAddr || '-') + '</span>' : '');
   updateCreditInfo();
 }
 
@@ -2293,7 +2300,7 @@ function ordSearch() {
   el.innerHTML = '<div class="srl">' + rs.map(p => {
     const ic = dItems.find(i => i.pid === p.id);
     const sc = p.stock === 0 ? 'var(--dg)' : p.stock <= 10 ? 'var(--wa)' : 'var(--sf)';
-    const icon = (catById((p.catIds || [])[0]) || { icon: '📦' }).icon;
+    const icon = (catById((p.catIds || [])[0]) || { icon: '' }).icon;
     return '<div class="sri" onclick="addOrdItem(' + p.id + ')"><span class="srI">' + icon + '</span><div style="flex:1;min-width:0"><div class="srN">' + esc(p.name) + '</div><div class="srD">' + esc(p.sku) + ' · ¥' + p.price.toLocaleString() + '</div></div><span class="srS" style="color:' + sc + '">' + (p.stock === 0 ? t('outOfStock') : t('stock') + ':' + p.stock) + '</span>' + (ic ? '<span style="font-size:.6rem;color:var(--ac)">×' + ic.qty + '</span>' : '') + '</div>';
   }).join('') + '</div>';
 }
@@ -2389,7 +2396,7 @@ function renderOrdItems() {
     const p = prodById(it.pid);
     if (!p) return '';
     const sc = p.stock === 0 ? 'var(--dg)' : p.stock <= 10 ? 'var(--wa)' : 'var(--sf)';
-    const icon = (catById((p.catIds || [])[0]) || { icon: '📦' }).icon;
+    const icon = (catById((p.catIds || [])[0]) || { icon: '' }).icon;
     return '<div class="oi-row"><span>' + icon + '</span><span class="oin">' + esc(p.name) + (it.size ? ' (' + esc(it.size) + ')' : '') + '</span><span class="oisk">' + esc(p.sku) + '</span><span class="oist" style="color:' + sc + '">' + t('stock') + ':' + p.stock + '</span><input type="number" value="' + it.qty + '" min="1" onchange="updOQ(' + idx + ',this.value)" /><button class="oid" onclick="rmOI(' + idx + ')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>';
   }).join('');
 }
